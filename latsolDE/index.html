@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Latihan Soal Bab D & E — Material, Bahan Bakar, dan Budaya Kerja</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;700&family=Source+Serif+4:wght@300;400;600&display=swap');
+
+.ssw-mega-wrap {
+  --ink:         #1a1a1a;
+  --ink-light:   #3d3d3d;
+  --ink-muted:   #707070;
+  --paper:       #faf9f7;
+  --paper-warm:  #f5f3ef;
+  --rule:        #d8d4cc;
+  --correct:     #1e7e45;
+  --correct-bg:  #edfaf3;
+  --correct-bd:  #6fcf97;
+  --wrong:       #c0392b;
+  --wrong-bg:    #fff0ef;
+  --wrong-bd:    #e07070;
+  --gold:        #a08030;
+  --bab-color:   #2c3e6b;
+  --bab-soft:    #eef1f9;
+  --font-jp:   'Noto Serif JP', serif;
+  --font-ui:   'Noto Sans JP', sans-serif;
+  --font-body: 'Source Serif 4','Noto Serif JP',serif;
+  font-family: var(--font-body);
+  color: var(--ink);
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.ssw-mega-wrap .qhdr {
+  background: linear-gradient(135deg, #1a2342 0%, #2c3e6b 100%);
+  border-radius: 12px 12px 0 0;
+  padding: 22px 28px 18px;
+  position: relative; overflow: hidden;
+}
+.ssw-mega-wrap .qhdr::after {
+  content: '材料安全';
+  position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+  font-family: var(--font-jp); font-size: 64px; font-weight: 700;
+  line-height: 1; color: rgba(255,255,255,0.05); pointer-events: none;
+}
+.ssw-mega-wrap .qhdr-inner { position: relative; }
+.ssw-mega-wrap .qhdr h2 {
+  font-family: var(--font-jp); font-size: 19px; font-weight: 700;
+  color: #fff; margin: 0 0 5px; line-height: 1.4;
+}
+.ssw-mega-wrap .qhdr p {
+  font-family: var(--font-ui); font-size: 12px;
+  color: rgba(255,255,255,0.55); margin: 0; line-height: 1.7;
+}
+.ssw-mega-wrap .hdr-pills {
+  display: flex; gap: 6px; flex-wrap: wrap; margin-top: 12px;
+}
+.ssw-mega-wrap .hp {
+  font-family: var(--font-ui); font-size: 10px; font-weight: 700;
+  letter-spacing: 0.06em; padding: 3px 9px; border-radius: 3px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.8);
+}
+.ssw-mega-wrap .bab-divider {
+  display: flex; align-items: center; gap: 10px;
+  margin: 18px 0 10px;
+  font-family: var(--font-ui); font-size: 12px; font-weight: 700;
+  color: var(--bab-color);
+}
+.ssw-mega-wrap .bab-divider::before,
+.ssw-mega-wrap .bab-divider::after {
+  content: ''; flex: 1; height: 1px; background: var(--rule);
+}
+.ssw-mega-wrap .bab-badge {
+  padding: 4px 14px; border-radius: 20px;
+  background: var(--bab-soft); border: 1px solid #99aad4;
+  white-space: nowrap;
+}
+.ssw-mega-wrap .shuffle-banner {
+  display: flex; align-items: flex-start; gap: 11px;
+  padding: 11px 20px; background: var(--bab-color);
+  font-family: var(--font-ui); font-size: 12.5px;
+  color: rgba(255,255,255,0.85); line-height: 1.6;
+}
+.ssw-mega-wrap .shuffle-banner .si { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.ssw-mega-wrap .top-panel {
+  background: var(--paper-warm); border: 1px solid var(--rule); border-top: none;
+  padding: 13px 20px; margin-bottom: 14px;
+  display: flex; flex-wrap: wrap; gap: 12px;
+  align-items: center; justify-content: space-between;
+}
+.ssw-mega-wrap .name-field {
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--font-ui); font-size: 13px; font-weight: 600; color: var(--ink-light);
+}
+.ssw-mega-wrap .name-field input {
+  padding: 7px 12px; border: 1.5px solid var(--rule); border-radius: 6px;
+  font-family: var(--font-ui); font-size: 13px; width: 185px;
+  outline: none; transition: border-color 0.2s; background: #fff;
+}
+.ssw-mega-wrap .name-field input:focus { border-color: var(--bab-color); }
+.ssw-mega-wrap .score-display {
+  font-family: var(--font-ui); font-size: 13px; color: var(--ink-light);
+  display: flex; align-items: center; gap: 5px;
+}
+.ssw-mega-wrap .snum { font-size: 22px; font-weight: 700; color: var(--bab-color); line-height: 1; }
+.ssw-mega-wrap .timer-row {
+  display: flex; align-items: center; justify-content: flex-end; gap: 8px;
+  margin-bottom: 8px; font-family: var(--font-ui); font-size: 13px; color: var(--ink-muted);
+}
+.ssw-mega-wrap .timer-display {
+  font-size: 20px; font-weight: 700; color: var(--bab-color);
+  font-variant-numeric: tabular-nums; min-width: 55px; text-align: right;
+}
+.ssw-mega-wrap .timer-display.warn { color: var(--wrong); }
+.ssw-mega-wrap .prog-row {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+  font-family: var(--font-ui); font-size: 11px; color: var(--ink-muted);
+}
+.ssw-mega-wrap .prog-track {
+  flex: 1; height: 5px; background: var(--rule); border-radius: 3px; overflow: hidden;
+}
+.ssw-mega-wrap .prog-fill {
+  height: 100%; width: 0%; background: var(--bab-color);
+  border-radius: 3px; transition: width 0.4s ease;
+}
+.ssw-mega-wrap .lulus-row {
+  margin-bottom: 14px; padding: 9px 14px; border-radius: 8px;
+  font-family: var(--font-ui); font-size: 12px; font-weight: 600;
+  background: var(--bab-soft); color: var(--bab-color); text-align: center;
+  border: 1px solid #99aad4;
+}
+.ssw-mega-wrap .lulus-row.is-lulus { background: var(--correct-bg); color: var(--correct); border-color: var(--correct-bd); }
+.ssw-mega-wrap .lulus-row.is-gagal { background: var(--wrong-bg); color: var(--wrong); border-color: var(--wrong-bd); }
+.ssw-mega-wrap details {
+  background: var(--paper); border: 1px solid var(--rule);
+  border-left: 4px solid var(--bab-color); border-radius: 10px;
+  margin-bottom: 9px; overflow: hidden;
+  box-shadow: 0 2px 9px rgba(0,0,0,0.04); transition: box-shadow 0.2s;
+}
+.ssw-mega-wrap details[open] { box-shadow: 0 4px 18px rgba(0,0,0,0.09); }
+.ssw-mega-wrap summary {
+  cursor: pointer; padding: 12px 16px;
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--font-ui); font-size: 13.5px; font-weight: 600;
+  color: var(--ink); list-style: none; user-select: none;
+  background: var(--paper-warm); transition: background 0.15s;
+}
+.ssw-mega-wrap summary::-webkit-details-marker { display: none; }
+.ssw-mega-wrap summary:hover { background: #ece8df; }
+.ssw-mega-wrap .q-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 28px; height: 28px; border-radius: 50%;
+  background: var(--bab-color); color: #fff;
+  font-size: 11px; font-weight: 700; flex-shrink: 0;
+}
+.ssw-mega-wrap .q-preview {
+  flex: 1; font-family: var(--font-jp); font-size: 13.5px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0;
+}
+.ssw-mega-wrap .q-chevron {
+  font-size: 11px; color: var(--ink-muted);
+  transition: transform 0.2s; flex-shrink: 0; margin-left: 4px;
+}
+.ssw-mega-wrap details[open] summary .q-chevron { transform: rotate(180deg); }
+.ssw-mega-wrap .quiz-body { padding: 16px 18px 18px; border-top: 1px solid var(--rule); }
+.ssw-mega-wrap .quiz-question {
+  font-family: var(--font-jp); font-size: 17px; line-height: 2.1;
+  color: var(--ink); margin-bottom: 14px; padding: 12px 15px;
+  background: var(--bab-soft); border-left: 3px solid var(--bab-color); border-radius: 8px;
+}
+.ssw-mega-wrap .options-list-mb {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 11px;
+}
+.ssw-mega-wrap .option-btn-mb {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 4px; padding: 16px 10px; border: 2px solid var(--rule); border-radius: 10px;
+  background: #fff; cursor: pointer; font-family: var(--font-ui);
+  transition: border-color 0.15s, background 0.15s, transform 0.1s;
+}
+.ssw-mega-wrap .option-btn-mb:hover:not([disabled]) {
+  border-color: var(--bab-color); background: var(--bab-soft); transform: translateY(-2px);
+}
+.ssw-mega-wrap .opt-symbol { font-family: var(--font-jp); font-size: 30px; font-weight: 700; line-height: 1; }
+.ssw-mega-wrap .opt-label-mb { font-size: 11px; font-weight: 700; letter-spacing: 0.05em; color: var(--ink-muted); }
+.ssw-mega-wrap .opt-icon-mb { font-size: 13px; opacity: 0; transition: opacity 0.2s; margin-top: 2px; }
+.ssw-mega-wrap .option-btn-mb.is-correct { border-color: var(--correct-bd); background: var(--correct-bg); animation: pulse-c .3s ease; }
+.ssw-mega-wrap .option-btn-mb.is-correct .opt-symbol { color: var(--correct); }
+.ssw-mega-wrap .option-btn-mb.is-correct .opt-icon-mb { opacity: 1; }
+.ssw-mega-wrap .option-btn-mb.is-wrong { border-color: var(--wrong-bd); background: var(--wrong-bg); animation: shake-w .3s ease; }
+.ssw-mega-wrap .option-btn-mb.is-wrong .opt-symbol { color: var(--wrong); }
+.ssw-mega-wrap .option-btn-mb.is-wrong .opt-icon-mb { opacity: 1; }
+.ssw-mega-wrap .option-btn-mb.is-locked { opacity: 0.42; pointer-events: none; }
+.ssw-mega-wrap .pembahasan {
+  display: none; background: #fffdf0;
+  border: 1px solid #e8d89a; border-left: 4px solid var(--gold);
+  border-radius: 8px; padding: 13px 15px;
+  font-size: 13px; line-height: 1.85; color: #4a3800;
+  margin-top: 4px; animation: fadeIn .3s ease;
+}
+.ssw-mega-wrap .pembahasan.show { display: block; }
+.ssw-mega-wrap .p-title { font-family: var(--font-ui); font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+.ssw-mega-wrap .p-arti { font-family: var(--font-ui); font-style: italic; font-size: 13px; color: var(--ink-light); margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px dashed #e0d4a0; }
+.ssw-mega-wrap .p-kunci { font-family: var(--font-jp); font-size: 14px; font-weight: 700; color: var(--correct); margin-bottom: 10px; }
+.ssw-mega-wrap .p-section { margin-top: 12px; }
+.ssw-mega-wrap .p-subtitle { font-family: var(--font-ui); font-size: 12px; font-weight: 700; color: #6b5400; margin-bottom: 5px; }
+.ssw-mega-wrap .p-section ul { margin: 4px 0 6px 0; padding-left: 18px; }
+.ssw-mega-wrap .p-section li { margin-bottom: 3px; }
+.ssw-mega-wrap .p-section ol { margin: 4px 0 6px 0; padding-left: 20px; }
+.ssw-mega-wrap .p-logika { margin-top: 6px; padding: 9px 12px; background: rgba(160,128,48,0.08); border-radius: 6px; border-left: 3px solid var(--gold); }
+.ssw-mega-wrap .p-istilah { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 6px; }
+.ssw-mega-wrap .p-istilah-item { font-family: var(--font-ui); font-size: 11.5px; background: #fff; border: 1px solid #e8d89a; border-radius: 5px; padding: 4px 9px; color: #5a4500; }
+.ssw-mega-wrap .p-istilah-item .jp-term { font-family: var(--font-jp); font-weight: 700; }
+.ssw-mega-wrap .p-tip { margin-top: 8px; padding: 7px 11px; background: rgba(44,62,107,0.07); border-radius: 5px; font-size: 12px; color: var(--bab-color); font-family: var(--font-ui); }
+.ssw-mega-wrap .submit-area { text-align: center; margin-top: 26px; padding-top: 20px; border-top: 1px solid var(--rule); }
+.ssw-mega-wrap #mega-submit-btn {
+  background: var(--bab-color); color: #fff; border: none;
+  padding: 13px 38px; border-radius: 30px;
+  font-family: var(--font-ui); font-size: 15px; font-weight: 700;
+  cursor: pointer; transition: background 0.2s, transform 0.1s;
+  box-shadow: 0 3px 14px rgba(44,62,107,0.3);
+}
+.ssw-mega-wrap #mega-submit-btn:hover { background: #1a2342; transform: translateY(-1px); }
+.ssw-mega-wrap #mega-submit-btn:disabled { background: #8a9ab8; cursor: not-allowed; transform: none; }
+.ssw-mega-wrap .hasil-panel { display: none; margin-top: 20px; padding: 20px; border: 1px solid var(--rule); border-radius: 12px; background: var(--paper-warm); }
+.ssw-mega-wrap .hasil-panel.show { display: block; }
+.ssw-mega-wrap .hasil-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 16px; }
+.ssw-mega-wrap .hasil-item { background: #fff; border: 1px solid var(--rule); border-radius: 8px; padding: 12px; text-align: center; }
+.ssw-mega-wrap .hasil-item .h-label { font-family: var(--font-ui); font-size: 10px; color: var(--ink-muted); margin-bottom: 4px; }
+.ssw-mega-wrap .hasil-item .h-value { font-family: var(--font-ui); font-size: 22px; font-weight: 700; color: var(--bab-color); }
+.ssw-mega-wrap .kirim-btn {
+  width: 100%; padding: 12px; border-radius: 8px; border: none;
+  background: #1a73e8; color: #fff; font-family: var(--font-ui);
+  font-size: 14px; font-weight: 700; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  transition: background 0.2s;
+}
+.ssw-mega-wrap .kirim-btn:hover { background: #1558b0; }
+.ssw-mega-wrap .kirim-btn:disabled { background: #8ab0d4; cursor: not-allowed; }
+.ssw-mega-wrap #kirim-status { margin-top: 10px; font-family: var(--font-ui); font-size: 13px; font-weight: 600; text-align: center; min-height: 20px; }
+@keyframes pulse-c { 0%{transform:scale(1)} 50%{transform:scale(1.03)} 100%{transform:scale(1)} }
+@keyframes shake-w { 0%{transform:translateX(0)} 20%{transform:translateX(-5px)} 40%{transform:translateX(5px)} 60%{transform:translateX(-3px)} 80%{transform:translateX(3px)} 100%{transform:translateX(0)} }
+@keyframes fadeIn { from{opacity:0;transform:translateY(-5px)} to{opacity:1;transform:translateY(0)} }
+@media(max-width:600px){
+  .ssw-mega-wrap .qhdr::after { font-size:40px; }
+  .ssw-mega-wrap .quiz-question { font-size:15px; }
+  .ssw-mega-wrap .opt-symbol { font-size:26px; }
+  .ssw-mega-wrap .hasil-grid { grid-template-columns:1fr 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="ssw-mega-wrap">
+
+<div class="qhdr">
+  <div class="qhdr-inner">
+    <h2>📘 Latihan Soal — BAB D &amp; E: Material, Bahan Bakar, dan Budaya Kerja</h2>
+    <p>自動車整備 SSW &nbsp;|&nbsp; 15 Soal &nbsp;|&nbsp; Format ○✕ &nbsp;|&nbsp; Hasil dikirim otomatis ke spreadsheet pengajar</p>
+    <div class="hdr-pills">
+      <span class="hp">エンジンオイル</span>
+      <span class="hp">燃料・潤滑剤</span>
+      <span class="hp">5S活動</span>
+      <span class="hp">安全作業</span>
+      <span class="hp">整備士の心得</span>
+    </div>
+  </div>
+</div>
+
+<div class="shuffle-banner">
+  <span class="si">📋</span>
+  <span>Latihan ini menggabungkan Bab D (jenis material, oli, pelumas, dan bahan bakar) dan Bab E (budaya kerja Jepang, K3, dan 5S). Kedua bab ini sering dianggap mudah tapi sering jadi sumber kesalahan karena jebakan istilah. Isi nama sebelum mengerjakan.</span>
+</div>
+
+<div class="top-panel">
+  <div class="name-field">
+    <label for="mega-name">👤 Nama:</label>
+    <input type="text" id="mega-name" placeholder="Masukkan nama kamu...">
+  </div>
+  <div class="score-display">
+    Skor: <span class="snum" id="mega-score">0</span>/15
+    &nbsp;|&nbsp; <span id="mega-correct">0</span> benar
+  </div>
+</div>
+
+<div class="timer-row">⏱ Waktu: <span class="timer-display" id="mega-timer">00:00</span></div>
+<div class="prog-row">
+  <span id="mega-prog-label">0 / 15 terjawab</span>
+  <div class="prog-track"><div class="prog-fill" id="mega-prog-fill"></div></div>
+</div>
+<div class="lulus-row" id="lulus-indicator">Jawab semua soal untuk melihat status kelulusan (standar: 70% atau lebih)</div>
+
+<!-- ══ BAB D ══ -->
+<div class="bab-divider"><span class="bab-badge">📙 BAB D — 材料（ざいりょう）・燃料（ねんりょう）・潤滑剤（じゅんかつざい）</span></div>
+
+<!-- ══ SOAL 1 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">1</span><span class="q-preview">ギヤ・オイルは、鉱物油（こうぶつゆ）や合成油（ごうせいゆ）に、各種（かくしゅ）添加剤（てんかざい）を加（くわ）えて耐水性（たいすいせい）、耐圧性（たいあつせい）、粘着性（ねんちゃくせい）などを向上（こうじょう）させたオイルである。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">ギヤ・オイルは、鉱物油（こうぶつゆ）や合成油（ごうせいゆ）に、各種（かくしゅ）添加剤（てんかざい）を加（くわ）えて耐水性（たいすいせい）、耐圧性（たいあつせい）、粘着性（ねんちゃくせい）などを向上（こうじょう）させたオイルである。</p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="true"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✓</span></button>
+      <button class="option-btn-mb batsu" data-correct="false"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✗</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Arti: Oli gardan (gear oil) adalah oli mineral atau sintetis yang ditambahkan berbagai aditif untuk meningkatkan ketahanan air, tekanan, dan daya rekat.</div>
+      <div class="p-kunci">Jawaban: ○ Benar</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>添加剤（てんかざい）</strong> = zat aditif yang ditambahkan</li>
+          <li><strong>耐圧性（たいあつせい）</strong> = ketahanan terhadap tekanan tinggi (sangat penting untuk roda gigi)</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Gear oil bekerja pada kondisi tekanan dan gesekan yang jauh lebih berat dibanding oli mesin biasa, karena roda gigi (gir) saling menekan dengan gaya yang sangat besar. Karena itu, gear oil harus ditambah aditif khusus yang disebut <strong>Extreme Pressure (EP) additive</strong> untuk mencegah kerusakan permukaan gigi gir.</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Gear oil TIDAK boleh diganti dengan oli mesin biasa meski kekentalan SAE-nya sama — formulasi EP additive-nya berbeda dan sangat krusial untuk perlindungan gir.</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">極圧添加剤（きょくあつてんかざい）</span> = Extreme Pressure additive</span>
+          <span class="p-istilah-item"><span class="jp-term">粘度（ねんど）</span> = kekentalan/viskositas</span>
+        </div>
+      </div>
+      <div class="p-tip">Gear oil ≠ oli mesin. Meski kekentalan SAE sama, formulasi EP additive-nya berbeda dan tidak bisa ditukar.</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SOAL 2 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">2</span><span class="q-preview">ジーゼル・エンジンの燃料（ねんりょう）は、軽油（けいゆ）である。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">ジーゼル・エンジンの燃料（ねんりょう）は、軽油（けいゆ）である。</p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="true"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✓</span></button>
+      <button class="option-btn-mb batsu" data-correct="false"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✗</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Arti: Bahan bakar untuk mesin diesel adalah solar (keiyu).</div>
+      <div class="p-kunci">Jawaban: ○ Benar</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>軽油（けいゆ）</strong> = solar/diesel fuel</li>
+          <li><strong>ジーゼル・エンジン</strong> = mesin diesel</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Pasangan bahan bakar yang wajib dihafal tanpa pengecualian:</p>
+        <ul>
+          <li>ジーゼル・エンジン → <strong>軽油（けいゆ）</strong> = solar</li>
+          <li>ガソリン・エンジン → <strong>ガソリン</strong> = bensin (レギュラー atau ハイオク)</li>
+        </ul>
+        <p>⚠️ Peringatan: kanji 軽 berarti "ringan", tapi 軽油 = SOLAR, bukan bensin untuk kendaraan kecil (軽自動車/kei-car).</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Mengisi solar ke tangki bensin (atau sebaliknya) akan merusak pompa bahan bakar dan sistem injeksi secara serius — biaya perbaikannya sangat mahal.</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">ガソリン</span> = bensin</span>
+          <span class="p-istilah-item"><span class="jp-term">レギュラー／ハイオク</span> = jenis bensin</span>
+          <span class="p-istilah-item"><span class="jp-term">軽自動車（けいじどうしゃ）</span> = kei-car (bukan berarti pakai 軽油)</span>
+        </div>
+      </div>
+      <div class="p-tip">⚠️ Hafalan mutlak: Diesel → 軽油 (keiyu/solar). Bensin → ガソリン (gasoline). Tidak boleh tertukar.</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SOAL 3 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">3</span><span class="q-preview">オイル・フィルタの中（なか）には、フィルタが詰（つ）まったときにオイルを流（なが）すための「リリーフバルブ」がある。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">オイル・フィルタの中（なか）には、フィルタが詰（つ）まったときにオイルを流（なが）すための「リリーフバルブ」がある。</p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="true"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✓</span></button>
+      <button class="option-btn-mb batsu" data-correct="false"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✗</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Arti: Di dalam oil filter terdapat relief valve yang berfungsi mengalirkan oli saat filter tersumbat.</div>
+      <div class="p-kunci">Jawaban: ○ Benar</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>詰（つ）まったとき</strong> = saat tersumbat</li>
+          <li><strong>リリーフバルブ</strong> = relief valve (katup jalur darurat/bypass)</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Jika filter oli tersumbat total, oli tidak bisa melewatinya dan mesin bisa rusak karena kekurangan pelumasan. Relief valve adalah katup darurat yang terbuka otomatis saat tekanan oli naik akibat tersumbat — memungkinkan oli (meski kotor) tetap mengalir ke mesin.</p>
+        <p>Prinsip: lebih baik mesin terlumasi oli kotor daripada sama sekali tidak terlumasi.</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Adanya relief valve bukan alasan untuk menunda ganti filter — itu hanya katup darurat sementara, bukan solusi jangka panjang. Ganti filter tepat waktu sesuai jadwal.</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">詰まる（つまる）</span> = tersumbat</span>
+          <span class="p-istilah-item"><span class="jp-term">バイパス</span> = bypass/jalur alternatif</span>
+          <span class="p-istilah-item"><span class="jp-term">交換部品（こうかんぶひん）</span> = komponen pengganti</span>
+        </div>
+      </div>
+      <div class="p-tip">Relief valve = katup darurat, bukan alasan menunda ganti filter. Ganti tepat jadwal!</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SOAL 4 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">4</span><span class="q-preview">グリースは、点検（てんけん）・給油（きゅうゆ）がひんぱんにおこなえない部分（ぶぶん）に使用（しよう）している。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">グリースは、点検（てんけん）・給油（きゅうゆ）がひんぱんにおこなえない部分（ぶぶん）に使用（しよう）している。</p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="true"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✓</span></button>
+      <button class="option-btn-mb batsu" data-correct="false"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✗</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Arti: Grease digunakan pada bagian-bagian yang tidak dapat dilakukan pemeriksaan dan pelumasan secara sering/rutin.</div>
+      <div class="p-kunci">Jawaban: ○ Benar</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>ひんぱんに</strong> = sering/berkali-kali</li>
+          <li><strong>給油（きゅうゆ）</strong> = pemberian pelumas/oli</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Grease berbentuk setengah padat sehingga tidak mudah mengalir atau hilang dari posisinya, cocok untuk komponen yang sulit dijangkau (seperti ball joint, bearing roda) dan tidak praktis untuk dilumasi setiap hari.</p>
+        <p>Alat untuk mengisi grease: <strong>グリース・ガン</strong> (Grease Gun) — BUKAN air gun yang hanya mengeluarkan udara bertekanan.</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Jangan tukar grease dengan oli cair di bagian sasis — oli cair akan menetes dan habis, meninggalkan komponen tanpa pelumasan. Sifat semi-padat grease membuatnya "bertahan" di tempatnya.</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">グリース・ガン</span> = grease gun (alat pengisi grease)</span>
+          <span class="p-istilah-item"><span class="jp-term">ボール・ジョイント</span> = ball joint</span>
+          <span class="p-istilah-item"><span class="jp-term">グリース・ニップル</span> = grease nipple (titik pengisian)</span>
+        </div>
+      </div>
+      <div class="p-tip">Grease = pelumas semi-padat untuk bagian yang sulit diakses rutin. Isi dengan Grease Gun, bukan Air Gun.</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SOAL 5 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">5</span><span class="q-preview">ブレーキ液（えき）は、長期間（ちょうきかん）使用（しよう）すると水分（すいぶん）を吸収（きゅうしゅう）して沸点（ふってん）が低下（ていか）するので、定期的（ていきてき）に交換（こうかん）する必要（ひつよう）がある。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">ブレーキ液（えき）は、長期間（ちょうきかん）使用（しよう）すると水分（すいぶん）を吸収（きゅうしゅう）して沸点（ふってん）が低下（ていか）するので、定期的（ていきてき）に交換（こうかん）する必要（ひつよう）がある。</p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="true"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✓</span></button>
+      <button class="option-btn-mb batsu" data-correct="false"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✗</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Arti: Minyak rem yang dipakai lama akan menyerap uap air sehingga titik didihnya turun, maka perlu diganti secara berkala.</div>
+      <div class="p-kunci">Jawaban: ○ Benar</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>水分（すいぶん）を吸収（きゅうしゅう）</strong> = menyerap uap air (sifat higroskopis)</li>
+          <li><strong>沸点（ふってん）が低下（ていか）</strong> = titik didih turun (berbahaya)</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Minyak rem bersifat higroskopis — secara alami menyerap uap air dari lingkungan. Semakin banyak air yang terserap, titik didih minyak rem turun drastis. Saat pengereman keras/berulang, minyak rem bisa mendidih dan membentuk gelembung uap — ini disebut <strong>ベーパー・ロック (Vapor Lock)</strong> yang menyebabkan rem blong (tidak responsif).</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Standar Jepang: ganti minyak rem setiap 2 tahun, bersamaan jadwal 車検（しゃけん）. Meski jumlahnya masih penuh di tangki, kualitasnya bisa sudah menurun karena kadar air tinggi.</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">吸湿性（きゅうしつせい）</span> = sifat higroskopis</span>
+          <span class="p-istilah-item"><span class="jp-term">ベーパー・ロック</span> = vapor lock (rem blong karena uap)</span>
+          <span class="p-istilah-item"><span class="jp-term">DOT 4</span> = standar kualitas minyak rem</span>
+        </div>
+      </div>
+      <div class="p-tip">⚠️ Minyak rem jumlah penuh ≠ kualitas masih baik. Kadar air tinggi tetap berbahaya. Ganti tiap 2 tahun.</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SOAL 6 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">6</span><span class="q-preview">ギヤ・オイルの粘度（ねんど）が高（たか）すぎると、粘性抵抗（ねんせいていこう）が大（おお）きくなり、動力損失（どうりょくそんしつ）を増大（ぞうだい）させる。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">ギヤ・オイルの粘度（ねんど）が高（たか）すぎると、粘性抵抗（ねんせいていこう）が大（おお）きくなり、動力損失（どうりょくそんしつ）を増大（ぞうだい）させる。</p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="true"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✓</span></button>
+      <button class="option-btn-mb batsu" data-correct="false"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✗</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Arti: Jika kekentalan gear oil terlalu tinggi, hambatan viskositas membesar dan menyebabkan kerugian tenaga.</div>
+      <div class="p-kunci">Jawaban: ○ Benar</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>粘度（ねんど）が高（たか）すぎる</strong> = kekentalan terlalu tinggi</li>
+          <li><strong>動力損失（どうりょくそんしつ）</strong> = kerugian/kehilangan tenaga</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Analogi sederhana: berlari di dalam kolam berisi sirup kental jauh lebih berat daripada berlari di air biasa. Gear oil yang terlalu kental membuat roda gigi "berenang" dalam cairan kental, sehingga sebagian tenaga mesin terbuang untuk "mengaduk" oli tersebut alih-alih menggerakkan kendaraan.</p>
+        <p>Kesimpulan: kekentalan oli harus sesuai spesifikasi pabrikan — tidak boleh terlalu encer (perlindungan kurang) dan tidak boleh terlalu kental (tenaga boros).</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Jangan beranggapan "oli makin kental makin baik" — itu mitos yang berbahaya. Kekentalan yang tepat (sesuai spek pabrikan) adalah yang terbaik.</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">適正粘度（てきせいねんど）</span> = kekentalan yang tepat</span>
+          <span class="p-istilah-item"><span class="jp-term">SAE</span> = Society of Automotive Engineers (standar kekentalan)</span>
+        </div>
+      </div>
+      <div class="p-tip">Oli terlalu kental = tenaga boros. Oli terlalu encer = pelindungan kurang. Keduanya buruk — pakai spek pabrikan.</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SOAL 7 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">7</span><span class="q-preview">エア・クリーナのエレメントが汚（よご）れて目詰（めづ）まりを起（お）こすと、吸入空気（きゅうにゅうくうき）が減少（げんしょう）し、エンジンの性能（せいのう）が低下（ていか）する。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">エア・クリーナのエレメントが汚（よご）れて目詰（めづ）まりを起（お）こすと、吸入空気（きゅうにゅうくうき）が減少（げんしょう）し、エンジンの性能（せいのう）が低下（ていか）する。</p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="true"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✓</span></button>
+      <button class="option-btn-mb batsu" data-correct="false"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✗</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Arti: Jika elemen air cleaner kotor dan menyumbat, udara yang dihisap berkurang sehingga performa mesin menurun.</div>
+      <div class="p-kunci">Jawaban: ○ Benar</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>目詰（めづ）まり</strong> = tersumbat/mampet</li>
+          <li><strong>吸入空気（きゅうにゅうくうき）が減少（げんしょう）</strong> = udara yang dihisap berkurang</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Analogi: berlari sambil memakai masker tebal yang kotor — napas sesak, tenaga berkurang. Mesin butuh udara untuk pembakaran. Jika filter udara mampet, rasio udara-bahan bakar tidak ideal → tenaga loyo dan bensin boros.</p>
+        <p>Cara bersihkan: tiup dengan air gun dari <strong>dalam ke luar</strong>. Jika sudah parah/rusak, wajib diganti baru.</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Ingat arah membersihkan filter — dari DALAM ke LUAR (bukan sebaliknya). Meniup dari luar ke dalam justru mendorong debu makin masuk ke pori-pori filter.</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">エレメント</span> = elemen filter (material penyaring)</span>
+          <span class="p-istilah-item"><span class="jp-term">燃費悪化（ねんぴあっか）</span> = perburukan konsumsi bahan bakar</span>
+        </div>
+      </div>
+      <div class="p-tip">Filter mampet → udara berkurang → tenaga loyo + bensin boros. Satu penyebab, dua akibat sekaligus.</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SOAL 8 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">8</span><span class="q-preview">エア・ガン（air gun）を用（もち）いて、グリースをグリース・ニップルから圧送（あっそう）する。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">エア・ガン（air gun）を用（もち）いて、グリースをグリース・ニップルから圧送（あっそう）する。</p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="false"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✗</span></button>
+      <button class="option-btn-mb batsu" data-correct="true"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✓</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Arti: Menggunakan air gun untuk menekan grease melalui grease nipple.</div>
+      <div class="p-kunci">Jawaban: ✕ Salah</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>エア・ガン</strong> = air gun (hanya mengeluarkan udara bertekanan — alat yang SALAH dipasangkan di sini)</li>
+          <li><strong>圧送（あっそう）</strong> = menekan/menyalurkan dengan tekanan</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Dua alat ini bentuknya mirip "pistol" tapi fungsinya sangat berbeda:</p>
+        <ul>
+          <li><strong>エア・ガン (Air Gun)</strong> = mengeluarkan udara bertekanan, HANYA untuk membersihkan debu/chip logam</li>
+          <li><strong>グリース・ガン (Grease Gun)</strong> = berisi grease, khusus untuk mengisi pelumas ke grease nipple di komponen sasis</li>
+        </ul>
+        <p>Grease bersifat semi-padat dan tidak bisa "ditembakkan" dengan udara seperti air gun — butuh tekanan mekanis dari grease gun.</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Jebakan klasik soal ini adalah dua alat yang namanya serupa tapi fungsinya berlawanan. Air Gun = membersihkan. Grease Gun = melumasi.</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">グリース・ガン</span> = grease gun (alat yang benar)</span>
+          <span class="p-istilah-item"><span class="jp-term">清掃（せいそう）</span> = pembersihan (fungsi Air Gun)</span>
+          <span class="p-istilah-item"><span class="jp-term">給油（きゅうゆ）</span> = pelumasan (fungsi Grease Gun)</span>
+        </div>
+      </div>
+      <div class="p-tip">⚠️ Air Gun = udara untuk membersihkan. Grease Gun = grease untuk melumasi. Jangan tertukar!</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ BAB E ══ -->
+<div class="bab-divider"><span class="bab-badge">📗 BAB E — 安全（あんぜん）・5S・整備士（せいびし）の心得（こころえ）</span></div>
+
+<!-- ══ SOAL 9 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">9</span><span class="q-preview">「整理（せいり）」の正（ただ）しい意味（いみ）は、いらないものを捨（す）てることである。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">「整理（せいり）」の正（ただ）しい意味（いみ）は、いらないものを捨（す）てることである。</p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="true"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✓</span></button>
+      <button class="option-btn-mb batsu" data-correct="false"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✗</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Arti: Arti yang benar dari "Seiri" adalah membuang barang yang tidak diperlukan.</div>
+      <div class="p-kunci">Jawaban: ○ Benar</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>整理（せいり）</strong> = Seiri — MEMILAH dan MEMBUANG yang tidak perlu</li>
+          <li><strong>いらないものを捨（す）てる</strong> = membuang yang tidak diperlukan</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>5S adalah filosofi manajemen tempat kerja Jepang yang wajib dikuasai untuk bekerja di Jepang:</p>
+        <ul>
+          <li><strong>整理（せいり）/Seiri</strong> = MEMILAH dan MEMBUANG yang tidak perlu</li>
+          <li><strong>整頓（せいとん）/Seiton</strong> = MENATA barang yang perlu agar mudah diambil</li>
+          <li><strong>清掃（せいそう）/Seisou</strong> = MEMBERSIHKAN area dan peralatan</li>
+          <li><strong>清潔（せいけつ）/Seiketsu</strong> = MENJAGA kebersihan secara konsisten</li>
+          <li><strong>躾（しつけ）/Shitsuke</strong> = DISIPLIN membiasakan semua langkah di atas</li>
+        </ul>
+        <p>⚠️ Jebakan klasik: banyak yang mengira Seiri = "merapikan". Yang benar, Seiri = <strong>membuang</strong> yang tidak perlu. Merapikan itu adalah Seiton (tahap kedua).</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Urutan 5S itu penting — tidak bisa langsung Seiton (menata) sebelum Seiri (membuang yang tidak perlu) selesai. Menata barang yang tidak perlu hanya memindahkan masalah.</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">不要品（ふようひん）</span> = barang yang tidak diperlukan</span>
+          <span class="p-istilah-item"><span class="jp-term">廃棄（はいき）</span> = membuang/memindahkan</span>
+        </div>
+      </div>
+      <div class="p-tip">⚠️ Seiri = MEMBUANG yang tidak perlu (bukan merapikan). Merapikan = Seiton. Jangan tertukar!</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SOAL 10 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">10</span><span class="q-preview">「整頓（せいとん）」とは、必要（ひつよう）なものをすぐに取（と）り出（だ）せるように定位置（ていいち）に置（お）くことである。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">「整頓（せいとん）」とは、必要（ひつよう）なものをすぐに取（と）り出（だ）せるように定位置（ていいち）に置（お）くことである。</p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="true"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✓</span></button>
+      <button class="option-btn-mb batsu" data-correct="false"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✗</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Arti: "Seiton" adalah menempatkan barang yang diperlukan di posisi tetap yang sudah ditentukan agar bisa segera diambil.</div>
+      <div class="p-kunci">Jawaban: ○ Benar</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>すぐに取（と）り出（だ）せる</strong> = bisa segera diambil</li>
+          <li><strong>定位置（ていいち）</strong> = posisi tetap yang sudah ditentukan</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Seiton bukan sekadar "terlihat rapi" — tujuan utamanya adalah <strong>efisiensi kerja</strong>. Setiap alat harus punya "rumah" yang tetap dan jelas, sehingga mekanik tidak buang waktu mencari alat saat sedang bekerja. Di bengkel Jepang, posisi setiap alat sering ditandai dengan outline/siluet di dinding atau laci.</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Konsep Seiton yang baik: ambil alat = 30 detik, kembalikan alat = 30 detik. Jika perlu lebih dari 1 menit untuk mencari alat, Seiton belum berhasil.</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">定位置（ていいち）</span> = posisi tetap yang ditentukan</span>
+          <span class="p-istilah-item"><span class="jp-term">工具管理（こうぐかんり）</span> = manajemen alat kerja</span>
+        </div>
+      </div>
+      <div class="p-tip">Seiton = setiap alat punya "rumah" tetap → bisa diambil dan dikembalikan dengan cepat dan mudah.</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SOAL 11 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">11</span><span class="q-preview">安全第一（あんぜんだいいち）とは、品質（ひんしつ）や効率（こうりつ）よりも安全（あんぜん）を優先（ゆうせん）するという考（かんが）え方（かた）である。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">安全第一（あんぜんだいいち）とは、品質（ひんしつ）や効率（こうりつ）よりも安全（あんぜん）を優先（ゆうせん）するという考（かんが）え方（かた）である。</p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="true"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✓</span></button>
+      <button class="option-btn-mb batsu" data-correct="false"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✗</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Arti: "Keselamatan Nomor Satu" adalah cara berpikir yang mengutamakan keselamatan di atas kualitas dan efisiensi.</div>
+      <div class="p-kunci">Jawaban: ○ Benar</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>安全第一（あんぜんだいいち）</strong> = Safety First / Keselamatan Nomor Satu</li>
+          <li><strong>優先（ゆうせん）する</strong> = mengutamakan/memprioritaskan</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Prioritas di bengkel Jepang selalu: <strong>安全 (Keselamatan) → 品質 (Kualitas) → 効率 (Efisiensi)</strong>. Tidak pernah sebaliknya. Jika ada konflik antara cepat dan aman, aman selalu menang. Kesalahan teknis bisa diperbaiki — kecelakaan tidak selalu bisa dipulihkan sepenuhnya.</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Kalau atasan meminta bekerja lebih cepat tapi dengan cara yang tidak aman, mekanik di Jepang BERHAK menolak dan menjelaskan alasan keselamatannya. Ini bukan dianggap lambat — ini dianggap profesional.</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">品質（ひんしつ）</span> = kualitas hasil kerja</span>
+          <span class="p-istilah-item"><span class="jp-term">効率（こうりつ）</span> = efisiensi/kecepatan kerja</span>
+        </div>
+      </div>
+      <div class="p-tip">安全 → 品質 → 効率. Urutan ini tidak boleh ditukar dalam kondisi apapun.</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SOAL 12 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">12</span><span class="q-preview">廃油（はいゆ）や廃液（はいえき）は、そのまま排水溝（はいすいこう）に流（なが）してもよい。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">廃油（はいゆ）や廃液（はいえき）は、そのまま排水溝（はいすいこう）に流（なが）してもよい。</p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="false"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✗</span></button>
+      <button class="option-btn-mb batsu" data-correct="true"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✓</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Arti: Oli bekas dan cairan limbah boleh langsung dibuang ke saluran pembuangan.</div>
+      <div class="p-kunci">Jawaban: ✕ Salah</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>廃油（はいゆ）・廃液（はいえき）</strong> = oli bekas dan cairan limbah bengkel</li>
+          <li><strong>排水溝（はいすいこう）に流（なが）す</strong> = dibuang ke saluran air (tindakan yang SALAH dan ILEGAL)</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Di Jepang, pembuangan limbah bengkel diatur ketat oleh 廃棄物処理法（はいきぶつしょりほう）(Undang-undang Pengelolaan Limbah). Oli bekas, cairan pendingin (LLC), minyak rem, dan cairan limbah lainnya adalah B3 (Bahan Berbahaya dan Beracun) yang WAJIB dikumpulkan dan diserahkan ke pengolah limbah berlisensi. Membuang ke saluran air adalah pelanggaran hukum serius.</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Di bengkel Jepang, selalu ada drum atau wadah khusus berlabel untuk tiap jenis limbah (oli bekas, air aki, cairan pendingin, dll). Jika ragu cara membuang limbah, tanyakan ke senior — jangan tebak-tebak.</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">産業廃棄物（さんぎょうはいきぶつ）</span> = limbah industri</span>
+          <span class="p-istilah-item"><span class="jp-term">廃棄物処理（はいきぶつしょり）</span> = pengelolaan limbah</span>
+        </div>
+      </div>
+      <div class="p-tip">⚠️ Limbah bengkel (oli bekas, LLC, minyak rem) WAJIB dikumpulkan dan diserahkan ke pengolah resmi. Dibuang ke saluran air = melanggar hukum.</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SOAL 13 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">13</span><span class="q-preview">整備士（せいびし）は、お客様（きゃくさま）の車（くるま）を大切（たいせつ）に扱（あつか）い、作業前後（さぎょうぜんご）にシート・カバーやフェンダー・カバーを使用（しよう）する。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">整備士（せいびし）は、お客様（きゃくさま）の車（くるま）を大切（たいせつ）に扱（あつか）い、作業前後（さぎょうぜんご）にシート・カバーやフェンダー・カバーを使用（しよう）する。</p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="true"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✓</span></button>
+      <button class="option-btn-mb batsu" data-correct="false"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✗</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Arti: Teknisi memperlakukan kendaraan pelanggan dengan hati-hati, dan menggunakan seat cover serta fender cover sebelum dan sesudah bekerja.</div>
+      <div class="p-kunci">Jawaban: ○ Benar</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>大切（たいせつ）に扱（あつか）う</strong> = memperlakukan dengan hati-hati/penuh perhatian</li>
+          <li><strong>シート・カバー / フェンダー・カバー</strong> = pelindung kursi dan fender</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Di Jepang, kendaraan pelanggan diperlakukan seperti barang berharga milik pribadi — teknisi tidak boleh duduk di kursi penumpang dengan pakaian kerja kotor tanpa seat cover, dan fender cover dipasang sebelum bekerja di dekat bodi untuk mencegah goresan cat.</p>
+        <p>Ini mencerminkan budaya おもてなし (omotenashi) — pelayanan tulus yang memperhatikan hal-hal kecil.</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Teknisi Jepang yang profesional juga menyerahkan kembali kendaraan dalam kondisi bersih, termasuk membersihkan bekas jari dari kaca dan membungkus kunci dengan sarung bersih.</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">おもてなし</span> = pelayanan tulus/keramahan khas Jepang</span>
+          <span class="p-istilah-item"><span class="jp-term">傷（きず）をつけない</span> = tidak membuat goresan</span>
+        </div>
+      </div>
+      <div class="p-tip">Teknisi profesional Jepang: hati-hati terhadap kendaraan pelanggan, selalu pakai pelindung sebelum bekerja.</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SOAL 14 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">14</span><span class="q-preview">「躾（しつけ）」とは、決（き）められたことを正（ただ）しく守（まも）る習慣（しゅうかん）を身（み）につけることである。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">「躾（しつけ）」とは、決（き）められたことを正（ただ）しく守（まも）る習慣（しゅうかん）を身（み）につけることである。</p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="true"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✓</span></button>
+      <button class="option-btn-mb batsu" data-correct="false"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✗</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Arti: "Shitsuke" adalah membiasakan diri untuk mematuhi dan menjalankan aturan yang telah ditetapkan dengan benar.</div>
+      <div class="p-kunci">Jawaban: ○ Benar</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>躾（しつけ）</strong> = Shitsuke, huruf kanji yang paling sulit ditulis dari 5S</li>
+          <li><strong>習慣（しゅうかん）を身（み）につける</strong> = membangun kebiasaan</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Shitsuke adalah tahap paling sulit dari 5S karena berkaitan dengan perubahan karakter dan kebiasaan, bukan sekadar tindakan fisik. 4S pertama (Seiri, Seiton, Seisou, Seiketsu) adalah "apa yang dilakukan" — sedangkan Shitsuke adalah "mengapa kita terus melakukannya bahkan tanpa diawasi".</p>
+        <p>Inilah inti dari budaya kerja Jepang: melakukan hal yang benar karena sudah menjadi kebiasaan dan karakter, bukan karena takut dimarahi.</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Ukuran Shitsuke berhasil: apakah mekanik tetap melakukan 4S pertama saat tidak ada yang mengawasi? Jika ya, Shitsuke sudah berhasil.</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">習慣（しゅうかん）</span> = kebiasaan</span>
+          <span class="p-istilah-item"><span class="jp-term">自律（じりつ）</span> = disiplin diri sendiri</span>
+        </div>
+      </div>
+      <div class="p-tip">Shitsuke = disiplin diri yang sudah jadi kebiasaan otomatis, bukan keterpaksaan. Ini puncak dari 5S.</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SOAL 15 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">15</span><span class="q-preview">指差（ゆびさ）し確認（かくにん）とは、作業箇所（さぎょうかしょ）を指（ゆび）で差（さ）しながら声（こえ）に出（だ）して確認（かくにん）する安全（あんぜん）確認（かくにん）の方法（ほうほう）である。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">指差（ゆびさ）し確認（かくにん）とは、作業箇所（さぎょうかしょ）を指（ゆび）で差（さ）しながら声（こえ）に出（だ）して確認（かくにん）する安全（あんぜん）確認（かくにん）の方法（ほうほう）である。</p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="true"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✓</span></button>
+      <button class="option-btn-mb batsu" data-correct="false"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✗</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Arti: "Yubisashi Kakunin" (Point and Call) adalah metode konfirmasi keselamatan dengan cara menunjuk objek sambil mengucapkan konfirmasi dengan suara keras.</div>
+      <div class="p-kunci">Jawaban: ○ Benar</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>指（ゆび）で差（さ）しながら</strong> = sambil menunjuk dengan jari</li>
+          <li><strong>声（こえ）に出（だ）して確認（かくにん）</strong> = mengucapkan konfirmasi dengan bersuara</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>指差し確認 (Yubisashi Kakunin / Point and Call) adalah teknik keselamatan khas Jepang yang terbukti efektif mengurangi kesalahan kerja. Penelitian menunjukkan teknik ini mengurangi tingkat kesalahan hingga <strong>85%</strong> dibanding hanya melihat saja.</p>
+        <p>Cara kerja: menunjuk objek dengan jari + menyebut kondisinya dengan keras. Contoh: "Oil level — OK!" sambil jari menunjuk dipstick. Melibatkan tiga indera sekaligus (visual, motorik, suara) membuat otak lebih "sadar" dan mengurangi autopilot error.</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Teknik ini juga dipakai oleh masinis kereta Jepang, pilot, dan operator alat berat — bukan hanya di bengkel. Ini adalah standar keselamatan yang sudah terbukti secara ilmiah.</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">ヒューマンエラー</span> = human error</span>
+          <span class="p-istilah-item"><span class="jp-term">安全確認（あんぜんかくにん）</span> = konfirmasi keselamatan</span>
+        </div>
+      </div>
+      <div class="p-tip">指差し確認 = menunjuk + bersuara = melibatkan 3 indera → mengurangi kesalahan hingga 85%. Ini ilmu, bukan sekedar tradisi.</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SUBMIT & KIRIM ══ -->
+<div class="submit-area">
+  <button id="mega-submit-btn">📊 Lihat Hasil &amp; Kirim ke Sensei</button>
+  <div class="hasil-panel" id="hasil-panel">
+    <div class="hasil-grid">
+      <div class="hasil-item"><div class="h-label">Nama</div><div class="h-value" id="h-nama" style="font-size:14px;">—</div></div>
+      <div class="hasil-item"><div class="h-label">Skor</div><div class="h-value" id="h-skor">0/15</div></div>
+      <div class="hasil-item"><div class="h-label">Benar</div><div class="h-value" id="h-benar">0</div></div>
+      <div class="hasil-item"><div class="h-label">Persentase</div><div class="h-value" id="h-persen">0%</div></div>
+      <div class="hasil-item"><div class="h-label">Waktu</div><div class="h-value" id="h-waktu" style="font-size:16px;">—</div></div>
+      <div class="hasil-item"><div class="h-label">Status</div><div class="h-value" id="h-status" style="font-size:14px;">—</div></div>
+    </div>
+    <button class="kirim-btn" id="kirim-btn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+      Kirim Hasil ke Google Sheets
+    </button>
+    <p id="kirim-status"></p>
+  </div>
+</div>
+
+</div><!-- .ssw-mega-wrap -->
+
+<script>
+(function(){
+  'use strict';
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwbXRXE-M6quwLbLCV6IuNoPVzwzLWiwZEHtokSkOpi7w38kiprxK0ZJ7bv7hsFET6H4w/exec';
+  const BAB_NAME        = 'Bab D & E — Material, Bahan Bakar, dan Budaya Kerja';
+  const TOTAL           = 15;
+  const PASSING_PERCENT = 70;
+  const state = { answered:0, correct:0, startTime:null, endTime:null, submitted:false };
+  const scoreEl=document.getElementById('mega-score');
+  const correctEl=document.getElementById('mega-correct');
+  const progFill=document.getElementById('mega-prog-fill');
+  const progLabel=document.getElementById('mega-prog-label');
+  const submitBtn=document.getElementById('mega-submit-btn');
+  const lulusRow=document.getElementById('lulus-indicator');
+  const timerEl=document.getElementById('mega-timer');
+  const hasilPanel=document.getElementById('hasil-panel');
+  const kirimBtn=document.getElementById('kirim-btn');
+  const kirimStat=document.getElementById('kirim-status');
+  let timerInterval=null;
+  function startTimer(){
+    if(state.startTime)return;
+    state.startTime=Date.now();
+    timerInterval=setInterval(()=>{
+      const e=Math.floor((Date.now()-state.startTime)/1000);
+      timerEl.textContent=`${String(Math.floor(e/60)).padStart(2,'0')}:${String(e%60).padStart(2,'0')}`;
+      if(e>=900)timerEl.classList.add('warn');
+    },1000);
+  }
+  function stopTimer(){ clearInterval(timerInterval); state.endTime=Date.now(); }
+  function getElapsed(){
+    if(!state.startTime||!state.endTime)return'—';
+    const e=Math.floor((state.endTime-state.startTime)/1000);
+    return`${String(Math.floor(e/60)).padStart(2,'0')}:${String(e%60).padStart(2,'0')}`;
+  }
+  function updateUI(){
+    if(scoreEl) scoreEl.textContent=state.correct;
+    if(correctEl) correctEl.textContent=state.correct;
+    if(progFill) progFill.style.width=Math.round((state.answered/TOTAL)*100)+'%';
+    if(progLabel) progLabel.textContent=`${state.answered} / ${TOTAL} terjawab`;
+    if(!lulusRow)return;
+    if(state.answered<TOTAL){
+      lulusRow.className='lulus-row';
+      lulusRow.textContent=`Jawab semua soal untuk melihat status kelulusan (standar: ${PASSING_PERCENT}% atau lebih)`;
+      return;
+    }
+    const pct=Math.round((state.correct/TOTAL)*100);
+    if(pct>=PASSING_PERCENT){
+      lulusRow.className='lulus-row is-lulus';
+      lulusRow.textContent=`✅ LULUS — Skor ${state.correct}/${TOTAL} (${pct}%), memenuhi standar minimal ${PASSING_PERCENT}%`;
+    } else {
+      lulusRow.className='lulus-row is-gagal';
+      lulusRow.textContent=`❌ BELUM LULUS — Skor ${state.correct}/${TOTAL} (${pct}%), standar minimal ${PASSING_PERCENT}%`;
+    }
+  }
+  function handleClick(e){
+    const btn=e.target.closest('.option-btn-mb');
+    if(!btn)return;
+    const card=btn.closest('.quiz-card');
+    if(!card)return;
+    const allOpts=card.querySelectorAll('.option-btn-mb');
+    if([...allOpts].some(b=>b.classList.contains('is-correct')||b.classList.contains('is-wrong')))return;
+    startTimer();
+    const ok=btn.dataset.correct==='true';
+    btn.classList.add(ok?'is-correct':'is-wrong');
+    allOpts.forEach(b=>{
+      if(b===btn){b.style.pointerEvents='none';return;}
+      b.style.pointerEvents='none';
+      b.classList.add(b.dataset.correct==='true'?'is-correct':'is-locked');
+    });
+    const p=card.querySelector('.pembahasan');
+    if(p)p.classList.add('show');
+    state.answered++; if(ok)state.correct++;
+    updateUI();
+    if(state.answered===TOTAL)stopTimer();
+  }
+  document.querySelector('.ssw-mega-wrap').addEventListener('click',handleClick);
+  submitBtn&&submitBtn.addEventListener('click',()=>{
+    if(state.answered===0){alert('Kamu belum menjawab soal apa pun!');return;}
+    const nama=document.getElementById('mega-name').value.trim()||'Tidak Diisi';
+    const pct=Math.round((state.correct/TOTAL)*100);
+    const lulus=pct>=PASSING_PERCENT;
+    document.getElementById('h-nama').textContent=nama;
+    document.getElementById('h-skor').textContent=`${state.correct}/${TOTAL}`;
+    document.getElementById('h-benar').textContent=state.correct;
+    document.getElementById('h-persen').textContent=`${pct}%`;
+    document.getElementById('h-waktu').textContent=getElapsed();
+    const hs=document.getElementById('h-status');
+    hs.textContent=lulus?'✅ LULUS':'❌ BELUM LULUS';
+    hs.style.color=lulus?'var(--correct)':'var(--wrong)';
+    hasilPanel.classList.add('show');
+    submitBtn.disabled=true;
+    window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
+  });
+  kirimBtn&&kirimBtn.addEventListener('click',async()=>{
+    const nama=document.getElementById('mega-name').value.trim();
+    if(!nama){kirimStat.style.color='var(--wrong)';kirimStat.textContent='⚠️ Isi nama dulu sebelum mengirim!';return;}
+    if(state.submitted){kirimStat.style.color='var(--ink-muted)';kirimStat.textContent='Hasil sudah pernah dikirim.';return;}
+    kirimBtn.disabled=true; kirimBtn.innerHTML='⏳ Mengirim...';
+    kirimStat.style.color='var(--ink-muted)'; kirimStat.textContent='Sedang mengirim ke spreadsheet...';
+    const pct=Math.round((state.correct/TOTAL)*100);
+    const tanggal=new Date().toLocaleString('id-ID',{timeZone:'Asia/Jakarta'});
+    const payload={nama,bab:BAB_NAME,skor:`${state.correct}/${TOTAL}`,jumlah_benar:state.correct,persen:pct,waktu:getElapsed(),tanggal,status:pct>=PASSING_PERCENT?'LULUS':'BELUM LULUS'};
+    try{
+      await fetch(APPS_SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+      state.submitted=true;
+      kirimBtn.innerHTML='✅ Berhasil Dikirim';
+      kirimStat.style.color='var(--correct)';
+      kirimStat.textContent=`Hasil ${nama} sudah dikirim (${tanggal})`;
+    }catch(err){
+      kirimBtn.disabled=false; kirimBtn.innerHTML='🔄 Coba Kirim Ulang';
+      kirimStat.style.color='var(--wrong)'; kirimStat.textContent='Gagal mengirim. Cek koneksi dan coba lagi.';
+    }
+  });
+})();
+</script>
+</body>
+</html>
