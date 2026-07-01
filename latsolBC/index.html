@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Latihan Soal Bab B & C — Inspeksi, Alat Ukur, dan Perkakas</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;700&family=Source+Serif+4:wght@300;400;600&display=swap');
+
+.ssw-mega-wrap {
+  --ink:         #1a1a1a;
+  --ink-light:   #3d3d3d;
+  --ink-muted:   #707070;
+  --paper:       #faf9f7;
+  --paper-warm:  #f5f3ef;
+  --rule:        #d8d4cc;
+  --correct:     #1e7e45;
+  --correct-bg:  #edfaf3;
+  --correct-bd:  #6fcf97;
+  --wrong:       #c0392b;
+  --wrong-bg:    #fff0ef;
+  --wrong-bd:    #e07070;
+  --acc:         #2c3e6b;
+  --acc-soft:    #eef1f9;
+  --gold:        #a08030;
+  --bab-color:   #6b3a1a;
+  --bab-soft:    #f5ede6;
+  --font-jp:   'Noto Serif JP', serif;
+  --font-ui:   'Noto Sans JP', sans-serif;
+  --font-body: 'Source Serif 4','Noto Serif JP',serif;
+  font-family: var(--font-body);
+  color: var(--ink);
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.ssw-mega-wrap .qhdr {
+  background: linear-gradient(135deg, #3d1f08 0%, #6b3a1a 100%);
+  border-radius: 12px 12px 0 0;
+  padding: 22px 28px 18px;
+  position: relative; overflow: hidden;
+}
+.ssw-mega-wrap .qhdr::after {
+  content: '点検計測';
+  position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+  font-family: var(--font-jp); font-size: 64px; font-weight: 700;
+  line-height: 1; color: rgba(255,255,255,0.05); pointer-events: none;
+}
+.ssw-mega-wrap .qhdr-inner { position: relative; }
+.ssw-mega-wrap .qhdr h2 {
+  font-family: var(--font-jp); font-size: 19px; font-weight: 700;
+  color: #fff; margin: 0 0 5px; line-height: 1.4;
+}
+.ssw-mega-wrap .qhdr p {
+  font-family: var(--font-ui); font-size: 12px;
+  color: rgba(255,255,255,0.55); margin: 0; line-height: 1.7;
+}
+.ssw-mega-wrap .hdr-pills {
+  display: flex; gap: 6px; flex-wrap: wrap; margin-top: 12px;
+}
+.ssw-mega-wrap .hp {
+  font-family: var(--font-ui); font-size: 10px; font-weight: 700;
+  letter-spacing: 0.06em; padding: 3px 9px; border-radius: 3px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.8);
+}
+
+/* ── Bab divider badge ── */
+.ssw-mega-wrap .bab-divider {
+  display: flex; align-items: center; gap: 10px;
+  margin: 18px 0 10px;
+  font-family: var(--font-ui); font-size: 12px; font-weight: 700;
+  color: var(--bab-color);
+}
+.ssw-mega-wrap .bab-divider::before,
+.ssw-mega-wrap .bab-divider::after {
+  content: ''; flex: 1; height: 1px; background: var(--rule);
+}
+.ssw-mega-wrap .bab-badge {
+  padding: 4px 14px; border-radius: 20px;
+  background: var(--bab-soft); border: 1px solid #d4a882;
+  white-space: nowrap;
+}
+
+.ssw-mega-wrap .shuffle-banner {
+  display: flex; align-items: flex-start; gap: 11px;
+  padding: 11px 20px;
+  background: var(--bab-color);
+  font-family: var(--font-ui); font-size: 12.5px;
+  color: rgba(255,255,255,0.85); line-height: 1.6;
+}
+.ssw-mega-wrap .shuffle-banner .si { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+
+.ssw-mega-wrap .top-panel {
+  background: var(--paper-warm);
+  border: 1px solid var(--rule); border-top: none;
+  padding: 13px 20px; margin-bottom: 14px;
+  display: flex; flex-wrap: wrap; gap: 12px;
+  align-items: center; justify-content: space-between;
+}
+.ssw-mega-wrap .name-field {
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--font-ui); font-size: 13px; font-weight: 600; color: var(--ink-light);
+}
+.ssw-mega-wrap .name-field input {
+  padding: 7px 12px; border: 1.5px solid var(--rule); border-radius: 6px;
+  font-family: var(--font-ui); font-size: 13px; width: 185px;
+  outline: none; transition: border-color 0.2s; background: #fff;
+}
+.ssw-mega-wrap .name-field input:focus { border-color: var(--bab-color); }
+.ssw-mega-wrap .score-display {
+  font-family: var(--font-ui); font-size: 13px; color: var(--ink-light);
+  display: flex; align-items: center; gap: 5px;
+}
+.ssw-mega-wrap .snum { font-size: 22px; font-weight: 700; color: var(--bab-color); line-height: 1; }
+
+.ssw-mega-wrap .timer-row {
+  display: flex; align-items: center; justify-content: flex-end; gap: 8px;
+  margin-bottom: 8px; font-family: var(--font-ui); font-size: 13px; color: var(--ink-muted);
+}
+.ssw-mega-wrap .timer-display {
+  font-size: 20px; font-weight: 700; color: var(--bab-color);
+  font-variant-numeric: tabular-nums; min-width: 55px; text-align: right;
+}
+.ssw-mega-wrap .timer-display.warn { color: var(--wrong); }
+
+.ssw-mega-wrap .prog-row {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+  font-family: var(--font-ui); font-size: 11px; color: var(--ink-muted);
+}
+.ssw-mega-wrap .prog-track {
+  flex: 1; height: 5px; background: var(--rule); border-radius: 3px; overflow: hidden;
+}
+.ssw-mega-wrap .prog-fill {
+  height: 100%; width: 0%; background: var(--bab-color);
+  border-radius: 3px; transition: width 0.4s ease;
+}
+
+.ssw-mega-wrap .lulus-row {
+  margin-bottom: 14px; padding: 9px 14px; border-radius: 8px;
+  font-family: var(--font-ui); font-size: 12px; font-weight: 600;
+  background: var(--bab-soft); color: var(--bab-color); text-align: center;
+  border: 1px solid #d4a882;
+}
+.ssw-mega-wrap .lulus-row.is-lulus { background: var(--correct-bg); color: var(--correct); border-color: var(--correct-bd); }
+.ssw-mega-wrap .lulus-row.is-gagal { background: var(--wrong-bg); color: var(--wrong); border-color: var(--wrong-bd); }
+
+.ssw-mega-wrap details {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-left: 4px solid var(--bab-color);
+  border-radius: 10px;
+  margin-bottom: 9px; overflow: hidden;
+  box-shadow: 0 2px 9px rgba(0,0,0,0.04);
+  transition: box-shadow 0.2s;
+}
+.ssw-mega-wrap details[open] { box-shadow: 0 4px 18px rgba(0,0,0,0.09); }
+.ssw-mega-wrap summary {
+  cursor: pointer; padding: 12px 16px;
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--font-ui); font-size: 13.5px; font-weight: 600;
+  color: var(--ink); list-style: none; user-select: none;
+  background: var(--paper-warm); transition: background 0.15s;
+}
+.ssw-mega-wrap summary::-webkit-details-marker { display: none; }
+.ssw-mega-wrap summary:hover { background: #ece8df; }
+.ssw-mega-wrap .q-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 28px; height: 28px; border-radius: 50%;
+  background: var(--bab-color); color: #fff;
+  font-size: 11px; font-weight: 700; flex-shrink: 0;
+}
+.ssw-mega-wrap .q-preview {
+  flex: 1; font-family: var(--font-jp); font-size: 13.5px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0;
+}
+.ssw-mega-wrap .q-chevron {
+  font-size: 11px; color: var(--ink-muted);
+  transition: transform 0.2s; flex-shrink: 0; margin-left: 4px;
+}
+.ssw-mega-wrap details[open] summary .q-chevron { transform: rotate(180deg); }
+
+.ssw-mega-wrap .quiz-body { padding: 16px 18px 18px; border-top: 1px solid var(--rule); }
+.ssw-mega-wrap .quiz-question {
+  font-family: var(--font-jp); font-size: 17px; line-height: 2.1;
+  color: var(--ink); margin-bottom: 14px; padding: 12px 15px;
+  background: var(--bab-soft); border-left: 3px solid var(--bab-color); border-radius: 8px;
+}
+
+.ssw-mega-wrap .options-list-mb {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 11px;
+}
+.ssw-mega-wrap .option-btn-mb {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 4px; padding: 16px 10px; border: 2px solid var(--rule); border-radius: 10px;
+  background: #fff; cursor: pointer; font-family: var(--font-ui);
+  transition: border-color 0.15s, background 0.15s, transform 0.1s;
+}
+.ssw-mega-wrap .option-btn-mb:hover:not([disabled]) {
+  border-color: var(--bab-color); background: var(--bab-soft); transform: translateY(-2px);
+}
+.ssw-mega-wrap .opt-symbol { font-family: var(--font-jp); font-size: 30px; font-weight: 700; line-height: 1; }
+.ssw-mega-wrap .opt-label-mb { font-size: 11px; font-weight: 700; letter-spacing: 0.05em; color: var(--ink-muted); }
+.ssw-mega-wrap .opt-icon-mb { font-size: 13px; opacity: 0; transition: opacity 0.2s; margin-top: 2px; }
+.ssw-mega-wrap .option-btn-mb.is-correct { border-color: var(--correct-bd); background: var(--correct-bg); animation: pulse-c .3s ease; }
+.ssw-mega-wrap .option-btn-mb.is-correct .opt-symbol { color: var(--correct); }
+.ssw-mega-wrap .option-btn-mb.is-correct .opt-icon-mb { opacity: 1; }
+.ssw-mega-wrap .option-btn-mb.is-wrong { border-color: var(--wrong-bd); background: var(--wrong-bg); animation: shake-w .3s ease; }
+.ssw-mega-wrap .option-btn-mb.is-wrong .opt-symbol { color: var(--wrong); }
+.ssw-mega-wrap .option-btn-mb.is-wrong .opt-icon-mb { opacity: 1; }
+.ssw-mega-wrap .option-btn-mb.is-locked { opacity: 0.42; pointer-events: none; }
+
+.ssw-mega-wrap .pembahasan {
+  display: none; background: #fffdf0;
+  border: 1px solid #e8d89a; border-left: 4px solid var(--gold);
+  border-radius: 8px; padding: 13px 15px;
+  font-size: 13px; line-height: 1.85; color: #4a3800;
+  margin-top: 4px; animation: fadeIn .3s ease;
+}
+.ssw-mega-wrap .pembahasan.show { display: block; }
+.ssw-mega-wrap .p-title { font-family: var(--font-ui); font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+.ssw-mega-wrap .p-arti { font-family: var(--font-ui); font-style: italic; font-size: 13px; color: var(--ink-light); margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px dashed #e0d4a0; }
+.ssw-mega-wrap .p-kunci { font-family: var(--font-jp); font-size: 14px; font-weight: 700; color: var(--correct); margin-bottom: 10px; }
+.ssw-mega-wrap .p-section { margin-top: 12px; }
+.ssw-mega-wrap .p-subtitle { font-family: var(--font-ui); font-size: 12px; font-weight: 700; color: #6b5400; margin-bottom: 5px; }
+.ssw-mega-wrap .p-section ul { margin: 4px 0 6px 0; padding-left: 18px; }
+.ssw-mega-wrap .p-section li { margin-bottom: 3px; }
+.ssw-mega-wrap .p-section ol { margin: 4px 0 6px 0; padding-left: 20px; }
+.ssw-mega-wrap .p-logika { margin-top: 6px; padding: 9px 12px; background: rgba(160,128,48,0.08); border-radius: 6px; border-left: 3px solid var(--gold); }
+.ssw-mega-wrap .p-istilah { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 6px; }
+.ssw-mega-wrap .p-istilah-item { font-family: var(--font-ui); font-size: 11.5px; background: #fff; border: 1px solid #e8d89a; border-radius: 5px; padding: 4px 9px; color: #5a4500; }
+.ssw-mega-wrap .p-istilah-item .jp-term { font-family: var(--font-jp); font-weight: 700; }
+.ssw-mega-wrap .p-tip { margin-top: 8px; padding: 7px 11px; background: rgba(107,58,26,0.07); border-radius: 5px; font-size: 12px; color: var(--bab-color); font-family: var(--font-ui); }
+
+.ssw-mega-wrap .q-image-wrap { margin: 0 0 14px 0; text-align: center; }
+.ssw-mega-wrap .q-image-wrap img { max-width: 100%; max-height: 360px; border: 1px solid var(--rule); border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+
+.ssw-mega-wrap .submit-area { text-align: center; margin-top: 26px; padding-top: 20px; border-top: 1px solid var(--rule); }
+.ssw-mega-wrap #mega-submit-btn {
+  background: var(--bab-color); color: #fff; border: none;
+  padding: 13px 38px; border-radius: 30px;
+  font-family: var(--font-ui); font-size: 15px; font-weight: 700;
+  cursor: pointer; transition: background 0.2s, transform 0.1s;
+  box-shadow: 0 3px 14px rgba(107,58,26,0.3);
+}
+.ssw-mega-wrap #mega-submit-btn:hover { background: #3d1f08; transform: translateY(-1px); }
+.ssw-mega-wrap #mega-submit-btn:disabled { background: #b89880; cursor: not-allowed; transform: none; }
+
+.ssw-mega-wrap .hasil-panel { display: none; margin-top: 20px; padding: 20px; border: 1px solid var(--rule); border-radius: 12px; background: var(--paper-warm); }
+.ssw-mega-wrap .hasil-panel.show { display: block; }
+.ssw-mega-wrap .hasil-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px; }
+.ssw-mega-wrap .hasil-item { background: #fff; border: 1px solid var(--rule); border-radius: 8px; padding: 12px; text-align: center; }
+.ssw-mega-wrap .hasil-item .h-label { font-family: var(--font-ui); font-size: 10px; color: var(--ink-muted); margin-bottom: 4px; }
+.ssw-mega-wrap .hasil-item .h-value { font-family: var(--font-ui); font-size: 22px; font-weight: 700; color: var(--bab-color); }
+.ssw-mega-wrap .kirim-btn {
+  width: 100%; padding: 12px; border-radius: 8px; border: none;
+  background: #1a73e8; color: #fff; font-family: var(--font-ui);
+  font-size: 14px; font-weight: 700; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  transition: background 0.2s;
+}
+.ssw-mega-wrap .kirim-btn:hover { background: #1558b0; }
+.ssw-mega-wrap .kirim-btn:disabled { background: #8ab0d4; cursor: not-allowed; }
+.ssw-mega-wrap #kirim-status { margin-top: 10px; font-family: var(--font-ui); font-size: 13px; font-weight: 600; text-align: center; min-height: 20px; }
+
+@keyframes pulse-c { 0%{transform:scale(1)} 50%{transform:scale(1.03)} 100%{transform:scale(1)} }
+@keyframes shake-w { 0%{transform:translateX(0)} 20%{transform:translateX(-5px)} 40%{transform:translateX(5px)} 60%{transform:translateX(-3px)} 80%{transform:translateX(3px)} 100%{transform:translateX(0)} }
+@keyframes fadeIn  { from{opacity:0;transform:translateY(-5px)} to{opacity:1;transform:translateY(0)} }
+
+@media (max-width:600px){
+  .ssw-mega-wrap .qhdr::after { font-size:40px; }
+  .ssw-mega-wrap .quiz-question { font-size:15px; }
+  .ssw-mega-wrap .opt-symbol { font-size:26px; }
+  .ssw-mega-wrap .hasil-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="ssw-mega-wrap">
+
+<div class="qhdr">
+  <div class="qhdr-inner">
+    <h2>📗 Latihan Soal — BAB B &amp; C: Inspeksi, Alat Ukur, dan Perkakas</h2>
+    <p>自動車整備 SSW &nbsp;|&nbsp; 15 Soal &nbsp;|&nbsp; Format ○✕ &nbsp;|&nbsp; Hasil dikirim otomatis ke spreadsheet pengajar</p>
+    <div class="hdr-pills">
+      <span class="hp">点検手順</span>
+      <span class="hp">安全作業</span>
+      <span class="hp">ノギス</span>
+      <span class="hp">マイクロメータ</span>
+      <span class="hp">工具の使い方</span>
+    </div>
+  </div>
+</div>
+
+<div class="shuffle-banner">
+  <span class="si">📋</span>
+  <span>Latihan ini menggabungkan Bab B (prosedur inspeksi dan keselamatan kerja) dan Bab C (cara membaca alat ukur presisi serta penggunaan perkakas). Jawab teliti — perhatikan kata kunci dan kondisi yang disyaratkan setiap soal. Isi nama sebelum mengerjakan.</span>
+</div>
+
+<div class="top-panel">
+  <div class="name-field">
+    <label for="mega-name">👤 Nama:</label>
+    <input type="text" id="mega-name" placeholder="Masukkan nama kamu...">
+  </div>
+  <div class="score-display">
+    Skor: <span class="snum" id="mega-score">0</span>/15
+    &nbsp;|&nbsp; <span id="mega-correct">0</span> benar
+  </div>
+</div>
+
+<div class="timer-row">⏱ Waktu: <span class="timer-display" id="mega-timer">00:00</span></div>
+
+<div class="prog-row">
+  <span id="mega-prog-label">0 / 15 terjawab</span>
+  <div class="prog-track"><div class="prog-fill" id="mega-prog-fill"></div></div>
+</div>
+
+<div class="lulus-row" id="lulus-indicator">Jawab semua soal untuk melihat status kelulusan (standar: 70% atau lebih)</div>
+
+<!-- ══════════════════════════════════════
+     BAB B — INSPEKSI, PERBAIKAN, PENYETELAN
+     Soal 1–8
+════════════════════════════════════════ -->
+<div class="bab-divider"><span class="bab-badge">📘 BAB B — 点検（てんけん）・修理（しゅうり）・調整（ちょうせい）</span></div>
+
+<!-- ══ SOAL 1 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">1</span><span class="q-preview">自動車（じどうしゃ）をジャッキで持（も）ち上（あ）げるときは、平（たい）らな場所（ばしょ）で行（おこな）い、輪止（わど）め（wheel chock）を使用（しよう）しなければならない。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">自動車（じどうしゃ）をジャッキで持（も）ち上（あ）げるときは、平（たい）らな場所（ばしょ）で行（おこな）い、輪止（わど）め（wheel chock）を使用（しよう）しなければならない。</p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="true"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✓</span></button>
+      <button class="option-btn-mb batsu" data-correct="false"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✗</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Arti: Saat mengangkat mobil menggunakan dongkrak, harus dilakukan di tempat rata dan menggunakan wheel chock.</div>
+      <div class="p-kunci">Jawaban: ○ Benar</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>平（たい）らな場所（ばしょ）</strong> = tempat yang rata dan keras</li>
+          <li><strong>輪止（わど）め</strong> = wheel chock, ganjal roda agar tidak menggelinding</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Dua syarat wajib saat menggunakan jack: permukaan harus rata dan keras, dan wheel chock dipasang di roda yang tidak diangkat. Setelah terangkat, segera pasang <strong>ジャッキ・スタンド（うま）</strong> sebagai penyangga tambahan — jack hanya alat untuk mengangkat, bukan menopang dalam waktu lama.</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Prinsip wajib: "ジャッキは持（も）ち上（あ）げるだけ、支（ささ）えるのはジャッキスタンド" (Jack hanya untuk mengangkat, jack stand yang menopang).</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">ジャッキ・ポイント</span> = titik dongkrak yang benar</span>
+          <span class="p-istilah-item"><span class="jp-term">うま（リジット・ラック）</span> = jack stand</span>
+        </div>
+      </div>
+      <div class="p-tip">⚠️ Jack TIDAK boleh jadi satu-satunya penyangga. Selalu pasang jack stand setelah mobil terangkat.</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SOAL 2 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">2</span><span class="q-preview">エンジンルームを点検（てんけん）する前（まえ）に確認（かくにん）すべきことは、エンジンが止（と）まっていることである。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">エンジンルームを点検（てんけん）する前（まえ）に確認（かくにん）すべきことは、エンジンが止（と）まっていることである。</p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="true"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✓</span></button>
+      <button class="option-btn-mb batsu" data-correct="false"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✗</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Arti: Hal yang harus dipastikan sebelum memeriksa ruang mesin adalah memastikan mesin sudah berhenti.</div>
+      <div class="p-kunci">Jawaban: ○ Benar</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>確認（かくにん）すべきこと</strong> = hal yang harus dipastikan terlebih dahulu</li>
+          <li><strong>エンジンが止（と）まっている</strong> = mesin sudah berhenti/mati</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Ruang mesin mengandung bahaya: bagian berputar (fan belt, pulley), bagian panas, dan tegangan listrik tinggi. Mesin wajib dimatikan sebelum memeriksa apapun di dalamnya untuk mencegah kecelakaan serius.</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Sebelum menyalakan kembali mesin setelah pemeriksaan, wajib berteriak "エンジン、かけます！" agar rekan yang masih di dekat kap mesin tidak terkejut.</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">安全確認</span> (あんぜんかくにん) = konfirmasi keselamatan</span>
+          <span class="p-istilah-item"><span class="jp-term">声掛け</span> (こえかけ) = memberi tahu rekan kerja</span>
+        </div>
+      </div>
+      <div class="p-tip">Urutan wajib sebelum periksa ruang mesin: Matikan mesin → Tunggu dingin → Baru periksa.</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SOAL 3 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">3</span><span class="q-preview">ファン・ベルトの摩耗（まもう）や損傷（そんしょう）は、エンジンが動（うご）いているじょうたいで手（て）で触（さわ）って点検（てんけん）する。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">ファン・ベルトの摩耗（まもう）や損傷（そんしょう）は、エンジンが動（うご）いているじょうたいで手（て）で触（さわ）って点検（てんけん）する。</p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="false"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✗</span></button>
+      <button class="option-btn-mb batsu" data-correct="true"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✓</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Arti: Keausan dan kerusakan fan belt diperiksa dengan cara diraba tangan saat mesin sedang berjalan/hidup.</div>
+      <div class="p-kunci">Jawaban: ✕ Salah</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>エンジンが動（うご）いているじょうたい</strong> = saat mesin sedang hidup/berputar (kondisi yang SALAH dan BERBAHAYA)</li>
+          <li><strong>手（て）で触（さわ）って</strong> = diraba dengan tangan</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Pemeriksaan fan belt dengan tangan hanya boleh dilakukan saat mesin dalam kondisi MATI. Fan belt yang sedang berputar sangat cepat bisa menarik jari tangan masuk ke pulley dan menyebabkan cedera serius.</p>
+        <p>Yang benar: 目視（もくし）= periksa visual dulu saat mesin bisa hidup (mencari bunyi mencit atau getaran), lalu matikan mesin sebelum meraba untuk cek kekenduran (たわみ) atau retakan (亀裂/きれつ).</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Ini adalah soal jebakan K3 yang sering muncul — soalnya terlihat "hampir benar" (fan belt memang dicek dengan tangan) tapi kondisinya yang dibalik (mesin hidup vs mati).</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">たわみ</span> = kekenduran/defleksi belt</span>
+          <span class="p-istilah-item"><span class="jp-term">亀裂（きれつ）</span> = retakan pada belt</span>
+        </div>
+      </div>
+      <div class="p-tip">⚠️ Cek fan belt dengan tangan = WAJIB mesin mati. Ini poin keselamatan paling kritis di Bab B.</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SOAL 4 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">4</span><span class="q-preview">共同（きょうどう）さぎょうをおこなう場合（ばあい）は、声（こえ）を掛（か）け、合図（あいず）をして確認（かくにん）をする。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">共同（きょうどう）さぎょうをおこなう場合（ばあい）は、声（こえ）を掛（か）け、合図（あいず）をして確認（かくにん）をする。</p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="true"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✓</span></button>
+      <button class="option-btn-mb batsu" data-correct="false"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✗</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Arti: Saat melakukan pekerjaan bersama, berikan suara (teguran) dan isyarat untuk melakukan konfirmasi.</div>
+      <div class="p-kunci">Jawaban: ○ Benar</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>声（こえ）を掛（か）け</strong> = memberi suara/menyapa</li>
+          <li><strong>合図（あいず）</strong> = isyarat/sinyal yang sudah disepakati</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Budaya kerja Jepang mewajibkan komunikasi verbal yang jelas saat bekerja bersama (共同作業/きょうどうさぎょう). Contoh: sebelum menurunkan car lift, teknisi harus memastikan tidak ada rekan di bawah mobil dengan berteriak konfirmasi terlebih dahulu.</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Di bengkel Jepang, mekanik yang lantang dan aktif memberi konfirmasi dianggap mekanik yang aman dan profesional — bukan dianggap berlebihan.</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">指差し確認（ゆびさしかくにん）</span> = konfirmasi dengan menunjuk</span>
+          <span class="p-istilah-item"><span class="jp-term">安全第一（あんぜんだいいち）</span> = keselamatan nomor satu</span>
+        </div>
+      </div>
+      <div class="p-tip">Budaya kerja Jepang: komunikasi verbal dan isyarat adalah SOP wajib, bukan pilihan.</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SOAL 5 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">5</span><span class="q-preview">点検（てんけん）ハンマでホイール・ナットが緩（ゆる）んでいないか点検（てんけん）した。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">点検（てんけん）ハンマでホイール・ナットが緩（ゆる）んでいないか点検（てんけん）した。</p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="true"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✓</span></button>
+      <button class="option-btn-mb batsu" data-correct="false"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✗</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Arti: Melakukan pemeriksaan apakah baut roda kendur menggunakan palu pemeriksa (test hammer).</div>
+      <div class="p-kunci">Jawaban: ○ Benar</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>点検（てんけん）ハンマ</strong> = test hammer (palu khusus inspeksi, BUKAN palu biasa)</li>
+          <li><strong>緩（ゆる）んでいないか</strong> = apakah ada yang kendur</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Teknik 打音点検（だおんてんけん）— pemeriksaan lewat suara ketukan. Baut diketuk pelan dengan test hammer: suara "ting" (nyaring) = kencang dan baik. Suara "duk" (mendhem) = kemungkinan kendur.</p>
+        <p>Test hammer BUKAN untuk melepas atau mengencangkan baut — itu tugasnya kunci roda dan torque wrench.</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Test hammer adalah screening cepat. Untuk kepastian angka torsi, tetap harus pakai トルクレンチ (torque wrench).</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">打音点検（だおんてんけん）</span> = inspeksi lewat suara ketukan</span>
+          <span class="p-istilah-item"><span class="jp-term">良好（りょうこう）</span> = kondisi baik/normal</span>
+        </div>
+      </div>
+      <div class="p-tip">Suara ting = kencang ○. Suara mendhem = kendur → perlu cek torque wrench.</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SOAL 6 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">6</span><span class="q-preview">作業着（さぎょうぎ）のボタンは、確実（かくじつ）にかける。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">作業着（さぎょうぎ）のボタンは、確実（かくじつ）にかける。</p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="true"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✓</span></button>
+      <button class="option-btn-mb batsu" data-correct="false"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✗</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Arti: Kancing baju kerja harus dikancingkan dengan benar/pasti.</div>
+      <div class="p-kunci">Jawaban: ○ Benar</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>作業着（さぎょうぎ）</strong> = baju/seragam kerja</li>
+          <li><strong>確実（かくじつ）に</strong> = dengan pasti/sempurna</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Di bengkel Jepang, kerapian seragam adalah soal keselamatan bukan estetika. Baju terbuka/menjuntai bisa tersangkut di mesin berputar (fan belt, pulley) dan menyebabkan kecelakaan fatal.</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Sebelum masuk area kerja, mekanik Jepang biasanya saling cek seragam satu sama lain — budaya ini disebut 指差し確認（ゆびさしかくにん）.</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">安全第一（あんぜんだいいち）</span> = keselamatan nomor satu</span>
+          <span class="p-istilah-item"><span class="jp-term">袖口（そでぐち）</span> = ujung lengan baju (juga harus rapi)</span>
+        </div>
+      </div>
+      <div class="p-tip">Soal tentang kerapian seragam di bengkel Jepang hampir selalu ○ Benar — keselamatan tidak boleh setengah-setengah.</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SOAL 7 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">7</span><span class="q-preview">床（ゆか）にオイルがこぼれているのを見（み）つけたとき、すぐにかたづけて、きれいに清掃（せいそう）する。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">床（ゆか）にオイルがこぼれているのを見（み）つけたとき、すぐにかたづけて、きれいに清掃（せいそう）する。</p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="true"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✓</span></button>
+      <button class="option-btn-mb batsu" data-correct="false"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✗</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Arti: Saat menemukan oli tumpah di lantai, segera dibereskan dan dibersihkan.</div>
+      <div class="p-kunci">Jawaban: ○ Benar</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>すぐに</strong> = segera, tidak menunggu</li>
+          <li><strong>清掃（せいそう）する</strong> = membersihkan</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Oli di lantai adalah bahaya tersembunyi yang sering diabaikan — bisa menyebabkan mekanik terpeleset dan cedera serius. Prinsip kerja Jepang: 見（み）つけた人（ひと）がすぐ対応（たいおう）する (yang melihat masalah, langsung menangani).</p>
+        <p>Ini juga termasuk aplikasi 5S: 清掃（せいそう）= membersihkan area kerja secara konsisten.</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Alat pembersih oli tumpah di bengkel Jepang: serbuk absorben (ノコギリクズ) atau kain lap khusus, bukan hanya diseka dengan kain biasa.</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">転倒事故（てんとうじこ）</span> = kecelakaan akibat terpeleset</span>
+          <span class="p-istilah-item"><span class="jp-term">5S</span> = Seiri, Seiton, Seisou, Seiketsu, Shitsuke</span>
+        </div>
+      </div>
+      <div class="p-tip">Oli di lantai = berbahaya dan harus segera dibersihkan oleh siapapun yang menemukannya.</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SOAL 8 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">8</span><span class="q-preview">充電中（じゅうでんちゅう）のバッテリは、水素（すいそ）ガスを発生（はっせい）するので、絶対（ぜったい）に火気（かき）を近（ちか）づけない。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">充電中（じゅうでんちゅう）のバッテリは、水素（すいそ）ガスを発生（はっせい）するので、絶対（ぜったい）に火気（かき）を近（ちか）づけない。</p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="true"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✓</span></button>
+      <button class="option-btn-mb batsu" data-correct="false"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✗</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Arti: Baterai yang sedang dicas mengeluarkan gas hidrogen, sehingga mutlak dilarang mendekatkan api.</div>
+      <div class="p-kunci">Jawaban: ○ Benar</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>水素（すいそ）ガス</strong> = gas hidrogen (sangat mudah terbakar/meledak)</li>
+          <li><strong>絶対（ぜったい）に</strong> = mutlak, sama sekali tidak boleh</li>
+          <li><strong>火気（かき）</strong> = sumber api (rokok, korek, alat las)</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Saat aki dicas, reaksi elektrolisis menghasilkan gas hidrogen yang tidak berwarna dan tidak berbau namun sangat eksplosif. Area pengisian aki harus berventilasi baik. Urutan benar selesai charging: matikan charger DULU, baru lepas kabel — jangan sebaliknya karena bisa muncul percikan api.</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Tanda 火気厳禁（かきげんきん）= "Dilarang Keras Membawa Api" adalah tanda wajib yang harus dipasang di area pengisian aki.</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">火気厳禁（かきげんきん）</span> = dilarang keras membawa api</span>
+          <span class="p-istilah-item"><span class="jp-term">換気（かんき）</span> = ventilasi udara</span>
+        </div>
+      </div>
+      <div class="p-tip">⚠️ Gas hidrogen dari aki yang dicas = eksplosif. Matikan charger DULU sebelum lepas kabel.</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══════════════════════════════════════
+     BAB C — ALAT UKUR DAN PERKAKAS
+     Soal 9–15
+════════════════════════════════════════ -->
+<div class="bab-divider"><span class="bab-badge">📙 BAB C — 計測器（けいそくき）・工具（こうぐ）の使（つか）い方（かた）</span></div>
+
+<!-- ══ SOAL 9 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">9</span><span class="q-preview">ノギスは、部品（ぶひん）の外径（がいけい）、内径（ないけい）、深（ふか）さを測定（そくてい）できる。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">ノギスは、部品（ぶひん）の外径（がいけい）、内径（ないけい）、深（ふか）さを測定（そくてい）できる。</p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="true"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✓</span></button>
+      <button class="option-btn-mb batsu" data-correct="false"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✗</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Arti: Jangka sorong (nogisu) dapat mengukur diameter luar, diameter dalam, dan kedalaman komponen.</div>
+      <div class="p-kunci">Jawaban: ○ Benar</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>外径（がいけい）</strong> = diameter luar → diukur dengan rahang luar</li>
+          <li><strong>内径（ないけい）</strong> = diameter dalam → diukur dengan rahang dalam</li>
+          <li><strong>深（ふか）さ</strong> = kedalaman → diukur dengan depth bar</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Nogisu adalah alat ukur 3-in-1 paling sering dipakai di bengkel. Cara baca skalanya: 2 tahap — skala utama (angka bulat dalam mm) + skala vernier (desimal, ketelitian 0.05mm). Wajib cek titik nol (零点調整/れいてんちょうせい) sebelum mulai mengukur.</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Bedakan dengan Mikrometer yang hanya mengukur diameter luar (外径) tetapi dengan ketelitian lebih tinggi (0.01mm). Nogisu lebih serbaguna, Mikrometer lebih presisi.</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">零点調整（れいてんちょうせい）</span> = cek titik nol sebelum ukur</span>
+          <span class="p-istilah-item"><span class="jp-term">バーニヤ目盛（めもり）</span> = skala vernier</span>
+        </div>
+      </div>
+      <div class="p-tip">ノギス = 外径＋内径＋深さ (3 fungsi). Mikrometer = 外径 saja (1 fungsi, tapi lebih presisi).</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SOAL 10 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">10</span><span class="q-preview">外側（そとがわ）マイクロメータは、ノギスよりも細（こま）かい0.01mm単位（たんい）で測定（そくてい）ができる。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">外側（そとがわ）マイクロメータは、ノギスよりも細（こま）かい0.01mm単位（たんい）で測定（そくてい）ができる。</p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="true"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✓</span></button>
+      <button class="option-btn-mb batsu" data-correct="false"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✗</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Arti: Outside micrometer dapat mengukur dengan ketelitian 0.01mm, lebih presisi dari jangka sorong.</div>
+      <div class="p-kunci">Jawaban: ○ Benar</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>0.01mm単位（たんい）</strong> = ketelitian per 0.01mm (ketelitian mikrometer)</li>
+          <li><strong>ノギスよりも細（こま）かい</strong> = lebih halus/presisi dari nogisu</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Tabel perbandingan ketelitian alat ukur:</p>
+        <ul>
+          <li>ノギス (Nogisu) → 0.05mm per garis vernier</li>
+          <li>マイクロメータ (Micrometer) → 0.01mm per garis thimble</li>
+        </ul>
+        <p>Cara baca mikrometer: 3 tahap — skala sleeve atas (mm) + skala sleeve bawah (0/0.5mm) + skala thimble (0.01mm × angka). Jangan lupa cek titik nol sebelum mulai mengukur.</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Jebakan tersering membaca mikrometer — lupa cek garis tengah/setengah (0.5mm) pada sleeve bawah. Hasilnya salah 0.5mm padahal prosedurnya sudah benar.</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">スリーブ</span> = sleeve (skala tetap)</span>
+          <span class="p-istilah-item"><span class="jp-term">シンブル</span> = thimble (skala putar)</span>
+          <span class="p-istilah-item"><span class="jp-term">ラチェット・ストップ</span> = ratchet stop</span>
+        </div>
+      </div>
+      <div class="p-tip">Nogisu = 0.05mm. Mikrometer = 0.01mm. Mikrometer 5× lebih presisi.</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SOAL 11 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">11</span><span class="q-preview">シックネス・ゲージは、バルブの隙間（すきま）などを測定（そくてい）するのに用（もち）いられる。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">シックネス・ゲージは、バルブの隙間（すきま）などを測定（そくてい）するのに用（もち）いられる。</p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="true"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✓</span></button>
+      <button class="option-btn-mb batsu" data-correct="false"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✗</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Arti: Thickness gauge digunakan untuk mengukur celah (gap) pada katup/valve dan sejenisnya.</div>
+      <div class="p-kunci">Jawaban: ○ Benar</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>バルブの隙間（すきま）</strong> = celah klep/valve</li>
+          <li><strong>シックネス・ゲージ</strong> = thickness gauge / feeler gauge</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Thickness gauge terdiri dari lembaran baja tipis (リーフ/leaf) berbagai ukuran. Cara pakai: masukkan ke celah, gerak sedikit seret (ada hambatan kecil) = pas. Terlalu longgar = bukan ukuran yang benar.</p>
+        <p>Jangan tertukar: Thickness Gauge = CELAH sempit saja. Nogisu = diameter/panjang/kedalaman. Toe-in Gauge = kelurusan roda.</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Celah klep penting disetel benar karena logam memuai saat panas. Terlalu sempit = klep tidak nutup rapat. Terlalu lebar = mesin berisik.</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">リーフ</span> = leaf/lembaran tipis</span>
+          <span class="p-istilah-item"><span class="jp-term">バルブ・クリアランス</span> = valve clearance</span>
+        </div>
+      </div>
+      <div class="p-tip">シックネス・ゲージ = HANYA untuk celah sempit (klep, busi). BUKAN untuk diameter atau panjang.</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SOAL 12 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">12</span><span class="q-preview">トーイン・ゲージは、バルブの隙間（すきま）を測定（そくてい）するのに用（もち）いられる。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">トーイン・ゲージは、バルブの隙間（すきま）を測定（そくてい）するのに用（もち）いられる。</p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="false"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✗</span></button>
+      <button class="option-btn-mb batsu" data-correct="true"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✓</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Arti: Toe-in gauge digunakan untuk mengukur celah klep/valve.</div>
+      <div class="p-kunci">Jawaban: ✕ Salah</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>トーイン・ゲージ</strong> = toe-in gauge (alat untuk wheel alignment — bukan komponen mesin)</li>
+          <li><strong>バルブの隙間（すきま）</strong> = celah klep (objek yang SALAH dipasangkan)</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Toe-in gauge adalah alat berbentuk batang panjang untuk mengukur selisih jarak antara bagian depan dan belakang dari sepasang roda kiri-kanan — ini masuk kategori <strong>ホイール・アライメント</strong> (wheel alignment), sama sekali bukan komponen mesin.</p>
+        <p>Celah klep diukur dengan シックネス・ゲージ (Soal 11), bukan toe-in gauge.</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Nama alat sama-sama berakhiran "ゲージ" tapi fungsinya berbeda dunia — Toe-in Gauge = sasis/roda, Thickness Gauge = mesin/klep.</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">偏摩耗（へんまもう）</span> = keausan ban tidak rata (akibat toe salah)</span>
+          <span class="p-istilah-item"><span class="jp-term">アライメント</span> = wheel alignment</span>
+        </div>
+      </div>
+      <div class="p-tip">⚠️ Toe-in Gauge = kelurusan RODA (sasis). Thickness Gauge = celah KLEP (mesin). Beda kategori total.</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SOAL 13 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">13</span><span class="q-preview">サーキット・テスタは、電圧（でんあつ）、電流（でんりゅう）、抵抗（ていこう）を測定（そくてい）するときに使用（しよう）する。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">サーキット・テスタは、電圧（でんあつ）、電流（でんりゅう）、抵抗（ていこう）を測定（そくてい）するときに使用（しよう）する。</p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="true"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✓</span></button>
+      <button class="option-btn-mb batsu" data-correct="false"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✗</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Arti: Circuit tester digunakan saat mengukur tegangan, arus, dan hambatan listrik.</div>
+      <div class="p-kunci">Jawaban: ○ Benar</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>電圧（でんあつ）</strong> = tegangan (Volt/V)</li>
+          <li><strong>電流（でんりゅう）</strong> = arus (Ampere/A)</li>
+          <li><strong>抵抗（ていこう）</strong> = hambatan (Ohm/Ω)</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Circuit tester (AVO meter/multitester) adalah alat serbaguna untuk diagnosis kelistrikan. "AVO" adalah singkatan dari: <strong>A</strong>mpere, <strong>V</strong>olt, <strong>O</strong>hm — tiga besaran listrik yang bisa diukur dengan satu alat ini.</p>
+        <p>Cara pasang berbeda tergantung yang diukur: Tegangan = paralel. Arus = seri (memutus sirkuit).</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Pastikan selector berada di posisi yang tepat sebelum mengukur — salah posisi selector (misalnya mau ukur tegangan tapi selector di Ohm) bisa merusak alat ukur.</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">断線（だんせん）</span> = kabel putus (terdeteksi lewat Ohm)</span>
+          <span class="p-istilah-item"><span class="jp-term">並列（へいれつ）</span> = paralel (cara pasang ukur voltase)</span>
+        </div>
+      </div>
+      <div class="p-tip">AVO meter: A = Ampere, V = Volt, O = Ohm. Tiga besaran listrik dasar dalam satu alat.</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SOAL 14 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">14</span><span class="q-preview">工具（こうぐ）を使（つか）うときは、ボルト・ナットのサイズに合（あ）った工具（こうぐ）を選（えら）ぶ。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">工具（こうぐ）を使（つか）うときは、ボルト・ナットのサイズに合（あ）った工具（こうぐ）を選（えら）ぶ。</p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="true"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✓</span></button>
+      <button class="option-btn-mb batsu" data-correct="false"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✗</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Arti: Saat menggunakan alat, pilih alat yang sesuai ukuran baut/mur yang akan dikerjakan.</div>
+      <div class="p-kunci">Jawaban: ○ Benar</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>ボルト・ナットのサイズに合（あ）った</strong> = sesuai ukuran baut dan mur</li>
+          <li><strong>工具（こうぐ）を選（えら）ぶ</strong> = memilih alat yang tepat</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Menggunakan kunci yang ukurannya lebih besar dari baut (misalnya kunci 14mm untuk baut 12mm) sangat berisiko: baut bisa dol (kepala baut rusak/aus), dan kunci bisa slip saat ditarik dengan kekuatan penuh.</p>
+        <p>Prinsip: selalu cocokkan ukuran alat ke ukuran baut, bukan sebaliknya.</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Urutan pilih alat yang benar: kunci ring (めがねレンチ) lebih aman dari kunci pas (スパナ) karena mengelilingi baut penuh — lebih kecil risiko slip.</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">なめる</span> = dol (kepala baut rusak)</span>
+          <span class="p-istilah-item"><span class="jp-term">めがねレンチ</span> = kunci ring (lebih aman)</span>
+          <span class="p-istilah-item"><span class="jp-term">スパナ</span> = kunci pas</span>
+        </div>
+      </div>
+      <div class="p-tip">⚠️ Kunci lebih besar dari baut = baut dol, kunci slip. Selalu pilih ukuran yang PAS.</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SOAL 15 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">15</span><span class="q-preview">トルク・レンチは、ボルト・ナットを規定（きてい）のトルクで締（し）め付（つ）けるときに使（つか）う。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">トルク・レンチは、ボルト・ナットを規定（きてい）のトルクで締（し）め付（つ）けるときに使（つか）う。</p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="true"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✓</span></button>
+      <button class="option-btn-mb batsu" data-correct="false"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✗</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Arti: Torque wrench (kunci momen) digunakan saat mengencangkan baut/mur sesuai torsi (kekencangan) standar yang telah ditentukan pabrikan.</div>
+      <div class="p-kunci">Jawaban: ○ Benar</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>規定（きてい）のトルク</strong> = torsi standar yang ditentukan pabrikan</li>
+          <li><strong>締（し）め付（つ）ける</strong> = mengencangkan</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Di dunia otomotif Jepang, mengencangkan baut vital TIDAK BOLEH hanya mengandalkan perasaan tangan. Harus menggunakan torque wrench agar kekencangannya tepat sesuai spesifikasi pabrikan (dalam satuan N·m atau kgf·m).</p>
+        <p>Risiko jika tidak sesuai: terlalu kencang → baut patah. Terlalu kendor → baut lepas di jalan.</p>
+        <p>Komponen yang WAJIB pakai torque wrench: baut roda, baut kepala silinder, baut drain (tap oli).</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Ada dua tipe torque wrench: tipe Beam (jarum) dan tipe Klik (berbunyi klik saat torsi target tercapai). Keduanya dipakai tergantung situasi pekerjaan.</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">N·m / kgf·m</span> = satuan torsi</span>
+          <span class="p-istilah-item"><span class="jp-term">規定値（きていち）</span> = nilai standar pabrikan</span>
+          <span class="p-istilah-item"><span class="jp-term">クリック型（かた）</span> = tipe klik (berbunyi saat target tercapai)</span>
+        </div>
+      </div>
+      <div class="p-tip">Baut vital = WAJIB torque wrench. "Cukup sekuat tenaga" saja bukan standar teknik yang benar.</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SUBMIT & KIRIM ══ -->
+<div class="submit-area">
+  <button id="mega-submit-btn">📊 Lihat Hasil &amp; Kirim ke Sensei</button>
+  <div class="hasil-panel" id="hasil-panel">
+    <div class="hasil-grid">
+      <div class="hasil-item"><div class="h-label">Nama</div><div class="h-value" id="h-nama" style="font-size:14px;">—</div></div>
+      <div class="hasil-item"><div class="h-label">Skor</div><div class="h-value" id="h-skor">0/15</div></div>
+      <div class="hasil-item"><div class="h-label">Benar</div><div class="h-value" id="h-benar">0</div></div>
+      <div class="hasil-item"><div class="h-label">Persentase</div><div class="h-value" id="h-persen">0%</div></div>
+      <div class="hasil-item"><div class="h-label">Waktu</div><div class="h-value" id="h-waktu" style="font-size:16px;">—</div></div>
+      <div class="hasil-item"><div class="h-label">Status</div><div class="h-value" id="h-status" style="font-size:14px;">—</div></div>
+    </div>
+    <button class="kirim-btn" id="kirim-btn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+      Kirim Hasil ke Google Sheets
+    </button>
+    <p id="kirim-status"></p>
+  </div>
+</div>
+
+</div><!-- .ssw-mega-wrap -->
+
+<script>
+(function(){
+  'use strict';
+
+  const APPS_SCRIPT_URL  = 'https://script.google.com/macros/s/AKfycbwd5yS37JVpl0hDx2fcrNcFzlkwX_l7gBMPaQcQRDmTeeXyA3ebDVvViI3UtPyvLeep/exec';
+  const BAB_NAME         = 'Bab B & C — Inspeksi, Alat Ukur, dan Perkakas';
+  const TOTAL            = 15;
+  const PASSING_PERCENT  = 70;
+
+  const state = { answered:0, correct:0, startTime:null, endTime:null, submitted:false };
+
+  const scoreEl    = document.getElementById('mega-score');
+  const correctEl  = document.getElementById('mega-correct');
+  const progFill   = document.getElementById('mega-prog-fill');
+  const progLabel  = document.getElementById('mega-prog-label');
+  const submitBtn  = document.getElementById('mega-submit-btn');
+  const lulusRow   = document.getElementById('lulus-indicator');
+  const timerEl    = document.getElementById('mega-timer');
+  const hasilPanel = document.getElementById('hasil-panel');
+  const kirimBtn   = document.getElementById('kirim-btn');
+  const kirimStat  = document.getElementById('kirim-status');
+
+  let timerInterval = null;
+
+  function startTimer(){
+    if(state.startTime) return;
+    state.startTime = Date.now();
+    timerInterval = setInterval(()=>{
+      const e = Math.floor((Date.now()-state.startTime)/1000);
+      const m = String(Math.floor(e/60)).padStart(2,'0');
+      const s = String(e%60).padStart(2,'0');
+      timerEl.textContent = `${m}:${s}`;
+      if(e>=900) timerEl.classList.add('warn');
+    },1000);
+  }
+
+  function stopTimer(){
+    clearInterval(timerInterval);
+    state.endTime = Date.now();
+  }
+
+  function getElapsed(){
+    if(!state.startTime||!state.endTime) return '—';
+    const e = Math.floor((state.endTime-state.startTime)/1000);
+    return `${String(Math.floor(e/60)).padStart(2,'0')}:${String(e%60).padStart(2,'0')}`;
+  }
+
+  function updateUI(){
+    if(scoreEl)   scoreEl.textContent   = state.correct;
+    if(correctEl) correctEl.textContent = state.correct;
+    if(progFill)  progFill.style.width  = Math.round((state.answered/TOTAL)*100)+'%';
+    if(progLabel) progLabel.textContent = `${state.answered} / ${TOTAL} terjawab`;
+    if(!lulusRow) return;
+    if(state.answered < TOTAL){
+      lulusRow.className = 'lulus-row';
+      lulusRow.textContent = `Jawab semua soal untuk melihat status kelulusan (standar: ${PASSING_PERCENT}% atau lebih)`;
+      return;
+    }
+    const pct = Math.round((state.correct/TOTAL)*100);
+    if(pct >= PASSING_PERCENT){
+      lulusRow.className = 'lulus-row is-lulus';
+      lulusRow.textContent = `✅ LULUS — Skor ${state.correct}/${TOTAL} (${pct}%), memenuhi standar minimal ${PASSING_PERCENT}%`;
+    } else {
+      lulusRow.className = 'lulus-row is-gagal';
+      lulusRow.textContent = `❌ BELUM LULUS — Skor ${state.correct}/${TOTAL} (${pct}%), standar minimal ${PASSING_PERCENT}%`;
+    }
+  }
+
+  function handleClick(e){
+    const btn  = e.target.closest('.option-btn-mb');
+    if(!btn) return;
+    const card = btn.closest('.quiz-card');
+    if(!card) return;
+    const allOpts = card.querySelectorAll('.option-btn-mb');
+    if([...allOpts].some(b=>b.classList.contains('is-correct')||b.classList.contains('is-wrong'))) return;
+    startTimer();
+    const ok = btn.dataset.correct === 'true';
+    btn.classList.add(ok ? 'is-correct' : 'is-wrong');
+    allOpts.forEach(b=>{
+      if(b===btn){ b.style.pointerEvents='none'; return; }
+      b.style.pointerEvents='none';
+      b.classList.add(b.dataset.correct==='true' ? 'is-correct' : 'is-locked');
+    });
+    const p = card.querySelector('.pembahasan');
+    if(p) p.classList.add('show');
+    state.answered++;
+    if(ok) state.correct++;
+    updateUI();
+    if(state.answered===TOTAL) stopTimer();
+  }
+
+  document.querySelector('.ssw-mega-wrap').addEventListener('click', handleClick);
+
+  submitBtn && submitBtn.addEventListener('click', ()=>{
+    if(state.answered===0){ alert('Kamu belum menjawab soal apa pun!'); return; }
+    const nama = document.getElementById('mega-name').value.trim() || 'Tidak Diisi';
+    const pct  = Math.round((state.correct/TOTAL)*100);
+    const lulus = pct >= PASSING_PERCENT;
+    document.getElementById('h-nama').textContent   = nama;
+    document.getElementById('h-skor').textContent   = `${state.correct}/${TOTAL}`;
+    document.getElementById('h-benar').textContent  = state.correct;
+    document.getElementById('h-persen').textContent = `${pct}%`;
+    document.getElementById('h-waktu').textContent  = getElapsed();
+    const hStatus = document.getElementById('h-status');
+    hStatus.textContent = lulus ? '✅ LULUS' : '❌ BELUM LULUS';
+    hStatus.style.color = lulus ? 'var(--correct)' : 'var(--wrong)';
+    hasilPanel.classList.add('show');
+    submitBtn.disabled = true;
+    window.scrollTo({top:document.body.scrollHeight, behavior:'smooth'});
+  });
+
+  kirimBtn && kirimBtn.addEventListener('click', async ()=>{
+    const nama = document.getElementById('mega-name').value.trim();
+    if(!nama){ kirimStat.style.color='var(--wrong)'; kirimStat.textContent='⚠️ Isi nama dulu sebelum mengirim!'; return; }
+    if(state.submitted){ kirimStat.style.color='var(--ink-muted)'; kirimStat.textContent='Hasil sudah pernah dikirim.'; return; }
+    kirimBtn.disabled=true;
+    kirimBtn.innerHTML='⏳ Mengirim...';
+    kirimStat.style.color='var(--ink-muted)';
+    kirimStat.textContent='Sedang mengirim ke spreadsheet...';
+    const pct    = Math.round((state.correct/TOTAL)*100);
+    const tanggal= new Date().toLocaleString('id-ID',{timeZone:'Asia/Jakarta'});
+    const payload = {
+      nama, bab:BAB_NAME, skor:`${state.correct}/${TOTAL}`,
+      jumlah_benar:state.correct, persen:pct, waktu:getElapsed(),
+      tanggal, status: pct>=PASSING_PERCENT?'LULUS':'BELUM LULUS'
+    };
+    try {
+      await fetch(APPS_SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+      state.submitted=true;
+      kirimBtn.innerHTML='✅ Berhasil Dikirim';
+      kirimStat.style.color='var(--correct)';
+      kirimStat.textContent=`Hasil ${nama} sudah dikirim (${tanggal})`;
+    } catch(err){
+      kirimBtn.disabled=false;
+      kirimBtn.innerHTML='🔄 Coba Kirim Ulang';
+      kirimStat.style.color='var(--wrong)';
+      kirimStat.textContent='Gagal mengirim. Cek koneksi dan coba lagi.';
+    }
+  });
+
+})();
+</script>
+</body>
+</html>
