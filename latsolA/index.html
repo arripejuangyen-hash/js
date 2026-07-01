@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Latihan Soal Bab A — Struktur, Fungsi, dan Pengoperasian</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;700&family=Source+Serif+4:wght@300;400;600&display=swap');
+
+.ssw-mega-wrap {
+  --ink:         #1a1a1a;
+  --ink-light:   #3d3d3d;
+  --ink-muted:   #707070;
+  --paper:       #faf9f7;
+  --paper-warm:  #f5f3ef;
+  --rule:        #d8d4cc;
+  --correct:     #1e7e45;
+  --correct-bg:  #edfaf3;
+  --correct-bd:  #6fcf97;
+  --wrong:       #c0392b;
+  --wrong-bg:    #fff0ef;
+  --wrong-bd:    #e07070;
+  --acc:         #2c3e6b;
+  --acc-soft:    #eef1f9;
+  --gold:        #a08030;
+  --bab-color:   #1a6b4a;
+  --bab-soft:    #e8f5ee;
+  --font-jp:   'Noto Serif JP', serif;
+  --font-ui:   'Noto Sans JP', sans-serif;
+  --font-body: 'Source Serif 4','Noto Serif JP',serif;
+  font-family: var(--font-body);
+  color: var(--ink);
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+/* ── Header ── */
+.ssw-mega-wrap .qhdr {
+  background: linear-gradient(135deg, #0d4a2e 0%, #1a6b4a 100%);
+  border-radius: 12px 12px 0 0;
+  padding: 22px 28px 18px;
+  position: relative; overflow: hidden;
+}
+.ssw-mega-wrap .qhdr::after {
+  content: '構造機能';
+  position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+  font-family: var(--font-jp); font-size: 64px; font-weight: 700;
+  line-height: 1; color: rgba(255,255,255,0.05); pointer-events: none;
+}
+.ssw-mega-wrap .qhdr-inner { position: relative; }
+.ssw-mega-wrap .qhdr h2 {
+  font-family: var(--font-jp); font-size: 19px; font-weight: 700;
+  color: #fff; margin: 0 0 5px; line-height: 1.4;
+}
+.ssw-mega-wrap .qhdr p {
+  font-family: var(--font-ui); font-size: 12px;
+  color: rgba(255,255,255,0.55); margin: 0; line-height: 1.7;
+}
+.ssw-mega-wrap .hdr-pills {
+  display: flex; gap: 6px; flex-wrap: wrap; margin-top: 12px;
+}
+.ssw-mega-wrap .hp {
+  font-family: var(--font-ui); font-size: 10px; font-weight: 700;
+  letter-spacing: 0.06em; padding: 3px 9px; border-radius: 3px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.8);
+}
+
+/* ── Info Banner ── */
+.ssw-mega-wrap .shuffle-banner {
+  display: flex; align-items: flex-start; gap: 11px;
+  padding: 11px 20px;
+  background: var(--bab-color);
+  font-family: var(--font-ui); font-size: 12.5px;
+  color: rgba(255,255,255,0.85); line-height: 1.6;
+}
+.ssw-mega-wrap .shuffle-banner .si { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+
+/* ── Top Panel ── */
+.ssw-mega-wrap .top-panel {
+  background: var(--paper-warm);
+  border: 1px solid var(--rule); border-top: none;
+  padding: 13px 20px; margin-bottom: 14px;
+  display: flex; flex-wrap: wrap; gap: 12px;
+  align-items: center; justify-content: space-between;
+}
+.ssw-mega-wrap .name-field {
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--font-ui); font-size: 13px;
+  font-weight: 600; color: var(--ink-light);
+}
+.ssw-mega-wrap .name-field input {
+  padding: 7px 12px; border: 1.5px solid var(--rule); border-radius: 6px;
+  font-family: var(--font-ui); font-size: 13px; width: 185px;
+  outline: none; transition: border-color 0.2s; background: #fff;
+}
+.ssw-mega-wrap .name-field input:focus { border-color: var(--bab-color); }
+.ssw-mega-wrap .score-display {
+  font-family: var(--font-ui); font-size: 13px; color: var(--ink-light);
+  display: flex; align-items: center; gap: 5px;
+}
+.ssw-mega-wrap .snum { font-size: 22px; font-weight: 700; color: var(--bab-color); line-height: 1; }
+
+/* ── Timer ── */
+.ssw-mega-wrap .timer-row {
+  display: flex; align-items: center; justify-content: flex-end; gap: 8px;
+  margin-bottom: 8px; font-family: var(--font-ui); font-size: 13px; color: var(--ink-muted);
+}
+.ssw-mega-wrap .timer-display {
+  font-size: 20px; font-weight: 700; color: var(--bab-color);
+  font-variant-numeric: tabular-nums; min-width: 55px; text-align: right;
+}
+.ssw-mega-wrap .timer-display.warn { color: var(--wrong); }
+
+/* ── Progress ── */
+.ssw-mega-wrap .prog-row {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+  font-family: var(--font-ui); font-size: 11px; color: var(--ink-muted);
+}
+.ssw-mega-wrap .prog-track {
+  flex: 1; height: 5px; background: var(--rule); border-radius: 3px; overflow: hidden;
+}
+.ssw-mega-wrap .prog-fill {
+  height: 100%; width: 0%; background: var(--bab-color);
+  border-radius: 3px; transition: width 0.4s ease;
+}
+
+/* ── Kelulusan ── */
+.ssw-mega-wrap .lulus-row {
+  margin-bottom: 14px; padding: 9px 14px; border-radius: 8px;
+  font-family: var(--font-ui); font-size: 12px; font-weight: 600;
+  background: var(--bab-soft); color: var(--bab-color); text-align: center;
+  border: 1px solid #b2d8c2;
+}
+.ssw-mega-wrap .lulus-row.is-lulus { background: var(--correct-bg); color: var(--correct); border-color: var(--correct-bd); }
+.ssw-mega-wrap .lulus-row.is-gagal { background: var(--wrong-bg); color: var(--wrong); border-color: var(--wrong-bd); }
+
+/* ── Card ── */
+.ssw-mega-wrap details {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-left: 4px solid var(--bab-color);
+  border-radius: 10px;
+  margin-bottom: 9px; overflow: hidden;
+  box-shadow: 0 2px 9px rgba(0,0,0,0.04);
+  transition: box-shadow 0.2s;
+}
+.ssw-mega-wrap details[open] { box-shadow: 0 4px 18px rgba(0,0,0,0.09); }
+.ssw-mega-wrap summary {
+  cursor: pointer; padding: 12px 16px;
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--font-ui); font-size: 13.5px; font-weight: 600;
+  color: var(--ink); list-style: none; user-select: none;
+  background: var(--paper-warm); transition: background 0.15s;
+}
+.ssw-mega-wrap summary::-webkit-details-marker { display: none; }
+.ssw-mega-wrap summary:hover { background: #ece8df; }
+.ssw-mega-wrap .q-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 28px; height: 28px; border-radius: 50%;
+  background: var(--bab-color); color: #fff;
+  font-size: 11px; font-weight: 700; flex-shrink: 0;
+}
+.ssw-mega-wrap .q-preview {
+  flex: 1; font-family: var(--font-jp); font-size: 13.5px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0;
+}
+.ssw-mega-wrap .q-chevron {
+  font-size: 11px; color: var(--ink-muted);
+  transition: transform 0.2s; flex-shrink: 0; margin-left: 4px;
+}
+.ssw-mega-wrap details[open] summary .q-chevron { transform: rotate(180deg); }
+
+/* ── Body ── */
+.ssw-mega-wrap .quiz-body { padding: 16px 18px 18px; border-top: 1px solid var(--rule); }
+.ssw-mega-wrap .quiz-question {
+  font-family: var(--font-jp); font-size: 17px; line-height: 2.1;
+  color: var(--ink); margin-bottom: 14px; padding: 12px 15px;
+  background: var(--bab-soft); border-left: 3px solid var(--bab-color); border-radius: 8px;
+}
+
+/* ── Options: Maru / Batsu ── */
+.ssw-mega-wrap .options-list-mb {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 11px;
+}
+.ssw-mega-wrap .option-btn-mb {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 4px; padding: 16px 10px; border: 2px solid var(--rule); border-radius: 10px;
+  background: #fff; cursor: pointer; font-family: var(--font-ui);
+  transition: border-color 0.15s, background 0.15s, transform 0.1s;
+}
+.ssw-mega-wrap .option-btn-mb:hover:not([disabled]) {
+  border-color: var(--bab-color); background: var(--bab-soft); transform: translateY(-2px);
+}
+.ssw-mega-wrap .opt-symbol {
+  font-family: var(--font-jp); font-size: 30px; font-weight: 700; line-height: 1;
+}
+.ssw-mega-wrap .opt-label-mb { font-size: 11px; font-weight: 700; letter-spacing: 0.05em; color: var(--ink-muted); }
+.ssw-mega-wrap .opt-icon-mb { font-size: 13px; opacity: 0; transition: opacity 0.2s; margin-top: 2px; }
+.ssw-mega-wrap .option-btn-mb.is-correct { border-color: var(--correct-bd); background: var(--correct-bg); animation: pulse-c .3s ease; }
+.ssw-mega-wrap .option-btn-mb.is-correct .opt-symbol { color: var(--correct); }
+.ssw-mega-wrap .option-btn-mb.is-correct .opt-icon-mb { opacity: 1; }
+.ssw-mega-wrap .option-btn-mb.is-wrong { border-color: var(--wrong-bd); background: var(--wrong-bg); animation: shake-w .3s ease; }
+.ssw-mega-wrap .option-btn-mb.is-wrong .opt-symbol { color: var(--wrong); }
+.ssw-mega-wrap .option-btn-mb.is-wrong .opt-icon-mb { opacity: 1; }
+.ssw-mega-wrap .option-btn-mb.is-locked { opacity: 0.42; pointer-events: none; cursor: not-allowed; }
+
+/* ── Pembahasan ── */
+.ssw-mega-wrap .pembahasan {
+  display: none; background: #fffdf0;
+  border: 1px solid #e8d89a; border-left: 4px solid var(--gold);
+  border-radius: 8px; padding: 13px 15px;
+  font-size: 13px; line-height: 1.85; color: #4a3800;
+  margin-top: 4px; animation: fadeIn .3s ease;
+}
+.ssw-mega-wrap .pembahasan.show { display: block; }
+.ssw-mega-wrap .p-title { font-family: var(--font-ui); font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+.ssw-mega-wrap .p-arti { font-family: var(--font-ui); font-style: italic; font-size: 13px; color: var(--ink-light); margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px dashed #e0d4a0; }
+.ssw-mega-wrap .p-kunci { font-family: var(--font-jp); font-size: 14px; font-weight: 700; color: var(--correct); margin-bottom: 10px; }
+.ssw-mega-wrap .p-section { margin-top: 12px; }
+.ssw-mega-wrap .p-subtitle { font-family: var(--font-ui); font-size: 12px; font-weight: 700; color: #6b5400; margin-bottom: 5px; display: flex; align-items: center; gap: 5px; }
+.ssw-mega-wrap .p-section ul { margin: 4px 0 6px 0; padding-left: 18px; }
+.ssw-mega-wrap .p-section li { margin-bottom: 3px; }
+.ssw-mega-wrap .p-section ol { margin: 4px 0 6px 0; padding-left: 20px; }
+.ssw-mega-wrap .p-section ol li { margin-bottom: 3px; }
+.ssw-mega-wrap .p-logika { margin-top: 6px; padding: 9px 12px; background: rgba(160,128,48,0.08); border-radius: 6px; border-left: 3px solid var(--gold); }
+.ssw-mega-wrap .p-istilah { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 6px; }
+.ssw-mega-wrap .p-istilah-item { font-family: var(--font-ui); font-size: 11.5px; background: #fff; border: 1px solid #e8d89a; border-radius: 5px; padding: 4px 9px; color: #5a4500; }
+.ssw-mega-wrap .p-istilah-item .jp-term { font-family: var(--font-jp); font-weight: 700; }
+.ssw-mega-wrap .p-tip { margin-top: 8px; padding: 7px 11px; background: rgba(26,106,74,0.07); border-radius: 5px; font-size: 12px; color: var(--bab-color); font-family: var(--font-ui); }
+
+/* ── Submit & Kirim ── */
+.ssw-mega-wrap .submit-area { text-align: center; margin-top: 26px; padding-top: 20px; border-top: 1px solid var(--rule); }
+.ssw-mega-wrap #mega-submit-btn {
+  background: var(--bab-color); color: #fff; border: none;
+  padding: 13px 38px; border-radius: 30px;
+  font-family: var(--font-ui); font-size: 15px; font-weight: 700;
+  cursor: pointer; transition: background 0.2s, transform 0.1s;
+  box-shadow: 0 3px 14px rgba(26,106,74,0.3);
+}
+.ssw-mega-wrap #mega-submit-btn:hover { background: #0d4a2e; transform: translateY(-1px); }
+.ssw-mega-wrap #mega-submit-btn:disabled { background: #8ab8a0; cursor: not-allowed; transform: none; }
+
+/* ── Hasil Panel ── */
+.ssw-mega-wrap .hasil-panel {
+  display: none; margin-top: 20px; padding: 20px;
+  border: 1px solid var(--rule); border-radius: 12px;
+  background: var(--paper-warm);
+}
+.ssw-mega-wrap .hasil-panel.show { display: block; }
+.ssw-mega-wrap .hasil-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px;
+}
+.ssw-mega-wrap .hasil-item {
+  background: #fff; border: 1px solid var(--rule); border-radius: 8px;
+  padding: 12px; text-align: center;
+}
+.ssw-mega-wrap .hasil-item .h-label { font-family: var(--font-ui); font-size: 10px; color: var(--ink-muted); margin-bottom: 4px; }
+.ssw-mega-wrap .hasil-item .h-value { font-family: var(--font-ui); font-size: 22px; font-weight: 700; color: var(--bab-color); }
+.ssw-mega-wrap .kirim-btn {
+  width: 100%; padding: 12px; border-radius: 8px; border: none;
+  background: #1a73e8; color: #fff; font-family: var(--font-ui);
+  font-size: 14px; font-weight: 700; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  transition: background 0.2s;
+}
+.ssw-mega-wrap .kirim-btn:hover { background: #1558b0; }
+.ssw-mega-wrap .kirim-btn:disabled { background: #8ab0d4; cursor: not-allowed; }
+.ssw-mega-wrap #kirim-status { margin-top: 10px; font-family: var(--font-ui); font-size: 13px; font-weight: 600; text-align: center; min-height: 20px; }
+
+/* ── Gambar Soal ── */
+.ssw-mega-wrap .q-image-wrap { margin: 0 0 14px 0; text-align: center; }
+.ssw-mega-wrap .q-image-wrap img { max-width: 100%; max-height: 360px; width: auto; height: auto; border: 1px solid var(--rule); border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.ssw-mega-wrap .q-image-caption { font-family: var(--font-ui); font-size: 11.5px; color: var(--ink-muted); margin-top: 6px; font-style: italic; }
+
+@keyframes pulse-c { 0%{transform:scale(1)} 50%{transform:scale(1.03)} 100%{transform:scale(1)} }
+@keyframes shake-w { 0%{transform:translateX(0)} 20%{transform:translateX(-5px)} 40%{transform:translateX(5px)} 60%{transform:translateX(-3px)} 80%{transform:translateX(3px)} 100%{transform:translateX(0)} }
+@keyframes fadeIn  { from{opacity:0;transform:translateY(-5px)} to{opacity:1;transform:translateY(0)} }
+
+@media (max-width:600px){
+  .ssw-mega-wrap .qhdr::after { font-size:40px; }
+  .ssw-mega-wrap .quiz-question { font-size:15px; }
+  .ssw-mega-wrap .opt-symbol { font-size:26px; }
+  .ssw-mega-wrap .hasil-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="ssw-mega-wrap">
+
+<!-- ── HEADER ── -->
+<div class="qhdr">
+  <div class="qhdr-inner">
+    <h2>📘 Latihan Soal — BAB A: Struktur, Fungsi, dan Pengoperasian</h2>
+    <p>自動車整備 SSW &nbsp;|&nbsp; 10 Soal &nbsp;|&nbsp; Format ○✕ &nbsp;|&nbsp; Hasil dikirim otomatis ke spreadsheet pengajar</p>
+    <div class="hdr-pills">
+      <span class="hp">エンジン構造</span>
+      <span class="hp">冷却・燃料</span>
+      <span class="hp">ブレーキ</span>
+      <span class="hp">タイヤ</span>
+      <span class="hp">電装・駆動</span>
+    </div>
+  </div>
+</div>
+
+<div class="shuffle-banner">
+  <span class="si">📋</span>
+  <span>Latihan Soal Bab A membahas struktur, fungsi, dan cara kerja komponen kendaraan. Jawab setiap soal dengan teliti — setelah semua selesai, hasil kamu akan dikirim otomatis ke spreadsheet pengajar. Pastikan mengisi nama sebelum mengerjakan.</span>
+</div>
+
+<!-- ── TOP PANEL ── -->
+<div class="top-panel">
+  <div class="name-field">
+    <label for="mega-name">👤 Nama:</label>
+    <input type="text" id="mega-name" placeholder="Masukkan nama kamu...">
+  </div>
+  <div class="score-display">
+    Skor: <span class="snum" id="mega-score">0</span>/10
+    &nbsp;|&nbsp; <span id="mega-correct">0</span> benar
+  </div>
+</div>
+
+<!-- ── TIMER ── -->
+<div class="timer-row">
+  ⏱ Waktu:
+  <span class="timer-display" id="mega-timer">00:00</span>
+</div>
+
+<!-- ── PROGRESS ── -->
+<div class="prog-row">
+  <span id="mega-prog-label">0 / 10 terjawab</span>
+  <div class="prog-track"><div class="prog-fill" id="mega-prog-fill"></div></div>
+</div>
+
+<div class="lulus-row" id="lulus-indicator">Jawab semua soal untuk melihat status kelulusan (standar: 70% atau lebih)</div>
+
+<!-- ══════════════════════════════════════
+     SOAL 1
+════════════════════════════════════════ -->
+<details class="quiz-card">
+  <summary><span class="q-num">1</span><span class="q-preview">グロープラグは、ガソリンエンジンに使（つか）われている。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">グロープラグは、ガソリンエンジンに使（つか）われている。</p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="false"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✗</span></button>
+      <button class="option-btn-mb batsu" data-correct="true"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✓</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Arti: Glow plug digunakan pada mesin bensin.</div>
+      <div class="p-kunci">Jawaban: ✕ Salah</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>グロープラグ</strong> = glow plug (busi pijar, bukan busi biasa)</li>
+          <li><strong>ガソリンエンジン</strong> = mesin bensin (pasangan yang SALAH)</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Glow plug HANYA digunakan pada mesin diesel untuk memanaskan ruang bakar sebelum mesin dinyalakan — terutama saat mesin dingin. Mesin diesel tidak menggunakan percikan api, melainkan tekanan kompresi tinggi untuk membakar bahan bakar.</p>
+        <p>Mesin bensin menggunakan <strong>スパークプラグ (Spark Plug)</strong> yang memercikkan bunga api listrik setiap saat mesin hidup.</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Glow = pijar/panas → Diesel. Spark = percikan api → Bensin. Hafalan mutlak, tidak boleh tertukar.</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">圧縮点火</span> = pengapian kompresi (ciri diesel)</span>
+          <span class="p-istilah-item"><span class="jp-term">予熱</span> = pemanasan awal</span>
+          <span class="p-istilah-item"><span class="jp-term">スパークプラグ</span> = spark plug (untuk mesin bensin)</span>
+        </div>
+      </div>
+      <div class="p-tip">⚠️ Jebakan paling sering di seluruh soal SSW — wajib hafal tanpa ragu.</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SOAL 2 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">2</span><span class="q-preview">4サイクル・エンジンは、クランク軸（じく）が2回転（かいてん）する間（あいだ）に1サイクルを完了（かんりょう）する。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">4サイクル・エンジンは、クランク軸（じく）が2回転（かいてん）する間（あいだ）に1サイクルを完了（かんりょう）する。</p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="true"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✓</span></button>
+      <button class="option-btn-mb batsu" data-correct="false"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✗</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Arti: Mesin 4 tak menyelesaikan satu siklus penuh dalam 2 putaran crankshaft.</div>
+      <div class="p-kunci">Jawaban: ○ Benar</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>クランク軸が2回転</strong> = crankshaft berputar 2 kali (720°)</li>
+          <li><strong>1サイクル</strong> = satu siklus lengkap (4 langkah)</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Mesin 4 tak memiliki 4 langkah: 吸入 (Hisap) → 圧縮 (Kompresi) → 燃焼/膨張 (Usaha/Bakar) → 排気 (Buang). Setiap langkah = satu gerakan piston (naik atau turun), sehingga 4 langkah = 2 kali piston naik-turun = 2 putaran crankshaft.</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Soal jebakan biasanya menyebut "1 putaran crankshaft per siklus" — itu SALAH. Selalu ingat: 4 Stroke = 2 putaran = 720 derajat.</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">吸入→圧縮→燃焼→排気</span> = 4 langkah berurutan</span>
+          <span class="p-istilah-item"><span class="jp-term">720度</span> = 720° (2 putaran penuh)</span>
+        </div>
+      </div>
+      <div class="p-tip">4 Stroke = 2 putaran crankshaft. Angka ini sering diuji dalam berbagai variasi soal.</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SOAL 3 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">3</span><span class="q-preview">ブレーキ・キャリパは、ディスク・ブレーキに用（もち）いられている。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">ブレーキ・キャリパは、ディスク・ブレーキに用（もち）いられている。</p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="true"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✓</span></button>
+      <button class="option-btn-mb batsu" data-correct="false"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✗</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Arti: Brake caliper digunakan pada sistem rem cakram (disc brake).</div>
+      <div class="p-kunci">Jawaban: ○ Benar</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>ブレーキ・キャリパ</strong> = brake caliper</li>
+          <li><strong>ディスク・ブレーキ</strong> = rem cakram (pasangan yang BENAR)</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Caliper adalah "penjepit" yang mendorong brake pad ke kedua sisi disc rotor untuk menghasilkan pengereman. Pasangan komponen Disc Brake: Caliper + Brake Pad + Disc Rotor.</p>
+        <p>Jangan tertukar dengan Drum Brake yang memakai: Wheel Cylinder + Brake Shoe/Lining + Brake Drum.</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Caliper = Disc SAJA. Wheel Cylinder = Drum SAJA. Ini jebakan yang paling sering diuji dalam variasi kalimat berbeda.</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">ホイール・シリンダ</span> = wheel cylinder (pasangan Drum Brake)</span>
+          <span class="p-istilah-item"><span class="jp-term">ブレーキ・パッド</span> = brake pad (pasangan Disc Brake)</span>
+        </div>
+      </div>
+      <div class="p-tip">Pasangan kunci: Caliper + Pad + Rotor (Disc) vs Cylinder + Shoe + Drum (Drum).</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SOAL 4 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">4</span><span class="q-preview">冷却装置（れいきゃくそうち）のラジエータは、ファンで冷（ひ）やす。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">冷却装置（れいきゃくそうち）のラジエータは、ファンで冷（ひ）やす。</p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="true"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✓</span></button>
+      <button class="option-btn-mb batsu" data-correct="false"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✗</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Arti: Radiator pada sistem pendingin didinginkan oleh kipas.</div>
+      <div class="p-kunci">Jawaban: ○ Benar</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>冷やす</strong> = mendinginkan (kata kerja yang BENAR)</li>
+          <li><strong>冷却装置</strong> = sistem pendingin (冷却 = pendinginan, petunjuk arah fungsi)</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Kipas (冷却ファン) menyedot udara dari luar melewati kisi-kisi radiator, sehingga panas dari air pendingin terbuang ke udara luar. Air yang sudah dingin kembali ke mesin untuk menyerap panas lagi.</p>
+        <p>Jebakan: soal SSW sering mengganti kata kerja <strong>冷やす (mendinginkan)</strong> menjadi <strong>あたためる (memanaskan)</strong> — selalu cek kata kerjanya!</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Analogi — radiator adalah "kulkas" mesin. Kipas membantu kulkas tetap dingin, bukan memanaskannya.</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">冷やす vs あたためる</span> = mendinginkan vs memanaskan</span>
+          <span class="p-istilah-item"><span class="jp-term">電動ファン</span> = electric fan</span>
+        </div>
+      </div>
+      <div class="p-tip">⚠️ Kalau soal mengganti "冷やす" dengan "あたためる" untuk radiator — jawabannya pasti ✕ Salah.</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SOAL 5 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">5</span><span class="q-preview">ジーゼル・エンジンの燃料（ねんりょう）は、軽油（けいゆ）である。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">ジーゼル・エンジンの燃料（ねんりょう）は、軽油（けいゆ）である。</p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="true"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✓</span></button>
+      <button class="option-btn-mb batsu" data-correct="false"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✗</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Arti: Bahan bakar untuk mesin diesel adalah solar (keiyu).</div>
+      <div class="p-kunci">Jawaban: ○ Benar</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>軽油 (けいゆ/keiyu)</strong> = solar/diesel fuel</li>
+          <li><strong>ジーゼル・エンジン</strong> = mesin diesel</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Bahan bakar kendaraan di Jepang:</p>
+        <ul>
+          <li>Mesin diesel → <strong>軽油 (Keiyu)</strong> = solar</li>
+          <li>Mesin bensin → <strong>ガソリン (Gasoline)</strong> = bensin (Regular/ハイオク)</li>
+        </ul>
+        <p>⚠️ Kanji 軽 berarti "ringan" tapi 軽油 tetap berarti SOLAR, bukan bensin untuk mobil kecil. Jangan tertukar dengan 軽自動車 (kei-car).</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Mengisi solar ke mesin bensin atau sebaliknya bisa merusak mesin secara serius — ini juga sering jadi soal ujian SSW.</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">ガソリン</span> = bensin</span>
+          <span class="p-istilah-item"><span class="jp-term">軽油</span> = solar/diesel</span>
+          <span class="p-istilah-item"><span class="jp-term">レギュラー／ハイオク</span> = jenis bensin</span>
+        </div>
+      </div>
+      <div class="p-tip">Hafalan mutlak: Diesel → 軽油 (keiyu). Bensin → ガソリン (gasoline).</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SOAL 6 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">6</span><span class="q-preview">プロペラ・シャフトは、トランスミッションからディファレンシャルへ動力（どうりょく）を伝（つた）える。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">プロペラ・シャフトは、トランスミッションからディファレンシャルへ動力（どうりょく）を伝（つた）える。</p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="true"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✓</span></button>
+      <button class="option-btn-mb batsu" data-correct="false"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✗</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Arti: Propeller shaft menyalurkan tenaga dari transmisi ke differential (gardan).</div>
+      <div class="p-kunci">Jawaban: ○ Benar</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>プロペラ・シャフト</strong> = propeller shaft</li>
+          <li><strong>トランスミッション → ディファレンシャル</strong> = transmisi → gardan</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Alur penyaluran tenaga (Power Train): Mesin → Kopling → Transmisi → <strong>Propeller Shaft</strong> → Differential (Gardan) → <strong>Drive Shaft</strong> → Roda.</p>
+        <p>Dua komponen yang sering ditukar:</p>
+        <ul>
+          <li><strong>Propeller Shaft</strong> = transmisi → gardan</li>
+          <li><strong>Drive Shaft</strong> = gardan → roda langsung</li>
+        </ul>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Propeller Shaft ada pada mobil penggerak roda belakang (FR). Mobil penggerak roda depan (FF) tidak punya propeller shaft, melainkan langsung dari transmisi ke drive shaft.</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">ドライブ・シャフト</span> = drive shaft (gardan→roda)</span>
+          <span class="p-istilah-item"><span class="jp-term">動力</span> (douryoku) = tenaga</span>
+        </div>
+      </div>
+      <div class="p-tip">Propeller Shaft: transmisi→gardan. Drive Shaft: gardan→roda. Dua komponen berbeda, jangan tertukar.</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SOAL 7 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">7</span><span class="q-preview">サーモスタットは、冷却水（れいきゃくすい）のおんどが低（ひく）いときにラジエータへの水路（すいろ）を閉（と）じる。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">サーモスタットは、冷却水（れいきゃくすい）のおんどが低（ひく）いときにラジエータへの水路（すいろ）を閉（と）じる。</p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="true"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✓</span></button>
+      <button class="option-btn-mb batsu" data-correct="false"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✗</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Arti: Thermostat menutup jalur air menuju radiator saat suhu air pendingin masih rendah.</div>
+      <div class="p-kunci">Jawaban: ○ Benar</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>サーモスタット</strong> = thermostat</li>
+          <li><strong>水路を閉じる</strong> = menutup jalur air</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Thermostat bekerja seperti "polisi lalu lintas air pendingin". Saat mesin dingin, ia menutup jalur ke radiator sehingga air hanya bersirkulasi di dalam mesin saja → mesin cepat mencapai suhu kerja optimal (80-90°C). Begitu suhu cukup panas, thermostat membuka jalur ke radiator.</p>
+        <p>Jangan tertukar dengan <strong>Radiator Cap</strong> yang fungsinya mengatur TEKANAN sistem, bukan membuka/menutup jalur air.</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Thermostat rusak-membeku-tertutup = mesin overheat (air tidak bisa ke radiator). Thermostat rusak-membeku-terbuka = mesin lama panas (air terlalu cepat ke radiator).</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">適温</span> (tekion) = suhu optimal 80-90°C</span>
+          <span class="p-istilah-item"><span class="jp-term">ラジエータ・キャップ</span> = atur tekanan (bukan jalur air)</span>
+        </div>
+      </div>
+      <div class="p-tip">Thermostat = atur jalur air. Radiator Cap = atur tekanan. Fungsi berbeda, sering ditukar di soal.</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SOAL 8 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">8</span><span class="q-preview">タイヤの空気圧（くうきあつ）は、タイヤが冷（さ）めたじょうたいで点検（てんけん）する。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">タイヤの空気圧（くうきあつ）は、タイヤが冷（さ）めたじょうたいで点検（てんけん）する。</p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="true"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✓</span></button>
+      <button class="option-btn-mb batsu" data-correct="false"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✗</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Arti: Tekanan angin ban diperiksa saat kondisi ban dalam keadaan dingin.</div>
+      <div class="p-kunci">Jawaban: ○ Benar</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>冷えたじょうたい</strong> = kondisi dingin (kondisi yang BENAR untuk cek tekanan ban)</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Udara memuai saat panas. Jika ban sudah dipakai jalan jauh dan diperiksa dalam kondisi panas, angka tekanan yang terbaca lebih tinggi dari kondisi sebenarnya — tidak akurat. Pemeriksaan harus dilakukan sebelum jalan jauh atau setelah parkir minimal 3 jam.</p>
+        <p>Kontras penting: cek asap knalpot (warna) harus dilakukan saat mesin sudah PANAS — berlawanan dengan cek tekanan ban.</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Tabel kontras wajib hafal — Ban: cek saat DINGIN. Asap knalpot: cek saat PANAS. Air radiator: cek saat DINGIN (jangan buka tutup radiator saat panas).</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">空気圧</span> = tekanan udara ban</span>
+          <span class="p-istilah-item"><span class="jp-term">タイヤ・ゲージ</span> = alat ukur tekanan ban</span>
+        </div>
+      </div>
+      <div class="p-tip">⚠️ Ban dicek DINGIN. Asap knalpot dicek PANAS. Berlawanan — jangan tertukar!</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SOAL 9 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">9</span><span class="q-preview">クランクシャフトは、ピストンの上下運動（じょうげうんどう）を回転運動（かいてんうんどう）に変（か）える。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">クランクシャフトは、ピストンの上下運動（じょうげうんどう）を回転運動（かいてんうんどう）に変（か）える。</p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="true"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✓</span></button>
+      <button class="option-btn-mb batsu" data-correct="false"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✗</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Arti: Crankshaft mengubah gerakan naik-turun piston menjadi gerakan putar.</div>
+      <div class="p-kunci">Jawaban: ○ Benar</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>上下運動</strong> = gerakan naik-turun (linear)</li>
+          <li><strong>回転運動に変える</strong> = diubah menjadi gerakan putar (rotasi)</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Crankshaft adalah komponen vital yang menjadi "jantung" konversi energi mesin. Energi ledakan di ruang bakar mendorong piston ke bawah secara linear — crankshaft mengubah gerakan linear ini menjadi putaran yang kemudian diteruskan ke transmisi dan akhirnya ke roda.</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Komponen yang terhubung ke crankshaft: flywheel (stabilizer putaran), timing belt/chain (menghubungkan ke camshaft), dan output shaft menuju transmisi.</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">コンロッド</span> = connecting rod (penghubung piston ke crankshaft)</span>
+          <span class="p-istilah-item"><span class="jp-term">フライホイール</span> = flywheel (stabilizer putaran)</span>
+        </div>
+      </div>
+      <div class="p-tip">Crankshaft = konversi gerak linear (naik-turun) menjadi gerak rotasi (putar). Fungsi dasar yang wajib dikuasai.</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SOAL 10 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">10</span><span class="q-preview">キャンバは、車（くるま）を前方（ぜんぽう）から見（み）たときの車輪（しゃりん）の傾（かたむ）きである。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">キャンバは、車（くるま）を前方（ぜんぽう）から見（み）たときの車輪（しゃりん）の傾（かたむ）きである。</p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="true"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✓</span></button>
+      <button class="option-btn-mb batsu" data-correct="false"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✗</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Arti: Camber adalah sudut kemiringan roda saat dilihat dari depan kendaraan.</div>
+      <div class="p-kunci">Jawaban: ○ Benar</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>前方から見た</strong> = dilihat dari depan kendaraan (arah pandang penentu nama sudut)</li>
+          <li><strong>車輪の傾き</strong> = kemiringan roda</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Wheel Alignment memiliki beberapa sudut penting:</p>
+        <ul>
+          <li><strong>キャンバ (Camber)</strong> — kemiringan roda dilihat dari DEPAN. Tujuan: setir lebih ringan, beban merata di bantalan roda.</li>
+          <li><strong>キャスタ (Caster)</strong> — kemiringan kingpin/poros kemudi dilihat dari SAMPING. Tujuan: setir bisa balik sendiri ke posisi lurus setelah belok.</li>
+          <li><strong>トーイン (Toe-in)</strong> — selisih jarak depan-belakang roda dilihat dari ATAS.</li>
+        </ul>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Hafalan visual: Camber = gambar roda miring dilihat dari DEPAN mobil. Caster = gambar sudut poros dari SAMPING mobil. Beda arah pandang = beda nama sudut.</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">キャスタ</span> = caster (dilihat dari SAMPING)</span>
+          <span class="p-istilah-item"><span class="jp-term">トーイン</span> = toe-in (dilihat dari ATAS)</span>
+          <span class="p-istilah-item"><span class="jp-term">アライメント</span> = wheel alignment</span>
+        </div>
+      </div>
+      <div class="p-tip">⚠️ Camber = DEPAN. Caster = SAMPING. Ini jebakan yang sangat sering diuji dalam berbagai variasi soal.</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SUBMIT & KIRIM ══ -->
+<div class="submit-area">
+  <button id="mega-submit-btn">📊 Lihat Hasil & Kirim ke Sensei</button>
+
+  <!-- Panel Hasil -->
+  <div class="hasil-panel" id="hasil-panel">
+    <div class="hasil-grid">
+      <div class="hasil-item">
+        <div class="h-label">Nama</div>
+        <div class="h-value" id="h-nama" style="font-size:14px;">—</div>
+      </div>
+      <div class="hasil-item">
+        <div class="h-label">Skor</div>
+        <div class="h-value" id="h-skor">0/10</div>
+      </div>
+      <div class="hasil-item">
+        <div class="h-label">Benar</div>
+        <div class="h-value" id="h-benar">0</div>
+      </div>
+      <div class="hasil-item">
+        <div class="h-label">Persentase</div>
+        <div class="h-value" id="h-persen">0%</div>
+      </div>
+      <div class="hasil-item">
+        <div class="h-label">Waktu</div>
+        <div class="h-value" id="h-waktu" style="font-size:16px;">—</div>
+      </div>
+      <div class="hasil-item">
+        <div class="h-label">Status</div>
+        <div class="h-value" id="h-status" style="font-size:14px;">—</div>
+      </div>
+    </div>
+    <button class="kirim-btn" id="kirim-btn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+      Kirim Hasil ke Google Sheets
+    </button>
+    <p id="kirim-status"></p>
+  </div>
+</div>
+
+</div><!-- .ssw-mega-wrap -->
+
+<script>
+(function () {
+  'use strict';
+
+  // ══════════════════════════════════════
+  // KONFIGURASI — ganti URL ini setelah
+  // deploy Google Apps Script Anda
+  // ══════════════════════════════════════
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwd5yS37JVpl0hDx2fcrNcFzlkwX_l7gBMPaQcQRDmTeeXyA3ebDVvViI3UtPyvLeep/exec';
+  const BAB_NAME = 'Bab A — Struktur, Fungsi, dan Pengoperasian';
+  const TOTAL = 10;
+  const PASSING_PERCENT = 70;
+
+  // ── State ──
+  const state = { answered: 0, correct: 0, startTime: null, endTime: null, submitted: false };
+
+  // ── Elemen ──
+  const scoreEl   = document.getElementById('mega-score');
+  const correctEl = document.getElementById('mega-correct');
+  const progFill  = document.getElementById('mega-prog-fill');
+  const progLabel = document.getElementById('mega-prog-label');
+  const submitBtn = document.getElementById('mega-submit-btn');
+  const lulusRow  = document.getElementById('lulus-indicator');
+  const timerEl   = document.getElementById('mega-timer');
+  const hasilPanel = document.getElementById('hasil-panel');
+  const kirimBtn  = document.getElementById('kirim-btn');
+  const kirimStatus = document.getElementById('kirim-status');
+
+  // ── Timer ──
+  let timerInterval = null;
+
+  function startTimer() {
+    if (state.startTime) return;
+    state.startTime = Date.now();
+    timerInterval = setInterval(() => {
+      const elapsed = Math.floor((Date.now() - state.startTime) / 1000);
+      const m = String(Math.floor(elapsed / 60)).padStart(2, '0');
+      const s = String(elapsed % 60).padStart(2, '0');
+      timerEl.textContent = `${m}:${s}`;
+      if (elapsed >= 600) timerEl.classList.add('warn');
+    }, 1000);
+  }
+
+  function stopTimer() {
+    clearInterval(timerInterval);
+    state.endTime = Date.now();
+  }
+
+  function getElapsedFormatted() {
+    if (!state.startTime || !state.endTime) return '—';
+    const elapsed = Math.floor((state.endTime - state.startTime) / 1000);
+    const m = String(Math.floor(elapsed / 60)).padStart(2, '0');
+    const s = String(elapsed % 60).padStart(2, '0');
+    return `${m}:${s}`;
+  }
+
+  // ── Update UI ──
+  function updateUI() {
+    if (scoreEl)   scoreEl.textContent   = state.correct;
+    if (correctEl) correctEl.textContent = state.correct;
+    if (progFill)  progFill.style.width  = Math.round((state.answered / TOTAL) * 100) + '%';
+    if (progLabel) progLabel.textContent = `${state.answered} / ${TOTAL} terjawab`;
+    updateLulusIndicator();
+  }
+
+  function updateLulusIndicator() {
+    if (!lulusRow) return;
+    if (state.answered < TOTAL) {
+      lulusRow.className = 'lulus-row';
+      lulusRow.textContent = `Jawab semua soal untuk melihat status kelulusan (standar: ${PASSING_PERCENT}% atau lebih)`;
+      return;
+    }
+    const persen = Math.round((state.correct / TOTAL) * 100);
+    if (persen >= PASSING_PERCENT) {
+      lulusRow.className = 'lulus-row is-lulus';
+      lulusRow.textContent = `✅ LULUS — Skor ${state.correct}/${TOTAL} (${persen}%), memenuhi standar minimal ${PASSING_PERCENT}%`;
+    } else {
+      lulusRow.className = 'lulus-row is-gagal';
+      lulusRow.textContent = `❌ BELUM LULUS — Skor ${state.correct}/${TOTAL} (${persen}%), standar minimal ${PASSING_PERCENT}%`;
+    }
+  }
+
+  // ── Handle klik jawaban ──
+  function handleClick(e) {
+    const btn = e.target.closest('.option-btn-mb');
+    if (!btn) return;
+    const card = btn.closest('.quiz-card');
+    if (!card) return;
+
+    const allOpts = card.querySelectorAll('.option-btn-mb');
+    const done = [...allOpts].some(b =>
+      b.classList.contains('is-correct') || b.classList.contains('is-wrong')
+    );
+    if (done) return;
+
+    // Mulai timer saat soal pertama dijawab
+    startTimer();
+
+    const isCorrect = btn.dataset.correct === 'true';
+    btn.classList.add(isCorrect ? 'is-correct' : 'is-wrong');
+    allOpts.forEach(b => {
+      if (b === btn) { b.style.pointerEvents = 'none'; return; }
+      b.style.pointerEvents = 'none';
+      b.classList.add(b.dataset.correct === 'true' ? 'is-correct' : 'is-locked');
+    });
+
+    const p = card.querySelector('.pembahasan');
+    if (p) p.classList.add('show');
+
+    state.answered++;
+    if (isCorrect) state.correct++;
+    updateUI();
+
+    // Hentikan timer saat soal terakhir selesai
+    if (state.answered === TOTAL) stopTimer();
+  }
+
+  const wrap = document.querySelector('.ssw-mega-wrap');
+  if (wrap) wrap.addEventListener('click', handleClick);
+
+  // ── Submit: tampilkan hasil ──
+  if (submitBtn) {
+    submitBtn.addEventListener('click', () => {
+      if (state.answered === 0) { alert('Kamu belum menjawab soal apa pun!'); return; }
+
+      const nama = document.getElementById('mega-name').value.trim() || 'Tidak Diisi';
+      const persen = Math.round((state.correct / TOTAL) * 100);
+      const lulus = persen >= PASSING_PERCENT;
+      const waktu = getElapsedFormatted();
+
+      // Isi panel hasil
+      document.getElementById('h-nama').textContent = nama;
+      document.getElementById('h-skor').textContent = `${state.correct}/${TOTAL}`;
+      document.getElementById('h-benar').textContent = state.correct;
+      document.getElementById('h-persen').textContent = `${persen}%`;
+      document.getElementById('h-waktu').textContent = waktu;
+      document.getElementById('h-status').textContent = lulus ? '✅ LULUS' : '❌ BELUM LULUS';
+      document.getElementById('h-status').style.color = lulus ? 'var(--correct)' : 'var(--wrong)';
+
+      hasilPanel.classList.add('show');
+      submitBtn.disabled = true;
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    });
+  }
+
+  // ── Kirim ke Google Sheets ──
+  if (kirimBtn) {
+    kirimBtn.addEventListener('click', async () => {
+      const nama = document.getElementById('mega-name').value.trim();
+      if (!nama) {
+        kirimStatus.style.color = 'var(--wrong)';
+        kirimStatus.textContent = '⚠️ Isi nama dulu sebelum mengirim!';
+        return;
+      }
+
+      if (state.submitted) {
+        kirimStatus.style.color = 'var(--ink-muted)';
+        kirimStatus.textContent = 'Hasil sudah pernah dikirim sebelumnya.';
+        return;
+      }
+
+      kirimBtn.disabled = true;
+      kirimBtn.innerHTML = '⏳ Mengirim...';
+      kirimStatus.style.color = 'var(--ink-muted)';
+      kirimStatus.textContent = 'Sedang mengirim ke spreadsheet...';
+
+      const persen = Math.round((state.correct / TOTAL) * 100);
+      const waktu = getElapsedFormatted();
+      const tanggal = new Date().toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' });
+
+      const payload = {
+        nama: nama,
+        bab: BAB_NAME,
+        skor: `${state.correct}/${TOTAL}`,
+        jumlah_benar: state.correct,
+        persen: persen,
+        waktu: waktu,
+        tanggal: tanggal,
+        status: persen >= PASSING_PERCENT ? 'LULUS' : 'BELUM LULUS'
+      };
+
+      try {
+        const res = await fetch(APPS_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        state.submitted = true;
+        kirimBtn.innerHTML = '✅ Berhasil Dikirim';
+        kirimStatus.style.color = 'var(--correct)';
+        kirimStatus.textContent = `Hasil ${nama} sudah dikirim ke spreadsheet pengajar (${tanggal})`;
+      } catch (err) {
+        kirimBtn.disabled = false;
+        kirimBtn.innerHTML = '🔄 Coba Kirim Ulang';
+        kirimStatus.style.color = 'var(--wrong)';
+        kirimStatus.textContent = 'Gagal mengirim. Cek koneksi internet dan coba lagi.';
+        console.error(err);
+      }
+    });
+  }
+
+})();
+</script>
+</body>
+</html>
