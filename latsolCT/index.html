@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Latihan Soal — Circuit Tester & Pengecekan Sensor</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;700&family=Source+Serif+4:wght@300;400;600&display=swap');
+
+.ssw-mega-wrap {
+  --ink:         #1a1a1a;
+  --ink-light:   #3d3d3d;
+  --ink-muted:   #707070;
+  --paper:       #faf9f7;
+  --paper-warm:  #f5f3ef;
+  --rule:        #d8d4cc;
+  --correct:     #1e7e45;
+  --correct-bg:  #edfaf3;
+  --correct-bd:  #6fcf97;
+  --wrong:       #c0392b;
+  --wrong-bg:    #fff0ef;
+  --wrong-bd:    #e07070;
+  --gold:        #a08030;
+  --bab-color:   #5a1a6b;
+  --bab-soft:    #f3eef9;
+  --font-jp:   'Noto Serif JP', serif;
+  --font-ui:   'Noto Sans JP', sans-serif;
+  --font-body: 'Source Serif 4','Noto Serif JP',serif;
+  font-family: var(--font-body);
+  color: var(--ink);
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.ssw-mega-wrap .qhdr {
+  background: linear-gradient(135deg, #2d0a38 0%, #5a1a6b 60%, #7b2d8b 100%);
+  border-radius: 12px 12px 0 0;
+  padding: 22px 28px 18px;
+  position: relative; overflow: hidden;
+}
+.ssw-mega-wrap .qhdr::after {
+  content: '回路計';
+  position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+  font-family: var(--font-jp); font-size: 64px; font-weight: 700;
+  line-height: 1; color: rgba(255,255,255,0.06); pointer-events: none;
+}
+.ssw-mega-wrap .qhdr-inner { position: relative; }
+.ssw-mega-wrap .qhdr h2 {
+  font-family: var(--font-jp); font-size: 19px; font-weight: 700;
+  color: #fff; margin: 0 0 5px; line-height: 1.4;
+}
+.ssw-mega-wrap .qhdr p {
+  font-family: var(--font-ui); font-size: 12px;
+  color: rgba(255,255,255,0.55); margin: 0; line-height: 1.7;
+}
+.ssw-mega-wrap .hdr-pills {
+  display: flex; gap: 6px; flex-wrap: wrap; margin-top: 12px;
+}
+.ssw-mega-wrap .hp {
+  font-family: var(--font-ui); font-size: 10px; font-weight: 700;
+  letter-spacing: 0.06em; padding: 3px 9px; border-radius: 3px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.8);
+}
+
+.ssw-mega-wrap .shuffle-banner {
+  display: flex; align-items: flex-start; gap: 11px;
+  padding: 11px 20px; background: var(--bab-color);
+  font-family: var(--font-ui); font-size: 12.5px;
+  color: rgba(255,255,255,0.85); line-height: 1.6;
+}
+.ssw-mega-wrap .shuffle-banner .si { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+
+.ssw-mega-wrap .top-panel {
+  background: var(--paper-warm); border: 1px solid var(--rule); border-top: none;
+  padding: 13px 20px; margin-bottom: 14px;
+  display: flex; flex-wrap: wrap; gap: 12px;
+  align-items: center; justify-content: space-between;
+}
+.ssw-mega-wrap .name-field {
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--font-ui); font-size: 13px; font-weight: 600; color: var(--ink-light);
+}
+.ssw-mega-wrap .name-field input {
+  padding: 7px 12px; border: 1.5px solid var(--rule); border-radius: 6px;
+  font-family: var(--font-ui); font-size: 13px; width: 185px;
+  outline: none; transition: border-color 0.2s; background: #fff;
+}
+.ssw-mega-wrap .name-field input:focus { border-color: var(--bab-color); }
+.ssw-mega-wrap .score-display {
+  font-family: var(--font-ui); font-size: 13px; color: var(--ink-light);
+  display: flex; align-items: center; gap: 5px;
+}
+.ssw-mega-wrap .snum { font-size: 22px; font-weight: 700; color: var(--bab-color); line-height: 1; }
+
+.ssw-mega-wrap .timer-row {
+  display: flex; align-items: center; justify-content: flex-end; gap: 8px;
+  margin-bottom: 8px; font-family: var(--font-ui); font-size: 13px; color: var(--ink-muted);
+}
+.ssw-mega-wrap .timer-display {
+  font-size: 20px; font-weight: 700; color: var(--bab-color);
+  font-variant-numeric: tabular-nums; min-width: 55px; text-align: right;
+}
+.ssw-mega-wrap .timer-display.warn { color: var(--wrong); }
+
+.ssw-mega-wrap .prog-row {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+  font-family: var(--font-ui); font-size: 11px; color: var(--ink-muted);
+}
+.ssw-mega-wrap .prog-track {
+  flex: 1; height: 5px; background: var(--rule); border-radius: 3px; overflow: hidden;
+}
+.ssw-mega-wrap .prog-fill {
+  height: 100%; width: 0%; background: var(--bab-color);
+  border-radius: 3px; transition: width 0.4s ease;
+}
+
+.ssw-mega-wrap .lulus-row {
+  margin-bottom: 14px; padding: 9px 14px; border-radius: 8px;
+  font-family: var(--font-ui); font-size: 12px; font-weight: 600;
+  background: var(--bab-soft); color: var(--bab-color); text-align: center;
+  border: 1px solid #c9a0d4;
+}
+.ssw-mega-wrap .lulus-row.is-lulus { background: var(--correct-bg); color: var(--correct); border-color: var(--correct-bd); }
+.ssw-mega-wrap .lulus-row.is-gagal { background: var(--wrong-bg); color: var(--wrong); border-color: var(--wrong-bd); }
+
+.ssw-mega-wrap details {
+  background: var(--paper); border: 1px solid var(--rule);
+  border-left: 4px solid var(--bab-color); border-radius: 10px;
+  margin-bottom: 9px; overflow: hidden;
+  box-shadow: 0 2px 9px rgba(0,0,0,0.04); transition: box-shadow 0.2s;
+}
+.ssw-mega-wrap details[open] { box-shadow: 0 4px 18px rgba(0,0,0,0.09); }
+.ssw-mega-wrap summary {
+  cursor: pointer; padding: 12px 16px;
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--font-ui); font-size: 13.5px; font-weight: 600;
+  color: var(--ink); list-style: none; user-select: none;
+  background: var(--paper-warm); transition: background 0.15s;
+}
+.ssw-mega-wrap summary::-webkit-details-marker { display: none; }
+.ssw-mega-wrap summary:hover { background: #ece8df; }
+.ssw-mega-wrap .q-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 28px; height: 28px; border-radius: 50%;
+  background: var(--bab-color); color: #fff;
+  font-size: 11px; font-weight: 700; flex-shrink: 0;
+}
+.ssw-mega-wrap .q-preview {
+  flex: 1; font-family: var(--font-jp); font-size: 13.5px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0;
+}
+.ssw-mega-wrap .q-chevron {
+  font-size: 11px; color: var(--ink-muted);
+  transition: transform 0.2s; flex-shrink: 0; margin-left: 4px;
+}
+.ssw-mega-wrap details[open] summary .q-chevron { transform: rotate(180deg); }
+
+.ssw-mega-wrap .quiz-body { padding: 16px 18px 18px; border-top: 1px solid var(--rule); }
+.ssw-mega-wrap .quiz-question {
+  font-family: var(--font-jp); font-size: 17px; line-height: 2.1;
+  color: var(--ink); margin-bottom: 14px; padding: 12px 15px;
+  background: var(--bab-soft); border-left: 3px solid var(--bab-color); border-radius: 8px;
+}
+.ssw-mega-wrap .q-tr {
+  display: block; font-family: var(--font-ui); font-size: 12px;
+  color: var(--ink-muted); font-style: italic; margin-top: 6px; line-height: 1.6;
+}
+
+.ssw-mega-wrap .options-list-mb {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 11px;
+}
+.ssw-mega-wrap .option-btn-mb {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 4px; padding: 16px 10px; border: 2px solid var(--rule); border-radius: 10px;
+  background: #fff; cursor: pointer; font-family: var(--font-ui);
+  transition: border-color 0.15s, background 0.15s, transform 0.1s;
+}
+.ssw-mega-wrap .option-btn-mb:hover:not([disabled]) {
+  border-color: var(--bab-color); background: var(--bab-soft); transform: translateY(-2px);
+}
+.ssw-mega-wrap .opt-symbol { font-family: var(--font-jp); font-size: 30px; font-weight: 700; line-height: 1; }
+.ssw-mega-wrap .opt-label-mb { font-size: 11px; font-weight: 700; letter-spacing: 0.05em; color: var(--ink-muted); }
+.ssw-mega-wrap .opt-icon-mb { font-size: 13px; opacity: 0; transition: opacity 0.2s; margin-top: 2px; }
+.ssw-mega-wrap .option-btn-mb.is-correct { border-color: var(--correct-bd); background: var(--correct-bg); animation: pulse-c .3s ease; }
+.ssw-mega-wrap .option-btn-mb.is-correct .opt-symbol { color: var(--correct); }
+.ssw-mega-wrap .option-btn-mb.is-correct .opt-icon-mb { opacity: 1; }
+.ssw-mega-wrap .option-btn-mb.is-wrong { border-color: var(--wrong-bd); background: var(--wrong-bg); animation: shake-w .3s ease; }
+.ssw-mega-wrap .option-btn-mb.is-wrong .opt-symbol { color: var(--wrong); }
+.ssw-mega-wrap .option-btn-mb.is-wrong .opt-icon-mb { opacity: 1; }
+.ssw-mega-wrap .option-btn-mb.is-locked { opacity: 0.42; pointer-events: none; }
+
+.ssw-mega-wrap .pembahasan {
+  display: none; background: #fffdf0;
+  border: 1px solid #e8d89a; border-left: 4px solid var(--gold);
+  border-radius: 8px; padding: 13px 15px;
+  font-size: 13px; line-height: 1.85; color: #4a3800;
+  margin-top: 4px; animation: fadeIn .3s ease;
+}
+.ssw-mega-wrap .pembahasan.show { display: block; }
+.ssw-mega-wrap .p-title { font-family: var(--font-ui); font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+.ssw-mega-wrap .p-arti { font-family: var(--font-ui); font-style: italic; font-size: 13px; color: var(--ink-light); margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px dashed #e0d4a0; }
+.ssw-mega-wrap .p-kunci { font-family: var(--font-jp); font-size: 14px; font-weight: 700; color: var(--correct); margin-bottom: 10px; }
+.ssw-mega-wrap .p-section { margin-top: 12px; }
+.ssw-mega-wrap .p-subtitle { font-family: var(--font-ui); font-size: 12px; font-weight: 700; color: #6b5400; margin-bottom: 5px; }
+.ssw-mega-wrap .p-section ul { margin: 4px 0 6px 0; padding-left: 18px; }
+.ssw-mega-wrap .p-section li { margin-bottom: 4px; }
+.ssw-mega-wrap .p-logika { margin-top: 6px; padding: 9px 12px; background: rgba(160,128,48,0.08); border-radius: 6px; border-left: 3px solid var(--gold); }
+.ssw-mega-wrap .p-istilah { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 6px; }
+.ssw-mega-wrap .p-istilah-item { font-family: var(--font-ui); font-size: 11.5px; background: #fff; border: 1px solid #e8d89a; border-radius: 5px; padding: 4px 9px; color: #5a4500; }
+.ssw-mega-wrap .p-istilah-item .jp-term { font-family: var(--font-jp); font-weight: 700; }
+.ssw-mega-wrap .p-tip { margin-top: 8px; padding: 7px 11px; background: rgba(90,26,107,0.07); border-radius: 5px; font-size: 12px; color: var(--bab-color); font-family: var(--font-ui); }
+
+.ssw-mega-wrap .submit-area { text-align: center; margin-top: 26px; padding-top: 20px; border-top: 1px solid var(--rule); }
+.ssw-mega-wrap #mega-submit-btn {
+  background: var(--bab-color); color: #fff; border: none;
+  padding: 13px 38px; border-radius: 30px;
+  font-family: var(--font-ui); font-size: 15px; font-weight: 700;
+  cursor: pointer; transition: background 0.2s, transform 0.1s;
+  box-shadow: 0 3px 14px rgba(90,26,107,0.3);
+}
+.ssw-mega-wrap #mega-submit-btn:hover { background: #2d0a38; transform: translateY(-1px); }
+.ssw-mega-wrap #mega-submit-btn:disabled { background: #a87db8; cursor: not-allowed; transform: none; }
+
+.ssw-mega-wrap .hasil-panel { display: none; margin-top: 20px; padding: 20px; border: 1px solid var(--rule); border-radius: 12px; background: var(--paper-warm); }
+.ssw-mega-wrap .hasil-panel.show { display: block; }
+.ssw-mega-wrap .hasil-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 16px; }
+.ssw-mega-wrap .hasil-item { background: #fff; border: 1px solid var(--rule); border-radius: 8px; padding: 12px; text-align: center; }
+.ssw-mega-wrap .hasil-item .h-label { font-family: var(--font-ui); font-size: 10px; color: var(--ink-muted); margin-bottom: 4px; }
+.ssw-mega-wrap .hasil-item .h-value { font-family: var(--font-ui); font-size: 22px; font-weight: 700; color: var(--bab-color); }
+.ssw-mega-wrap .kirim-btn {
+  width: 100%; padding: 12px; border-radius: 8px; border: none;
+  background: #1a73e8; color: #fff; font-family: var(--font-ui);
+  font-size: 14px; font-weight: 700; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  transition: background 0.2s;
+}
+.ssw-mega-wrap .kirim-btn:hover { background: #1558b0; }
+.ssw-mega-wrap .kirim-btn:disabled { background: #8ab0d4; cursor: not-allowed; }
+.ssw-mega-wrap #kirim-status { margin-top: 10px; font-family: var(--font-ui); font-size: 13px; font-weight: 600; text-align: center; min-height: 20px; }
+
+@keyframes pulse-c { 0%{transform:scale(1)} 50%{transform:scale(1.03)} 100%{transform:scale(1)} }
+@keyframes shake-w { 0%{transform:translateX(0)} 20%{transform:translateX(-5px)} 40%{transform:translateX(5px)} 60%{transform:translateX(-3px)} 80%{transform:translateX(3px)} 100%{transform:translateX(0)} }
+@keyframes fadeIn { from{opacity:0;transform:translateY(-5px)} to{opacity:1;transform:translateY(0)} }
+
+@media(max-width:600px){
+  .ssw-mega-wrap .qhdr::after { font-size:40px; }
+  .ssw-mega-wrap .quiz-question { font-size:15px; }
+  .ssw-mega-wrap .opt-symbol { font-size:26px; }
+  .ssw-mega-wrap .hasil-grid { grid-template-columns:1fr 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="ssw-mega-wrap">
+
+<div class="qhdr">
+  <div class="qhdr-inner">
+    <h2>⚡ Latihan Soal - PejuangYen — Seri 8: 回路計（かいろけい）・センサー点検（てんけん）</h2>
+    <p>自動車整備 SSW &nbsp;|&nbsp; 10 Soal &nbsp;|&nbsp; Format ○✕ &nbsp;|&nbsp; Circuit Tester &amp; Pengecekan Sensor</p>
+    <div class="hdr-pills">
+      <span class="hp">サーキット・テスタ</span>
+      <span class="hp">抵抗測定</span>
+      <span class="hp">電圧測定</span>
+      <span class="hp">水温センサー</span>
+      <span class="hp">導通確認</span>
+    </div>
+  </div>
+</div>
+
+<div class="shuffle-banner">
+  <span class="si">⚡</span>
+  <span>Latihan khusus circuit tester dan pengecekan sensor — materi yang sering muncul dan sering menjebak. Perhatikan baik-baik: mode pengukuran (Ω/DCV), cara koneksi (paralel/seri), dan karakteristik NTC thermistor. Isi nama sebelum mengerjakan.</span>
+</div>
+
+<div class="top-panel">
+  <div class="name-field">
+    <label for="mega-name">👤 Nama:</label>
+    <input type="text" id="mega-name" placeholder="Masukkan nama kamu...">
+  </div>
+  <div class="score-display">
+    Skor: <span class="snum" id="mega-score">0</span>/10
+    &nbsp;|&nbsp; <span id="mega-correct">0</span> benar
+  </div>
+</div>
+
+<div class="timer-row">⏱ Waktu: <span class="timer-display" id="mega-timer">00:00</span></div>
+<div class="prog-row">
+  <span id="mega-prog-label">0 / 10 terjawab</span>
+  <div class="prog-track"><div class="prog-fill" id="mega-prog-fill"></div></div>
+</div>
+<div class="lulus-row" id="lulus-indicator">Jawab semua soal untuk melihat status kelulusan (standar: 70% atau lebih)</div>
+
+<!-- ══ SOAL 1 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">1</span><span class="q-preview">回路計（かいろけい）（サーキット・テスタ）を使（つか）ってセンサーの抵抗（ていこう）を測定（そくてい）する時（とき）は、必（かなら）ず車両（しゃりょう）のイグニッション・スイッチをＯＮにしてから行（おこな）う。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">回路計（かいろけい）（サーキット・テスタ）を使（つか）ってセンサーの抵抗（ていこう）を測定（そくてい）する時（とき）は、必（かなら）ず車両（しゃりょう）のイグニッション・スイッチをＯＮにしてから行（おこな）う。
+      <span class="q-tr">Saat menggunakan circuit tester untuk mengukur hambatan sensor, pastikan selalu menyalakan Ignition Switch ke posisi ON terlebih dahulu.</span>
+    </p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="false"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✗</span></button>
+      <button class="option-btn-mb batsu" data-correct="true"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✓</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Saat mengukur hambatan sensor, kunci kontak HARUS dalam posisi OFF — bukan ON.</div>
+      <div class="p-kunci">Jawaban: ✕ Salah</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>抵抗（ていこう）を測定（そくてい）</strong> = mengukur hambatan/resistansi → mode Ω</li>
+          <li><strong>イグニッション・スイッチをＯＮ</strong> = kunci kontak ON (kondisi yang SALAH dan BERBAHAYA)</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Saat tester diset ke mode Ω (Ohm), tester mengeluarkan arus kecil dari baterai internalnya sendiri untuk mengukur hambatan. Jika kunci kontak ON, arus listrik mobil (dari aki) akan masuk ke sirkuit yang sama dan <strong>bertabrakan dengan arus tester</strong>.</p>
+        <ul>
+          <li>Hasil ukur menjadi kacau dan tidak valid</li>
+          <li>Komponen internal circuit tester bisa terbakar</li>
+          <li>ECU mobil bisa rusak permanen</li>
+        </ul>
+        <p>Aturan mutlak: <strong>Ukur hambatan (Ω) → kunci kontak OFF, lepas konektor sensor.</strong></p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Mode Ω = tester jadi sumber arus sendiri. Kalau ada arus dari luar masuk, dua sumber arus saling bertabrakan → komponen terbakar. Ini seperti mencolokkan dua charger ke satu baterai bersamaan.</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">抵抗（ていこう）</span> = hambatan listrik (Ohm/Ω)</span>
+          <span class="p-istilah-item"><span class="jp-term">回路計（かいろけい）</span> = circuit tester/multitester</span>
+          <span class="p-istilah-item"><span class="jp-term">イグニッション OFF</span> = wajib saat ukur Ω</span>
+        </div>
+      </div>
+      <div class="p-tip">⚠️ Aturan emas: Ukur hambatan (Ω) = KUNCI KONTAK OFF + LEPAS KONEKTOR. Tidak ada pengecualian.</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SOAL 2 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">2</span><span class="q-preview">センサーの出力電圧（しゅつりょくでんあつ）を測定（そくてい）する時（とき）は、テスタのセレクタを「ＤＣＶ（直流電圧（ちょくりゅうでんあつ））」に合（あ）わせる。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">センサーの出力電圧（しゅつりょくでんあつ）を測定（そくてい）する時（とき）は、テスタのセレクタを「ＤＣＶ（直流電圧（ちょくりゅうでんあつ））」に合（あ）わせる。
+      <span class="q-tr">Saat mengukur tegangan output sensor, posisikan selector tester pada mode "DCV (Tegangan Arus Searah)".</span>
+    </p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="true"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✓</span></button>
+      <button class="option-btn-mb batsu" data-correct="false"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✗</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Semua sensor kendaraan menggunakan arus searah (DC) — maka selector wajib di DCV saat mengukur tegangan output sensor.</div>
+      <div class="p-kunci">Jawaban: ○ Benar</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>出力電圧（しゅつりょくでんあつ）</strong> = tegangan output (voltase yang keluar dari sensor)</li>
+          <li><strong>直流（ちょくりゅう）(DCV)</strong> = Direct Current — arus searah (sistem kelistrikan mobil)</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Sistem kelistrikan kendaraan 100% menggunakan arus searah (DC). ECU memberikan tegangan referensi 5V (DC) ke sensor, dan sensor mengirim balik tegangan sinyal (0–5V DC) ke ECU.</p>
+        <ul>
+          <li><strong>DCV (直流/ちょくりゅう)</strong> = untuk ukur tegangan mobil ✓</li>
+          <li><strong>ACV (交流/こうりゅう)</strong> = untuk listrik rumah tangga — TIDAK dipakai di mobil</li>
+        </ul>
+        <p>Cara ukur: kunci kontak ON atau mesin hidup → probe merah ke terminal sinyal sensor → probe hitam ke ground (bodi mobil).</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Jebakan: kalau salah pasang selector ke mode A (Ampere) saat mau ukur tegangan → arus besar mengalir langsung → tester rusak, sekring putus, bahkan korsleting. Selalu cek posisi selector sebelum menempelkan probe.</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">直流（ちょくりゅう）</span> = DC (arus searah)</span>
+          <span class="p-istilah-item"><span class="jp-term">交流（こうりゅう）</span> = AC (arus bolak-balik)</span>
+          <span class="p-istilah-item"><span class="jp-term">基準電圧（きじゅんでんあつ）</span> = tegangan referensi (biasanya 5V dari ECU)</span>
+        </div>
+      </div>
+      <div class="p-tip">DCV = sensor mobil. ACV = listrik rumah. Di bengkel otomotif, ACV hampir tidak pernah dipakai.</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SOAL 3 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">3</span><span class="q-preview">水温（すいおん）センサーのコネクターを外（はず）して、センサー単体（たんたい）の抵抗（ていこう）を測定（そくてい）したところ、テスタの表示（ひょうじ）が「∞」を示（しめ）した。この場合（ばあい）、センサーは正常（せいじょう）である。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">水温（すいおん）センサーのコネクターを外（はず）して、センサー単体（たんたい）の抵抗（ていこう）を測定（そくてい）したところ、テスタの表示（ひょうじ）が「∞（オーム・インフィニティ）」を示（しめ）した。この場合（ばあい）、センサーは正常（せいじょう）である。
+      <span class="q-tr">Konektor sensor suhu air dilepas, hambatan sensor diukur secara mandiri, layar tester menunjukkan "∞ (Ohm Infinity)". Dalam kondisi ini, sensor dinyatakan normal.</span>
+    </p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="false"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✗</span></button>
+      <button class="option-btn-mb batsu" data-correct="true"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✓</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Tanda ∞ pada mode Ω berarti jalur di dalam sensor terputus total (断線/だんせん) — sensor RUSAK, bukan normal.</div>
+      <div class="p-kunci">Jawaban: ✕ Salah</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>∞ (Infinity/Tak Terhingga)</strong> = jalur terputus total = sensor RUSAK</li>
+          <li><strong>単体（たんたい）</strong> = diukur secara mandiri, terlepas dari sirkuit mobil</li>
+          <li><strong>正常（せいじょう）</strong> = normal (klaim yang SALAH dalam kasus ini)</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Sensor suhu air (水温センサー) menggunakan <strong>NTC Thermistor</strong>. Saat diukur dalam kondisi normal, thermistor selalu menunjukkan angka hambatan tertentu (bukan ∞ dan bukan 0).</p>
+        <ul>
+          <li>Kondisi <strong>normal</strong>: terbaca angka tertentu, misalnya ~2kΩ saat dingin, mengecil saat panas</li>
+          <li>Terbaca <strong>∞</strong> = 断線（だんせん）= jalur dalam sensor putus total → sensor HARUS DIGANTI</li>
+          <li>Terbaca <strong>0Ω</strong> = korsleting internal di dalam sensor → sensor HARUS DIGANTI</li>
+        </ul>
+        <p>Akibat sensor ∞: ECU tidak bisa membaca suhu mesin → kipas radiator bisa berputar terus atau mesin susah dihidupkan.</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Hafalan 3 kondisi wajib: ∞ = putus (断線) → ganti. 0Ω = korsleting → ganti. Angka wajar = normal → bandingkan dengan spesifikasi di buku manual.</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">断線（だんせん）</span> = putus jalur/kabel</span>
+          <span class="p-istilah-item"><span class="jp-term">単体（たんたい）</span> = komponen berdiri sendiri</span>
+          <span class="p-istilah-item"><span class="jp-term">水温センサー</span> = sensor suhu air pendingin</span>
+        </div>
+      </div>
+      <div class="p-tip">⚠️ ∞ pada mode Ω = SELALU rusak (断線). Tidak ada sensor normal yang menunjukkan ∞ saat diukur hambatannya.</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SOAL 4 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">4</span><span class="q-preview">回路計（かいろけい）のデジタル画面（がめん）に「０．００Ω」と表示（ひょうじ）された場合（ばあい）、測定（そくてい）している配線（はいせん）は導通（どうつう）している状態（じょうたい）である。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">回路計（かいろけい）のデジタル画面（がめん）に「０．００Ω」と表示（ひょうじ）された場合（ばあい）、測定（そくてい）している配線（はいせん）は導通（どうつう）している状態（じょうたい）である。
+      <span class="q-tr">Jika layar digital circuit tester menampilkan "0.00Ω", artinya kabel yang sedang diukur berada dalam kondisi tersambung (memiliki kontinuitas).</span>
+    </p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="true"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✓</span></button>
+      <button class="option-btn-mb batsu" data-correct="false"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✗</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">0.00Ω = hambatan nol = arus mengalir bebas tanpa hambatan = kabel tersambung dengan baik (導通/どうつう).</div>
+      <div class="p-kunci">Jawaban: ○ Benar</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>0.00Ω</strong> = hambatan nol = kabel utuh dan tersambung</li>
+          <li><strong>導通（どうつう）</strong> = kontinuitas = arus bisa mengalir lancar</li>
+          <li><strong>配線（はいせん）</strong> = kabel/jalur kelistrikan</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Pengecekan 導通（どうつう）(kontinuitas) adalah cara paling dasar untuk memastikan kabel dari sensor ke ECU tidak putus di tengah jalan. Cara ukur yang benar:</p>
+        <ul>
+          <li>Lepas kedua ujung kabel dari sirkuit mobil (agar tidak ada arus lain yang mengganggu)</li>
+          <li>Tempelkan probe merah di ujung satu, probe hitam di ujung lainnya</li>
+          <li>Hasil mendekati 0Ω → kabel bagus</li>
+          <li>Hasil ∞ → kabel putus di suatu titik</li>
+        </ul>
+        <p>Banyak tester digital juga punya mode <strong>Buzzer/Continuity</strong> — berbunyi BEEP jika kabel tersambung, diam jika putus.</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Sebelum membeli sensor baru yang mahal, selalu cek dulu kabelnya dengan uji 導通. Banyak "sensor rusak" ternyata hanya kabelnya yang putus atau konektornya yang kotor.</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">導通（どうつう）</span> = kontinuitas/tersambung</span>
+          <span class="p-istilah-item"><span class="jp-term">ブザー確認（かくにん）</span> = cek dengan bunyi buzzer</span>
+          <span class="p-istilah-item"><span class="jp-term">断線（だんせん）</span> = kabel putus (hasil ∞)</span>
+        </div>
+      </div>
+      <div class="p-tip">0.00Ω = 導通 OK (tersambung). ∞ = 断線 (putus). Dua hasil yang berlawanan dan wajib dihafal.</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SOAL 5 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">5</span><span class="q-preview">サーキット・テスタを使（つか）って配線（はいせん）の電圧（でんあつ）を測定（そくてい）する時（とき）は、テスタを測定箇所（そくていかしょ）に対（たい）して直列（ちょくれつ）に接続（せつぞく）する。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">サーキット・テスタを使（つか）って配線（はいせん）の電圧（でんあつ）を測定（そくてい）する時（とき）は、テスタを測定箇所（そくていかしょ）に対（たい）して直列（ちょくれつ）に接続（せつぞく）する。
+      <span class="q-tr">Saat menggunakan circuit tester untuk mengukur tegangan pada kabel, hubungkan tester secara seri terhadap titik pengukuran.</span>
+    </p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="false"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✗</span></button>
+      <button class="option-btn-mb batsu" data-correct="true"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✓</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Mengukur tegangan (voltase) = tester dihubungkan secara PARALEL, bukan seri. Seri hanya untuk mengukur arus (Ampere).</div>
+      <div class="p-kunci">Jawaban: ✕ Salah</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>直列（ちょくれつ）= Seri</strong> → dipakai untuk ukur ARUS (電流/でんりゅう/Ampere)</li>
+          <li><strong>並列（へいれつ）= Paralel</strong> → dipakai untuk ukur TEGANGAN (電圧/でんあつ/Volt) ← yang benar</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Ini adalah prinsip dasar kelistrikan yang paling sering menjebak di ujian SSW:</p>
+        <ul>
+          <li><strong>Ukur Tegangan (Volt/DCV)</strong> → sambung PARALEL → probe langsung menempel ke titik ukur tanpa memutus jalur kabel</li>
+          <li><strong>Ukur Arus (Ampere/DCA)</strong> → sambung SERI → jalur kabel HARUS diputus dulu, tester dipasang di tengah potongan</li>
+        </ul>
+        <p>Jika tegangan diukur dengan cara seri → jalur kabel terputus → arus tidak mengalir → pembacaan 0V (tidak benar). Lebih bahaya lagi jika mode selector salah ke Ampere → korsleting.</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Hafalan cepat: <strong>V = Paralel</strong> (tidak perlu potong kabel). <strong>A = Seri</strong> (perlu potong kabel). Di bengkel, pengukuran Ampere (seri) sangat jarang dilakukan karena berbahaya dan merepotkan.</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">並列（へいれつ）</span> = paralel (cara ukur tegangan)</span>
+          <span class="p-istilah-item"><span class="jp-term">直列（ちょくれつ）</span> = seri (cara ukur arus)</span>
+          <span class="p-istilah-item"><span class="jp-term">電流（でんりゅう）</span> = arus listrik (Ampere)</span>
+        </div>
+      </div>
+      <div class="p-tip">⚠️ Tegangan (V) = PARALEL. Arus (A) = SERI. Ini adalah jebakan paling sering di soal circuit tester SSW.</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SOAL 6 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">6</span><span class="q-preview">クランク角（かく）センサーの点検（てんけん）において、カプラ（コネクター）の接触不良（せっしょくふりょう）があると、エンジンがかからなくなることがある。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">クランク角（かく）センサーの点検（てんけん）において、カプラ（コネクター）の接触不良（せっしょくふりょう）があると、エンジンがかからなくなることがある。
+      <span class="q-tr">Dalam pemeriksaan Crank Angle Sensor, jika terdapat kontak buruk pada soket/konektor, dapat menyebabkan mesin tidak bisa dihidupkan.</span>
+    </p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="true"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✓</span></button>
+      <button class="option-btn-mb batsu" data-correct="false"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✗</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Crank Angle Sensor adalah sensor paling vital di mesin — konektornya longgar/kotor saja sudah cukup untuk membuat mesin tidak mau hidup.</div>
+      <div class="p-kunci">Jawaban: ○ Benar</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>接触不良（せっしょくふりょう）</strong> = kontak buruk (longgar, kotor, berkarat)</li>
+          <li><strong>クランク角（かく）センサー</strong> = Crankshaft Position Sensor (sensor posisi poros engkol)</li>
+          <li><strong>エンジンがかからない</strong> = mesin tidak bisa dihidupkan</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Crank Angle Sensor memberi tahu ECU posisi dan kecepatan poros engkol setiap saat. Tanpa data ini, ECU tidak tahu kapan harus:</p>
+        <ul>
+          <li>Memercikkan api busi (timing pengapian)</li>
+          <li>Menyemprotkan bahan bakar dari injektor</li>
+        </ul>
+        <p>Gejala 接触不良 pada konektor Crank Sensor: mesin mati mendadak saat jalan, atau mesin bisa cranking (berputar) saat distarter tapi tidak mau hidup sama sekali.</p>
+        <p>Poin penting: sensornya sendiri masih bagus, tapi <strong>konektor yang kotor/longgar</strong> sudah cukup untuk menghilangkan sinyal sepenuhnya.</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Urutan diagnosis yang benar sebelum ganti sensor mahal: 1) Cek konektor → bersihkan/kencangkan. 2) Cek kabel (導通テスト). 3) Baru ukur sensor itu sendiri. Banyak "kerusakan sensor" ternyata hanya masalah konektor.</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">接触不良（せっしょくふりょう）</span> = kontak buruk/longgar</span>
+          <span class="p-istilah-item"><span class="jp-term">カプラ</span> = konektor/soket sensor</span>
+          <span class="p-istilah-item"><span class="jp-term">クランキング</span> = mesin berputar saat distarter</span>
+        </div>
+      </div>
+      <div class="p-tip">Cek konektor DULU sebelum vonis sensor rusak. 接触不良 sering jadi penyebab yang disepelekan tapi akibatnya fatal.</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SOAL 7 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">7</span><span class="q-preview">水温（すいおん）センサー単体（たんたい）の良否（りょうひ）を判定（はんてい）するために抵抗（ていこう）を測定（そくてい）する時（とき）、サーキット・テスタのセレクタは「Ω（オーム）」に合（あ）わせる。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">水温（すいおん）センサー単体（たんたい）の良否（りょうひ）を判定（はんてい）するために抵抗（ていこう）を測定（そくてい）する時（とき）、サーキット・テスタのセレクタは「Ω（オーム）」に合（あ）わせる。
+      <span class="q-tr">Saat mengukur hambatan untuk menentukan kondisi baik/rusak sensor suhu air secara mandiri, posisikan selector circuit tester pada mode "Ω (Ohm)".</span>
+    </p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="true"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✓</span></button>
+      <button class="option-btn-mb batsu" data-correct="false"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✗</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Mengukur kondisi sensor secara mandiri (berdiri sendiri, lepas dari mobil) = mengukur hambatan internalnya = wajib selector di Ω.</div>
+      <div class="p-kunci">Jawaban: ○ Benar</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>良否（りょうひ）を判定（はんてい）</strong> = menentukan baik atau rusaknya komponen</li>
+          <li><strong>単体（たんたい）</strong> = sensor dilepas dari mobil, berdiri sendiri</li>
+          <li><strong>抵抗（ていこう）を測定（そくてい）</strong> = mengukur hambatan → wajib mode Ω</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Sensor yang dilepas dari mobil tidak memiliki tegangan — maka tidak ada yang bisa diukur dengan DCV. Satu-satunya cara mengetahui kondisi internal sensor yang sudah dilepas adalah mengukur hambatan (Ω) di dalamnya.</p>
+        <p>Kalau selector salah diset ke DCV saat sensor sudah dilepas → layar menunjukkan 0V → ini tidak bermakna apa-apa dan tidak bisa membantu diagnosis.</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Dua situasi berbeda, dua cara berbeda: <strong>Sensor masih di mobil + kunci kontak ON</strong> → ukur tegangan output dengan DCV. <strong>Sensor sudah dilepas dari mobil</strong> → ukur hambatan internal dengan Ω.</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">良否判定（りょうひはんてい）</span> = penilaian baik/rusak</span>
+          <span class="p-istilah-item"><span class="jp-term">単体点検（たんたいてんけん）</span> = pemeriksaan komponen mandiri</span>
+          <span class="p-istilah-item"><span class="jp-term">サーミスタ</span> = thermistor (elemen dalam sensor suhu)</span>
+        </div>
+      </div>
+      <div class="p-tip">Sensor lepas dari mobil → ukur Ω. Sensor masih di mobil, kunci ON → ukur DCV. Situasi berbeda, selector berbeda.</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SOAL 8 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">8</span><span class="q-preview">前問（ぜんもん）の測定（そくてい）において、冷却水（れいきゃくすい）の温度（おんど）が高（たか）くなるほど、テスタに表示（ひょうじ）される抵抗値（ていこうち）は大（おお）きくなる。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">前問（ぜんもん）の測定（そくてい）において、冷却水（れいきゃくすい）の温度（おんど）が高（たか）くなるほど、テスタに表示（ひょうじ）される抵抗値（ていこうち）は大（おお）きくなる。
+      <span class="q-tr">Pada pengukuran soal sebelumnya, semakin tinggi suhu air pendingin, nilai hambatan yang ditampilkan tester akan semakin besar.</span>
+    </p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="false"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✗</span></button>
+      <button class="option-btn-mb batsu" data-correct="true"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✓</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Ini jebakan logika — sensor suhu memakai NTC Thermistor: suhu NAIK → hambatan TURUN. Berlawanan dengan intuisi.</div>
+      <div class="p-kunci">Jawaban: ✕ Salah</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>温度（おんど）が高（たか）くなるほど</strong> = semakin tinggi suhu</li>
+          <li><strong>抵抗値（ていこうち）は大（おお）きくなる</strong> = hambatan semakin besar (klaim yang SALAH)</li>
+          <li><strong>NTC Thermistor</strong> = Negative Temperature Coefficient — hambatan berbanding TERBALIK dengan suhu</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Sensor suhu air pendingin menggunakan <strong>NTC Thermistor (Negative Temperature Coefficient)</strong>. Karakteristik NTC:</p>
+        <ul>
+          <li>Suhu DINGIN → hambatan BESAR (misalnya ~2kΩ–5kΩ)</li>
+          <li>Suhu PANAS → hambatan KECIL (misalnya ~200Ω–300Ω)</li>
+        </ul>
+        <p>ECU membaca perubahan hambatan ini sebagai perubahan tegangan, lalu menerjemahkannya menjadi data suhu yang akurat. Inilah mengapa soal ini menjebak — secara intuitif terasa "semakin panas seharusnya semakin besar", padahal justru sebaliknya.</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Hafalan mudah — NTC = <strong>N</strong>egative = hambatan <strong>N</strong>urun saat panas. Kebalikan dari logika biasa. Ini poin emas di interview karena menunjukkan kamu paham karakteristik sensor, bukan hanya hafal prosedur.</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">NTCサーミスタ</span> = Negative Temperature Coefficient thermistor</span>
+          <span class="p-istilah-item"><span class="jp-term">抵抗値（ていこうち）</span> = nilai hambatan (Ohm)</span>
+          <span class="p-istilah-item"><span class="jp-term">反比例（はんぴれい）</span> = berbanding terbalik</span>
+        </div>
+      </div>
+      <div class="p-tip">⚠️ NTC Thermistor: Suhu NAIK → Hambatan TURUN. Suhu TURUN → Hambatan NAIK. Berlawanan dengan intuisi — ini jebakan favorit soal SSW.</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SOAL 9 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">9</span><span class="q-preview">冷（つめ）たい状態（じょうたい）の水温（すいおん）センサーの抵抗（ていこう）をアナログ回路計（テスタ）で測定（そくてい）する時（とき）、抵抗値（ていこうち）が大（おお）きいため、レンジ（倍率（ばいりつ））は「×１」ではなく「×１００」に合（あ）わせて測定（そくてい）する。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">冷（つめ）たい状態（じょうたい）の水温（すいおん）センサーの抵抗（ていこう）をアナログ回路計（テスタ）で測定（そくてい）する時（とき）、抵抗値（ていこうち）が大（おお）きいため、レンジ（倍率（ばいりつ））は「×１」ではなく「×１００」に合（あ）わせて測定（そくてい）する。
+      <span class="q-tr">Saat mengukur hambatan sensor suhu dalam kondisi dingin menggunakan tester analog, karena hambatannya besar, range disetel ke "×100", bukan "×1".</span>
+    </p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="true"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✓</span></button>
+      <button class="option-btn-mb batsu" data-correct="false"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✗</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Sensor suhu saat dingin hambatannya ribuan Ohm — tester analog harus disetel ke range ×100 atau ×1k agar jarum bisa terbaca dengan akurat.</div>
+      <div class="p-kunci">Jawaban: ○ Benar</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>冷（つめ）たい状態（じょうたい）</strong> = kondisi dingin → hambatan BESAR (ingat NTC dari soal 8)</li>
+          <li><strong>レンジ（倍率（ばいりつ））</strong> = range/skala perkalian pada tester analog</li>
+          <li><strong>×１</strong> = untuk komponen hambatan kecil (kabel, sekring)</li>
+          <li><strong>×１００</strong> = untuk komponen hambatan besar (sensor suhu saat dingin)</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p>Tester analog berbeda dengan digital — harus pilih range secara manual. Prinsip memilih range yang benar:</p>
+        <ul>
+          <li>Jika range terlalu kecil (×1) untuk hambatan besar → jarum menempel di ujung kiri (∞) → tidak bisa dibaca</li>
+          <li>Jika range terlalu besar (×10k) untuk hambatan kecil → jarum hanya bergerak sedikit di ujung kanan (0) → tidak akurat</li>
+          <li><strong>Range ideal</strong> = jarum menunjuk di area TENGAH papan skala → pembacaan paling akurat</li>
+        </ul>
+        <p>Sensor suhu saat dingin: ~2000–5000Ω → gunakan ×100 (maks baca 10kΩ) atau ×1k.</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Cara cepat pilih range yang benar: mulai dari range BESAR dulu, lalu turunkan bertahap sampai jarum menunjuk di area tengah papan skala. Jangan mulai dari range kecil karena bisa merusak tester analog jika hambatan komponen ternyata sangat kecil.</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">倍率（ばいりつ）</span> = faktor perkalian/range</span>
+          <span class="p-istilah-item"><span class="jp-term">アナログテスタ</span> = tester analog (jarum)</span>
+          <span class="p-istilah-item"><span class="jp-term">中間（ちゅうかん）</span> = area tengah (posisi jarum terbaik)</span>
+        </div>
+      </div>
+      <div class="p-tip">Tester analog: pilih range dari BESAR ke KECIL sampai jarum di area tengah. Jarum di tengah = pembacaan paling akurat.</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SOAL 10 ══ -->
+<details class="quiz-card">
+  <summary><span class="q-num">10</span><span class="q-preview">前問（ぜんもん）の測定（そくてい）において、テスタの目盛（めもり）の針（はり）が「２０」を示（しめ）した場合（ばあい）、実際（じっさい）の抵抗値（ていこうち）は２０Ω（オーム）である。</span><span class="q-chevron">▼</span></summary>
+  <div class="quiz-body">
+    <p class="quiz-question">前問（ぜんもん）の測定（そくてい）において、テスタの目盛（めもり）の針（はり）が「２０」を示（しめ）した場合（ばあい）、実際（じっさい）の抵抗値（ていこうち）は２０Ω（オーム）である。
+      <span class="q-tr">Pada pengukuran soal sebelumnya, jika jarum tester menunjuk angka "20", maka nilai hambatan yang sebenarnya adalah 20Ω.</span>
+    </p>
+    <div class="options-list-mb">
+      <button class="option-btn-mb maru" data-correct="false"><span class="opt-symbol">○</span><span class="opt-label-mb">MARU (Benar)</span><span class="opt-icon-mb">✗</span></button>
+      <button class="option-btn-mb batsu" data-correct="true"><span class="opt-symbol">✕</span><span class="opt-label-mb">BATSU (Salah)</span><span class="opt-icon-mb">✓</span></button>
+    </div>
+    <div class="pembahasan">
+      <div class="p-title">★ Pembahasan</div>
+      <div class="p-arti">Angka di jarum HARUS dikalikan dengan range yang dipilih. Range ×100 + jarum menunjuk 20 = 20 × 100 = 2000Ω (2kΩ) — bukan 20Ω.</div>
+      <div class="p-kunci">Jawaban: ✕ Salah</div>
+      <div class="p-section">
+        <div class="p-subtitle">🔑 Analisa Kata Kunci</div>
+        <ul>
+          <li><strong>針（はり）が「２０」を示（しめ）した</strong> = jarum menunjuk angka 20 di papan skala</li>
+          <li><strong>実際（じっさい）の抵抗値（ていこうち）</strong> = nilai hambatan yang sebenarnya (hasil akhir setelah dikali range)</li>
+        </ul>
+      </div>
+      <div class="p-section">
+        <div class="p-subtitle">📘 Penjelasan Detail</div>
+        <p><strong>Rumus membaca tester analog:</strong></p>
+        <p style="text-align:center; font-size:15px; font-weight:700; padding:8px; background:rgba(90,26,107,0.08); border-radius:6px;">Nilai Sebenarnya = Angka Jarum × Range (Bairitsu)</p>
+        <p>Dari soal 9, range yang dipilih adalah ×100. Maka:</p>
+        <p style="text-align:center; font-size:15px; font-weight:700;">20 × 100 = <span style="color:#5a1a6b">2.000Ω = 2kΩ</span></p>
+        <p>Nilai 2kΩ ini masuk akal — sesuai karakteristik NTC thermistor sensor suhu dalam kondisi dingin. Sedangkan 20Ω terlalu kecil (itu setara hambatan kabel biasa, bukan sensor suhu).</p>
+      </div>
+      <div class="p-logika">💡 <strong>Logika teknisi:</strong> Ini adalah soal rangkaian dari soal 8 dan 9 — menguji apakah siswa benar-benar memahami alur lengkap: NTC (suhu dingin = hambatan besar) → pilih range ×100 → baca jarum → kalikan range → dapatkan nilai sebenarnya.</div>
+      <div class="p-section">
+        <div class="p-subtitle">📚 Istilah Kunci Tambahan</div>
+        <div class="p-istilah">
+          <span class="p-istilah-item"><span class="jp-term">目盛（めもり）</span> = skala/garis ukur pada alat</span>
+          <span class="p-istilah-item"><span class="jp-term">針（はり）</span> = jarum penunjuk</span>
+          <span class="p-istilah-item"><span class="jp-term">実際（じっさい）の値（ち）</span> = nilai yang sebenarnya</span>
+        </div>
+      </div>
+      <div class="p-tip">⚠️ Rumus wajib: Nilai Sebenarnya = Angka Jarum × Range. Melupakan langkah perkalian ini adalah kesalahan paling umum membaca tester analog.</div>
+    </div>
+  </div>
+</details>
+
+<!-- ══ SUBMIT & KIRIM ══ -->
+<div class="submit-area">
+  <button id="mega-submit-btn">📊 Lihat Hasil &amp; Kirim ke Spreadsheet</button>
+  <div class="hasil-panel" id="hasil-panel">
+    <div class="hasil-grid">
+      <div class="hasil-item"><div class="h-label">Nama</div><div class="h-value" id="h-nama" style="font-size:14px;">—</div></div>
+      <div class="hasil-item"><div class="h-label">Skor</div><div class="h-value" id="h-skor">0/10</div></div>
+      <div class="hasil-item"><div class="h-label">Benar</div><div class="h-value" id="h-benar">0</div></div>
+      <div class="hasil-item"><div class="h-label">Persentase</div><div class="h-value" id="h-persen">0%</div></div>
+      <div class="hasil-item"><div class="h-label">Waktu</div><div class="h-value" id="h-waktu" style="font-size:16px;">—</div></div>
+      <div class="hasil-item"><div class="h-label">Status</div><div class="h-value" id="h-status" style="font-size:14px;">—</div></div>
+    </div>
+    <button class="kirim-btn" id="kirim-btn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+      Kirim Hasil ke Google Sheets
+    </button>
+    <p id="kirim-status"></p>
+  </div>
+</div>
+
+</div><!-- .ssw-mega-wrap -->
+
+<script>
+(function(){
+  'use strict';
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxi-XNeyqUs5Tq2GdbIXTtiz5ZGtkNfnF6opahw-HcasPZuMIi_VkjF886oZrVjUVAeMg/exec';
+  const BAB_NAME        = 'Seri 8 — Circuit Tester & Pengecekan Sensor';
+  const TOTAL           = 10;
+  const PASSING_PERCENT = 70;
+  const state = { answered:0, correct:0, startTime:null, endTime:null, submitted:false };
+  const scoreEl   = document.getElementById('mega-score');
+  const correctEl = document.getElementById('mega-correct');
+  const progFill  = document.getElementById('mega-prog-fill');
+  const progLabel = document.getElementById('mega-prog-label');
+  const submitBtn = document.getElementById('mega-submit-btn');
+  const lulusRow  = document.getElementById('lulus-indicator');
+  const timerEl   = document.getElementById('mega-timer');
+  const hasilPanel= document.getElementById('hasil-panel');
+  const kirimBtn  = document.getElementById('kirim-btn');
+  const kirimStat = document.getElementById('kirim-status');
+  let timerInterval = null;
+
+  function startTimer(){
+    if(state.startTime) return;
+    state.startTime = Date.now();
+    timerInterval = setInterval(()=>{
+      const e = Math.floor((Date.now()-state.startTime)/1000);
+      timerEl.textContent = `${String(Math.floor(e/60)).padStart(2,'0')}:${String(e%60).padStart(2,'0')}`;
+      if(e>=600) timerEl.classList.add('warn');
+    },1000);
+  }
+  function stopTimer(){ clearInterval(timerInterval); state.endTime = Date.now(); }
+  function getElapsed(){
+    if(!state.startTime||!state.endTime) return '—';
+    const e = Math.floor((state.endTime-state.startTime)/1000);
+    return `${String(Math.floor(e/60)).padStart(2,'0')}:${String(e%60).padStart(2,'0')}`;
+  }
+  function updateUI(){
+    if(scoreEl)   scoreEl.textContent   = state.correct;
+    if(correctEl) correctEl.textContent = state.correct;
+    if(progFill)  progFill.style.width  = Math.round((state.answered/TOTAL)*100)+'%';
+    if(progLabel) progLabel.textContent = `${state.answered} / ${TOTAL} terjawab`;
+    if(!lulusRow) return;
+    if(state.answered < TOTAL){
+      lulusRow.className = 'lulus-row';
+      lulusRow.textContent = `Jawab semua soal untuk melihat status kelulusan (standar: ${PASSING_PERCENT}% atau lebih)`;
+      return;
+    }
+    const pct = Math.round((state.correct/TOTAL)*100);
+    if(pct >= PASSING_PERCENT){
+      lulusRow.className = 'lulus-row is-lulus';
+      lulusRow.textContent = `✅ LULUS — Skor ${state.correct}/${TOTAL} (${pct}%), memenuhi standar minimal ${PASSING_PERCENT}%`;
+    } else {
+      lulusRow.className = 'lulus-row is-gagal';
+      lulusRow.textContent = `❌ BELUM LULUS — Skor ${state.correct}/${TOTAL} (${pct}%), standar minimal ${PASSING_PERCENT}%`;
+    }
+  }
+  function handleClick(e){
+    const btn = e.target.closest('.option-btn-mb');
+    if(!btn) return;
+    const card = btn.closest('.quiz-card');
+    if(!card) return;
+    const allOpts = card.querySelectorAll('.option-btn-mb');
+    if([...allOpts].some(b=>b.classList.contains('is-correct')||b.classList.contains('is-wrong'))) return;
+    startTimer();
+    const ok = btn.dataset.correct === 'true';
+    btn.classList.add(ok ? 'is-correct' : 'is-wrong');
+    allOpts.forEach(b=>{
+      if(b===btn){ b.style.pointerEvents='none'; return; }
+      b.style.pointerEvents='none';
+      b.classList.add(b.dataset.correct==='true' ? 'is-correct' : 'is-locked');
+    });
+    const p = card.querySelector('.pembahasan');
+    if(p) p.classList.add('show');
+    state.answered++; if(ok) state.correct++;
+    updateUI();
+    if(state.answered===TOTAL) stopTimer();
+  }
+  document.querySelector('.ssw-mega-wrap').addEventListener('click', handleClick);
+
+  submitBtn && submitBtn.addEventListener('click', ()=>{
+    if(state.answered===0){ alert('Kamu belum menjawab soal apa pun!'); return; }
+    const nama = document.getElementById('mega-name').value.trim() || 'Tidak Diisi';
+    const pct  = Math.round((state.correct/TOTAL)*100);
+    const lulus = pct >= PASSING_PERCENT;
+    document.getElementById('h-nama').textContent   = nama;
+    document.getElementById('h-skor').textContent   = `${state.correct}/${TOTAL}`;
+    document.getElementById('h-benar').textContent  = state.correct;
+    document.getElementById('h-persen').textContent = `${pct}%`;
+    document.getElementById('h-waktu').textContent  = getElapsed();
+    const hs = document.getElementById('h-status');
+    hs.textContent = lulus ? '✅ LULUS' : '❌ BELUM LULUS';
+    hs.style.color = lulus ? 'var(--correct)' : 'var(--wrong)';
+    hasilPanel.classList.add('show');
+    submitBtn.disabled = true;
+    window.scrollTo({top:document.body.scrollHeight, behavior:'smooth'});
+  });
+
+  kirimBtn && kirimBtn.addEventListener('click', async ()=>{
+    const nama = document.getElementById('mega-name').value.trim();
+    if(!nama){ kirimStat.style.color='var(--wrong)'; kirimStat.textContent='⚠️ Isi nama dulu sebelum mengirim!'; return; }
+    if(state.submitted){ kirimStat.style.color='var(--ink-muted)'; kirimStat.textContent='Hasil sudah pernah dikirim.'; return; }
+    kirimBtn.disabled=true; kirimBtn.innerHTML='⏳ Mengirim...';
+    kirimStat.style.color='var(--ink-muted)'; kirimStat.textContent='Sedang mengirim ke spreadsheet...';
+    const pct     = Math.round((state.correct/TOTAL)*100);
+    const tanggal = new Date().toLocaleString('id-ID',{timeZone:'Asia/Jakarta'});
+    const payload = {
+      nama, bab:BAB_NAME, skor:`${state.correct}/${TOTAL}`,
+      jumlah_benar:state.correct, persen:pct, waktu:getElapsed(),
+      tanggal, status: pct>=PASSING_PERCENT ? 'LULUS' : 'BELUM LULUS'
+    };
+    try{
+      await fetch(APPS_SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+      state.submitted=true;
+      kirimBtn.innerHTML='✅ Berhasil Dikirim';
+      kirimStat.style.color='var(--correct)';
+      kirimStat.textContent=`Hasil ${nama} sudah dikirim (${tanggal})`;
+    }catch(err){
+      kirimBtn.disabled=false; kirimBtn.innerHTML='🔄 Coba Kirim Ulang';
+      kirimStat.style.color='var(--wrong)'; kirimStat.textContent='Gagal mengirim. Cek koneksi dan coba lagi.';
+    }
+  });
+})();
+</script>
+</body>
+</html>
